@@ -8,7 +8,6 @@ import CreativeDesk from "./components/CreativeDesk";
 import AtelierStore from "./components/AtelierStore";
 import StudioFooter from "./components/StudioFooter";
 import CartDrawer from "./components/CartDrawer";
-import ScrollIndicator from "./components/ScrollIndicator";
 import { FlowArt, FlowSection } from "./components/FlowArt";
 
 export interface OrganicTheme {
@@ -165,7 +164,6 @@ export default function App() {
 
       {/* Floating Quiet-Luxe Shopping Drawer Pin (Top Right) */}
       <CartDrawer cart={cart} setCart={setCart} />
-      <ScrollIndicator />
       
       {/* 1. Warmth Tint Overlay (Hue Tint Box multiplying paper tones) */}
       <div 

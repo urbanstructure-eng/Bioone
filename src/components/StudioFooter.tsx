@@ -1,6 +1,84 @@
 import { useState, useEffect, FormEvent } from "react";
 import { Compass, Mail, Check, Bookmark, FileText } from "lucide-react";
+import { motion } from "motion/react";
 import { JournalEntry } from "../types";
+
+const LOGO_PARTNERS = [
+  {
+    name: "Kawahara Seishi", 
+    location: "TOKYO", 
+    icon: (
+      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18M3 12h18M12 3a9 9 0 019 9M3 12a9 9 0 009 9" />
+      </svg>
+    )
+  },
+  {
+    name: "Kraft & Silt Guild", 
+    location: "MUNICH", 
+    icon: (
+      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+        <circle cx={12} cy={12} r={9} />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v8M8 12h8" />
+      </svg>
+    )
+  },
+  {
+    name: "Moss & Soil Assoc.", 
+    location: "COPENHAGEN", 
+    icon: (
+      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    )
+  },
+  {
+    name: "Villa Erba Atelier", 
+    location: "MILAN", 
+    icon: (
+      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+        <rect x={4} y={4} width={16} height={16} rx={2} strokeLinecap="round" strokeLinejoin="round" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 9h6v6H9z" />
+      </svg>
+    )
+  },
+  {
+    name: "L'Heure Sauvage", 
+    location: "PARIS", 
+    icon: (
+      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z" />
+      </svg>
+    )
+  },
+  {
+    name: "Chateau De Lin", 
+    location: "LYON", 
+    icon: (
+      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+    )
+  },
+  {
+    name: "Bamboo Arch Co.", 
+    location: "KYOTO", 
+    icon: (
+      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      </svg>
+    )
+  },
+  {
+    name: "Raw Fibre Labs", 
+    location: "BOSTON", 
+    icon: (
+      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L2 22h20L12 2z" />
+      </svg>
+    )
+  }
+];
 
 const JOURNAL_DATA: JournalEntry[] = [
   {
@@ -54,6 +132,50 @@ export default function StudioFooter() {
 
   return (
     <footer className="relative w-full max-w-7xl mx-auto px-6 pt-16 pb-12 z-10 border-t border-garabel-ink/10 select-none animate-fadeIn">
+      
+      {/* Luxurious Editorial Logo Ticker (Brown organic subtle placeholders) */}
+      <div className="w-full overflow-hidden py-8 border-b border-garabel-ink/10 mb-14 relative">
+        {/* Elegant edge fading using CSS custom properties for theme-cohesive background matching */}
+        <div 
+          className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none" 
+          style={{ background: "linear-gradient(to right, var(--color-garabel-bg) 0%, transparent 100%)" }}
+        />
+        <div 
+          className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none" 
+          style={{ background: "linear-gradient(to left, var(--color-garabel-bg) 0%, transparent 100%)" }}
+        />
+
+        <motion.div 
+          className="flex whitespace-nowrap gap-16 md:gap-24 items-center w-max"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            ease: "linear",
+            duration: 32,
+            repeat: Infinity,
+          }}
+        >
+          {/* Duplicated array of luxury organic partners for infinite seamless animation */}
+          {[...LOGO_PARTNERS, ...LOGO_PARTNERS].map((partner, idx) => (
+            <div 
+              key={idx} 
+              className="flex items-center gap-3.5 text-garabel-mid/45 hover:text-garabel-ink/85 transition-colors duration-300"
+            >
+              <div className="text-garabel-mid/45 hover:text-garabel-accent/60 transition-colors duration-300">
+                {partner.icon}
+              </div>
+              <div className="flex flex-col items-start leading-none gap-0.5">
+                <span className="font-sans font-semibold text-[10px] md:text-[11px] uppercase tracking-[0.24em]">
+                  {partner.name}
+                </span>
+                <span className="font-mono text-[7px] tracking-[0.16em] text-garabel-mid/40 font-medium">
+                  {partner.location} // IN COLLABORATION
+                </span>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
       {/* Journal and Manifesto Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 pb-16 border-b border-garabel-ink/10">
         

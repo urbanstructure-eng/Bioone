@@ -113,7 +113,7 @@ export default function StudioBanner() {
           transformStyle: "preserve-3d",
           transition: isHovering ? "transform 0.05s ease-out" : "transform 0.9s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
-        className="relative w-full max-w-[1300px] h-[75vh] md:h-[84vh] flex items-center justify-center cursor-grab active:cursor-grabbing group z-10"
+        className="relative w-full max-w-[1300px] h-[55vh] sm:h-[60vh] md:h-[68vh] flex items-center justify-center cursor-grab active:cursor-grabbing group z-10"
       >
         
         {/* The Luxury Bag itself with continuous cinematic float and interactive 3D perspective tilt */}
@@ -122,16 +122,16 @@ export default function StudioBanner() {
           alt="Atelier Garabel Sustainable Organic Luxury Bag"
           referrerPolicy="no-referrer"
           animate={{
-            y: isHovering ? -15 : [0, -28, 0],
-            rotate: isHovering ? coords.x * 0.12 : [0, 1.2, 0, -1.2, 0],
+            y: isHovering ? -15 : [0, -20, 0],
+            rotate: isHovering ? coords.x * 0.12 : [0, 1.0, 0, -1.0, 0],
           }}
           transition={{
             y: isHovering 
-              ? { type: "spring", stiffness: 100 } 
-              : { repeat: Infinity, duration: 6, ease: "easeInOut" },
+              ? { type: "spring", stiffness: 120, damping: 20 } 
+              : { repeat: Infinity, duration: 4.2, ease: "easeInOut" },
             rotate: isHovering
-              ? { type: "spring", stiffness: 100 }
-              : { repeat: Infinity, duration: 8, ease: "easeInOut" }
+              ? { type: "spring", stiffness: 120, damping: 20 }
+              : { repeat: Infinity, duration: 5.5, ease: "easeInOut" }
           }}
           className="w-full h-full object-contain select-none filter drop-shadow-[0_40px_90px_rgba(40,36,32,0.22)]"
         />
@@ -144,14 +144,14 @@ export default function StudioBanner() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.8, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-24 sm:bottom-32 md:bottom-36 lg:bottom-40 flex flex-col items-center gap-1 group cursor-pointer focus:outline-none z-30"
+        className="absolute bottom-5 sm:bottom-8 md:bottom-12 flex flex-col items-center gap-1 group cursor-pointer focus:outline-none z-30"
       >
         <span className="font-mono text-[10.5px] sm:text-[12px] uppercase tracking-[0.28em] text-garabel-mid group-hover:text-garabel-ink transition-colors duration-300 font-bold">
           Scroll down to explore
         </span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 1.1, ease: "easeInOut" }}
           className="text-garabel-accent group-hover:text-garabel-ink transition-colors duration-300"
         >
           <ChevronDown className="w-8 h-8 md:w-10 md:h-10 stroke-[1.25]" />
