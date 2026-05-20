@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Compass, Sparkles, Sliders, ChevronDown, Check, Eye, Layers } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { useLanguage } from "../translations";
 
 interface ClockProps {
   label: string;
@@ -41,6 +42,7 @@ function LiveClock({ label, timeZone }: ClockProps) {
 }
 
 export default function StudioBanner() {
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<"specs" | "narrative" | "origin">("specs");
   
   // Interactive 3D hover orientation
@@ -87,7 +89,7 @@ export default function StudioBanner() {
         className="flex flex-col items-center gap-3.5 mb-[-70px] md:mb-[-130px] relative z-20 px-4 text-center"
       >
         <h2 className="font-sans font-black text-4xl sm:text-6xl md:text-7xl lg:text-[88px] uppercase text-[#376332] tracking-tighter leading-[0.88] max-w-6xl">
-          the future of<br />luxury packaging<br />is biodegradable
+          {t("hero_title_1")}<br />{t("hero_title_2")}<br />{t("hero_title_3")}
         </h2>
         <div className="flex items-center gap-2.5 opacity-95 py-1">
           <svg className="w-4.5 h-4.5 text-garabel-ink shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -95,7 +97,7 @@ export default function StudioBanner() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
           </svg>
           <span className="font-mono text-[10.5px] sm:text-[13px] tracking-widest text-garabel-ink font-semibold uppercase leading-none">
-            BIODEGRADABLE CERTIFIED // 100% RAW COMPOSTABLE PLANT-CELLULOSE
+            {t("hero_certified")}
           </span>
         </div>
       </motion.div>
@@ -147,7 +149,7 @@ export default function StudioBanner() {
         className="absolute bottom-5 sm:bottom-8 md:bottom-12 flex flex-col items-center gap-1 group cursor-pointer focus:outline-none z-30"
       >
         <span className="font-mono text-[10.5px] sm:text-[12px] uppercase tracking-[0.28em] text-garabel-mid group-hover:text-garabel-ink transition-colors duration-300 font-bold">
-          Scroll down to explore
+          {t("hero_scroll")}
         </span>
         <motion.div
           animate={{ y: [0, 6, 0] }}

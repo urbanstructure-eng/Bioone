@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Sparkles, ArrowUpRight, Copy, Check, Terminal, Mail, Info, Palette, ShieldCheck, ShoppingCart } from "lucide-react";
 import { Service, AICustomDesign } from "../types";
+import { useLanguage } from "../translations";
 
 const SERVICES_DATA: Service[] = [
   {
@@ -31,6 +32,7 @@ interface CreativeDeskProps {
 }
 
 export default function CreativeDesk({ onAddCustomDesign }: CreativeDeskProps) {
+  const { t } = useLanguage();
   const [scope, setScope] = useState<"liner" | "rigid" | "carrier">("liner");
   const [theme, setTheme] = useState<"hemp" | "bamboo" | "recycled">("hemp");
   const [focus, setFocus] = useState<"composite" | "carbon" | "plastic">("composite");
@@ -235,13 +237,13 @@ WARMEST ECO-LUXE REGARDS.`;
           <div>
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded border border-garabel-ink/10 bg-garabel-sand bg-opacity-30 font-mono text-[9px] text-garabel-mid tracking-widest uppercase mb-4">
               <Terminal className="w-3.5 h-3.5" />
-              <span>INTERACTIVE ECO-LUXE ESTIMATION DESK</span>
+              <span>{t("desk_badge")}</span>
             </span>
             <h3 className="text-2xl md:text-4xl font-sans font-light tracking-tight text-garabel-ink mb-4">
-              Draft your custom <span className="italic font-normal text-garabel-mid">material blueprint</span>.
+              {t("desk_title")} <span className="italic font-normal text-garabel-mid">{t("desk_title_italic")}</span>.
             </h3>
             <p className="text-xs md:text-sm font-sans font-light text-garabel-mid leading-relaxed max-w-lg">
-              Toggle our premium structural specifications representing your brand's environmental and visual ambitions. Experience luxury design with zero compromise.
+              {t("desk_desc")}
             </p>
           </div>
 
@@ -319,7 +321,7 @@ WARMEST ECO-LUXE REGARDS.`;
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <label className="block font-mono text-[8.5px] font-bold text-garabel-ink uppercase tracking-wider">
-                      BRAND INITIALS / NAME:
+                      {t("desk_brand_label")}
                     </label>
                     <input
                       type="text"
@@ -331,30 +333,30 @@ WARMEST ECO-LUXE REGARDS.`;
                   </div>
                   <div className="space-y-1.5">
                     <label className="block font-mono text-[8.5px] font-bold text-garabel-ink uppercase tracking-wider">
-                      DESIGN STYLE DIRECTORY:
+                      {t("desk_style_label")}
                     </label>
                     <select
                       value={aiStyle}
                       onChange={(e) => setAiStyle(e.target.value as any)}
                       className="w-full px-3 py-2.5 rounded border border-garabel-ink/15 bg-white font-mono text-[11px] text-garabel-ink focus:border-garabel-accent outline-none"
                     >
-                      <option value="aesop">Aesop Botanical Minimalist</option>
-                      <option value="louis">Monogram Prestige Luxe</option>
-                      <option value="frama">Wabi-Sabi Raw Ash</option>
-                      <option value="apple">Precision Modern Slate</option>
+                      <option value="aesop">{t("desk_style_aesop")}</option>
+                      <option value="louis">{t("desk_style_louis")}</option>
+                      <option value="frama">{t("desk_style_frama")}</option>
+                      <option value="apple">{t("desk_style_apple")}</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="block font-mono text-[8.5px] font-bold text-garabel-ink uppercase tracking-wider">
-                    BESPOKE BLUEPRINT VISION ENVELOPE:
+                    {t("desk_prompt_label")}
                   </label>
                   <textarea
                     value={aiPromptText}
                     onChange={(e) => setAiPromptText(e.target.value)}
                     rows={3}
-                    placeholder="Provide specific aesthetic, texture ambitions or geometric focuses (e.g. blind embossed gold motifs, sand slate tone texture)..."
+                    placeholder={t("desk_prompt_placeholder")}
                     className="w-full px-3 py-2 rounded border border-garabel-ink/15 bg-white font-sans text-xs text-garabel-ink focus:border-garabel-accent outline-none resize-none leading-relaxed"
                   />
                 </div>
@@ -363,17 +365,17 @@ WARMEST ECO-LUXE REGARDS.`;
                   type="button"
                   onClick={handleGenerateAiDesign}
                   disabled={isAiGenerating || !brandName || !aiPromptText}
-                  className="w-full flex items-center justify-center gap-2.5 py-3 rounded bg-garabel-accent text-white font-mono text-[10px] uppercase tracking-widest hover:bg-opacity-95 active:scale-[0.99] transition-all cursor-pointer shadow-craft-md disabled:bg-opacity-30 disabled:cursor-not-allowed"
+                  className="w-full flex items-center justify-center gap-2.5 py-3 rounded bg-[#376332] text-white font-mono text-[10px] uppercase tracking-widest hover:bg-opacity-95 active:scale-[0.99] transition-all cursor-pointer shadow-craft-md disabled:bg-opacity-30 disabled:cursor-not-allowed"
                 >
                   {isAiGenerating ? (
                     <>
                       <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                      <span>CRAFTING AI PACKAGING LAYOUT...</span>
+                      <span>{t("desk_gen_btn_running")}</span>
                     </>
                   ) : (
                     <>
                       <Sparkles className="w-4 h-4 text-garabel-cream" />
-                      <span>✦ GENERATE CUSTOM DESIGN ATELIER SAMPLE</span>
+                      <span>{t("desk_gen_btn_active")}</span>
                     </>
                   )}
                 </button>

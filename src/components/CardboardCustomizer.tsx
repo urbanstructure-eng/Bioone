@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Sliders, RefreshCw, AudioWaveform, HelpCircle, Flame, Eye, Sparkles } from "lucide-react";
 import { MaterialParams } from "../types";
+import { useLanguage } from "../translations";
 
 interface CardboardCustomizerProps {
   params: MaterialParams;
@@ -41,6 +42,7 @@ function playClick(frequency = 800, duration = 0.04) {
 }
 
 export default function CardboardCustomizer({}: CardboardCustomizerProps) {
+  const { t } = useLanguage();
   return (
     <section 
       id="interactive-bench" 
@@ -49,9 +51,9 @@ export default function CardboardCustomizer({}: CardboardCustomizerProps) {
       {/* Quiet luxury bold sustainability statement stacked on left - matching logo organic green */}
       <div className="max-w-6xl text-left">
         <h2 className="text-[52px] sm:text-7xl md:text-[110px] lg:text-[145px] xl:text-[165px] font-sans font-black tracking-tighter text-[#376332] leading-[0.85] uppercase">
-          helping brands<br />
-          meet sustainability<br />
-          goals
+          {t("sustain_goals_1")}<br />
+          {t("sustain_goals_2")}<br />
+          {t("sustain_goals_3")}
         </h2>
       </div>
     </section>

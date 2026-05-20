@@ -16,6 +16,7 @@ import {
   FileCheck
 } from "lucide-react";
 import { UnifiedCartItem } from "../types";
+import { useLanguage } from "../translations";
 
 interface ShopItem {
   id: string;
@@ -84,6 +85,7 @@ interface AtelierStoreProps {
 }
 
 export default function AtelierStore({ cart, setCart }: AtelierStoreProps) {
+  const { t } = useLanguage();
   const [paypalEmail, setPaypalEmail] = useState("");
   
   // Minimalist Shipping Form states
@@ -240,15 +242,15 @@ export default function AtelierStore({ cart, setCart }: AtelierStoreProps) {
       {/* Visual Header Grid layout */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12 md:mb-16">
         <div className="max-w-xl">
-          <span className="block font-mono text-[10px] tracking-widest text-garabel-accent uppercase mb-2 md:mb-3">
-            TACTILE SWATCH DISPATCH // DESK SEC-02
+          <span className="block font-mono text-[10px] tracking-widest text-[#376332] uppercase mb-2 md:mb-3 font-bold">
+            {t("shop_subtitle")}
           </span>
           <h2 className="text-3xl md:text-5xl font-sans font-light tracking-tight text-garabel-ink">
-            Order premium <span className="italic font-normal text-garabel-mid">prototype swatches</span>.
+            {t("shop_title")} <span className="italic font-normal text-[#376332]">{t("shop_title_italic")}</span>.
           </h2>
         </div>
         <p className="text-xs md:text-sm font-sans font-light text-garabel-mid max-w-sm leading-relaxed">
-          Settle your physical brand inquiries by ordering our certified luxury material specimen packs or custom AI-designed prototypes. Dispatched immediately in heavy carbon-conscious box sets.
+          {t("shop_desc")}
         </p>
       </div>
 
@@ -257,7 +259,7 @@ export default function AtelierStore({ cart, setCart }: AtelierStoreProps) {
         {/* Left Side: Exclusive Sensory Remnants Catalog */}
         <div className="lg:col-span-7 space-y-8">
           <span className="block font-mono text-[10px] tracking-widest text-garabel-mid uppercase border-b border-garabel-ink/10 pb-2">
-            AVAILABLE SUSTAINABLE SPECIMENS & PROTOTYPES:
+            {t("shop_badge")}
           </span>
 
           <div className="space-y-6">

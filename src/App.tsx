@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
+import { Globe, Check, ChevronDown } from "lucide-react";
 import { MaterialParams, UnifiedCartItem, AICustomDesign } from "./types";
 import StudioBanner from "./components/StudioBanner";
 import CardboardCustomizer from "./components/CardboardCustomizer";
@@ -9,6 +10,7 @@ import AtelierStore from "./components/AtelierStore";
 import StudioFooter from "./components/StudioFooter";
 import CartDrawer from "./components/CartDrawer";
 import { FlowArt, FlowSection } from "./components/FlowArt";
+import { useLanguage, LANGUAGES } from "./translations";
 
 export interface OrganicTheme {
   id: "kraft" | "moss" | "clay" | "linen";
@@ -85,6 +87,9 @@ export const ORGANIC_THEMES: OrganicTheme[] = [
 ];
 
 export default function App() {
+  const { language, setLanguage } = useLanguage();
+  const [isLangOpen, setIsLangOpen] = useState(false);
+
   const [params, setParams] = useState<MaterialParams>({
     grain: 24,
     warmth: 45,
@@ -164,6 +169,70 @@ export default function App() {
 
       {/* Floating Quiet-Luxe Shopping Drawer Pin (Top Right) */}
       <CartDrawer cart={cart} setCart={setCart} />
+
+      {/* Floating Quiet-Luxe Multi-Language Toggle (Top Navigation) */}
+      <div className="fixed top-6 right-[152px] sm:right-[175px] md:top-8 md:right-[230px] z-50 pointer-events-auto select-none">
+        {/* Desktop full bar */}
+        <div className="hidden sm:flex items-center gap-1.5 px-3 py-2 bg-white/75 backdrop-blur-md border border-garabel-ink/10 rounded-full shadow-craft-sm h-11 md:h-13">
+          <Globe className="w-3.5 h-3.5 opacity-60 text-garabel-ink mr-0.5 ml-1 animate-pulse" />
+          {LANGUAGES.map((lang, idx) => (
+            <span key={lang.code} className="flex items-center gap-1.5 text-[9px] font-mono tracking-wider">
+              <button
+                onClick={() => setLanguage(lang.code)}
+                className={`py-1 px-2 rounded-full font-bold transition-all duration-300 cursor-pointer ${
+                  language === lang.code
+                    ? "text-white bg-[#376332] shadow-craft-sm"
+                    : "text-garabel-mid hover:text-[#376332] hover:bg-garabel-sand/20"
+                }`}
+              >
+                {lang.flag}
+              </button>
+              {idx < LANGUAGES.length - 1 && <span className="opacity-25 select-none font-light text-garabel-mid">•</span>}
+            </span>
+          ))}
+        </div>
+
+        {/* Mobile dropdown style */}
+        <div className="sm:hidden relative">
+          <button
+            onClick={() => setIsLangOpen(!isLangOpen)}
+            className="flex items-center gap-1.5 px-2.5 py-2 bg-white/85 backdrop-blur-md border border-garabel-ink/10 rounded-full shadow-craft-sm h-11 text-garabel-ink font-mono text-[9px] font-bold cursor-pointer"
+          >
+            <Globe className="w-3.5 h-3.5 text-[#376332]" />
+            <span>{LANGUAGES.find(l => l.code === language)?.flag}</span>
+            <ChevronDown className={`w-3.5 h-3.5 text-garabel-mid transition-transform duration-300 ${isLangOpen ? "rotate-180" : ""}`} />
+          </button>
+
+          <AnimatePresence>
+            {isLangOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                className="absolute right-0 mt-1.5 py-1 w-24 bg-garabel-cream border border-garabel-ink/10 rounded-lg shadow-craft-lg overflow-hidden flex flex-col z-50"
+              >
+                {LANGUAGES.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => {
+                      setLanguage(lang.code);
+                      setIsLangOpen(false);
+                    }}
+                    className={`flex items-center justify-between px-3 py-1.5 text-left font-mono text-[9px] tracking-wider transition-colors cursor-pointer ${
+                      language === lang.code
+                        ? "text-[#376332] bg-[#376332]/5 font-bold"
+                        : "text-garabel-ink hover:bg-garabel-sand/10"
+                    }`}
+                  >
+                    <span>{lang.name}</span>
+                    {language === lang.code && <Check className="w-2.5 h-2.5 text-[#376332]" />}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
       
       {/* 1. Warmth Tint Overlay (Hue Tint Box multiplying paper tones) */}
       <div 

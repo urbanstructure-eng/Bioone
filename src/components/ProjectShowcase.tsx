@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Compass, Calendar, Layers, CornerDownRight, X, ExternalLink, ChevronRight } from "lucide-react";
 import { Project } from "../types";
+import { useLanguage } from "../translations";
 
 // Refer to generated images directly as string constants
 const imgCeramic = "/src/assets/images/portfolio_ceramic_vase_1779300266749.png";
@@ -47,6 +48,7 @@ const PROJECTS_DATA: Project[] = [
 ];
 
 export default function ProjectShowcase() {
+  const { t } = useLanguage();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
@@ -58,14 +60,14 @@ export default function ProjectShowcase() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12 md:mb-16">
         <div className="max-w-xl">
           <span className="block font-mono text-[10px] tracking-widest text-garabel-accent uppercase mb-2 md:mb-3">
-            MOCK COLLABORATIONS // SAMPLE LEDGER SERIES 01
+            {t("showcase_badge")}
           </span>
           <h2 className="text-3xl md:text-5xl font-sans font-light tracking-tight text-garabel-ink">
-            Crafted with structural <span className="italic font-normal text-garabel-mid">integrity</span>.
+            {t("showcase_title_1")} <span className="italic font-normal text-garabel-mid">{t("showcase_title_2")}</span>.
           </h2>
         </div>
         <p className="text-xs md:text-sm font-sans font-light text-garabel-mid max-w-sm leading-relaxed">
-          We treat physical containers like architectural masterpieces. No plastic laminates, no toxic glues — just pure organic fiber alignments, elite debossing geometry, and zero-compromise environmental weight.
+          {t("showcase_desc")}
         </p>
       </div>
 

@@ -13,6 +13,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { UnifiedCartItem } from "../types";
+import { useLanguage } from "../translations";
 
 interface CartDrawerProps {
   cart: UnifiedCartItem[];
@@ -20,6 +21,7 @@ interface CartDrawerProps {
 }
 
 export default function CartDrawer({ cart, setCart }: CartDrawerProps) {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [soundEnabled] = useState(true);
 
@@ -135,8 +137,8 @@ export default function CartDrawer({ cart, setCart }: CartDrawerProps) {
           
           <ShoppingCart className="w-4 h-4 md:w-4.5 md:h-4.5 text-garabel-ink" />
           
-          <span className="font-mono text-[9px] md:text-[10px] tracking-widest text-garabel-ink font-bold uppercase select-none mr-0.5">
-            Order Details
+          <span className="font-mono text-[9px] md:text-[10px] tracking-widest text-[#376332] font-bold uppercase select-none mr-0.5">
+            {t("order_details")}
           </span>
           
           {/* High visibility minimal stamp badge */}
