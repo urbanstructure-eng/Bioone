@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEvent } from "react";
-import { Compass, Mail, Check, Bookmark, FileText } from "lucide-react";
+import { Compass, Mail, Check, Bookmark, FileText, ArrowUp } from "lucide-react";
 import { motion } from "motion/react";
 import { JournalEntry } from "../types";
 
@@ -276,14 +276,31 @@ export default function StudioFooter() {
 
       </div>
 
+      {/* Centered Bigger & More Prominent Minimalist Return Arrow */}
+      <div className="flex flex-col items-center justify-center pt-16 pb-12">
+        <button 
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="flex flex-col items-center gap-4 group cursor-pointer focus:outline-none z-30"
+          aria-label="Return to top"
+        >
+          <div className="w-16 h-16 rounded-full border border-garabel-ink/15 group-hover:border-garabel-ink bg-garabel-cream/20 group-hover:bg-garabel-ink/5 flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-sm">
+            <ArrowUp className="w-7 h-7 text-garabel-ink group-hover:-translate-y-1.5 transition-transform duration-300 stroke-[1.25]" />
+          </div>
+          <span className="font-mono text-[9px] uppercase tracking-[0.34em] text-garabel-mid group-hover:text-garabel-ink transition-colors duration-300 font-bold">
+            Return to top
+          </span>
+        </button>
+      </div>
+
       {/* Outermost copyright and designer specs */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pt-10 text-[9px] font-mono tracking-widest text-garabel-mid opacity-70">
-        <div>
+      <div className="border-t border-garabel-ink/10 pt-8 flex flex-col items-center justify-center text-center gap-4 text-[9px] font-mono tracking-widest text-garabel-mid opacity-75">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-center gap-2 sm:gap-6">
           <span>© 2026 ATELIER GARABEL. COPH / MUNICH / TOKYO. ALL SPEC RIGHTS PERSIST.</span>
-        </div>
-        <div className="flex flex-wrap gap-x-6 gap-y-2">
+          <span className="hidden sm:inline text-garabel-mid/30">•</span>
           <span>COMPOSTABLE CERTIFICATION NO. 299-A</span>
-          <span className="text-garabel-accent">DESIGN BY NATURAL RATIO SYSTEMS</span>
+        </div>
+        <div className="text-garabel-accent font-bold uppercase tracking-[0.2em]">
+          DESIGN BY NATURAL RATIO SYSTEMS
         </div>
       </div>
     </footer>

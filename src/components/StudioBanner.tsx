@@ -86,8 +86,8 @@ export default function StudioBanner() {
         transition={{ duration: 2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
         className="flex flex-col items-center gap-3.5 mb-[-70px] md:mb-[-130px] relative z-20 px-4 text-center"
       >
-        <h2 className="font-sans font-light text-xl sm:text-3xl md:text-4xl lg:text-5xl text-emerald-800 tracking-wide max-w-5xl">
-          The Future of Luxury Packaging Is Biodegradable
+        <h2 className="font-sans font-black text-4xl sm:text-6xl md:text-7xl lg:text-[88px] uppercase text-[#376332] tracking-tighter leading-[0.88] max-w-6xl">
+          the future of<br />luxury packaging<br />is biodegradable
         </h2>
         <div className="flex items-center gap-2.5 opacity-95 py-1">
           <svg className="w-4.5 h-4.5 text-garabel-ink shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
