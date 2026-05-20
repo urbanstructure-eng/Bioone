@@ -1,0 +1,169 @@
+import { useState, useEffect, FormEvent } from "react";
+import { Compass, Mail, Check, Bookmark, FileText } from "lucide-react";
+import { JournalEntry } from "../types";
+
+const JOURNAL_DATA: JournalEntry[] = [
+  {
+    id: "jn-1",
+    date: "16 // MAY 2026",
+    readTime: "04 MIN",
+    title: "Scent-Security of Organic Liners",
+    excerpt: "A chemical study on maintaining delicate cosmetic fragrance preservation inside compostable sugarcane pulp cores without utilizing synthetic vinyl membranes.",
+  },
+  {
+    id: "jn-2",
+    date: "28 // APR 2026",
+    readTime: "07 MIN",
+    title: "The Architecture of Raw Cardboard",
+    excerpt: "How zero-waste cardboard packaging aesthetics are replacing plastic gloss finishes to cultivate organic trust among elite fashion design houses.",
+  },
+  {
+    id: "jn-3",
+    date: "04 // MAR 2026",
+    readTime: "05 MIN",
+    title: "Soy Foils and Letterpress Depths",
+    excerpt: "A design analysis of hot vegetable soy foils and blind debossing alignments on high-density secondary post-consumer fiber boards.",
+  },
+];
+
+export default function StudioFooter() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+  const [ticketNum, setTicketNum] = useState("");
+
+  useEffect(() => {
+    // Generate a beautiful mock ticket number once subscribed
+    setTicketNum("TKT-" + Math.floor(100000 + Math.random() * 900000));
+  }, []);
+
+  const handleSubscribe = (e: FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes("@")) return;
+
+    // Persist list locally
+    const existing = localStorage.getItem("garabel_subscribers") || "[]";
+    const parsed = JSON.parse(existing);
+    if (!parsed.includes(email)) {
+      parsed.push({ email, timestamp: new Date().toISOString() });
+      localStorage.setItem("garabel_subscribers", JSON.stringify(parsed));
+    }
+
+    setSubscribed(true);
+    setEmail("");
+  };
+
+  return (
+    <footer className="relative w-full max-w-7xl mx-auto px-6 pt-16 pb-12 z-10 border-t border-garabel-ink/10 select-none animate-fadeIn">
+      {/* Journal and Manifesto Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 pb-16 border-b border-garabel-ink/10">
+        
+        {/* Editorial Journal Entries */}
+        <div className="lg:col-span-8 space-y-8">
+          <div>
+            <span className="block font-mono text-[10px] tracking-widest text-garabel-accent uppercase mb-2">
+              JOURNAL READINGS // EXPLORING THE CRAFT
+            </span>
+            <h3 className="text-2xl md:text-3xl font-sans font-light tracking-tight text-garabel-ink">
+              Boutique literary <span className="italic font-normal text-garabel-mid">journal notes</span>.
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+            {JOURNAL_DATA.map((entry) => (
+              <div 
+                key={entry.id}
+                className="group p-5 rounded border border-garabel-ink/5 bg-garabel-sand bg-opacity-10 hover:bg-opacity-30 transition-all flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center font-mono text-[8px] text-garabel-mid tracking-widest">
+                    <span>{entry.date}</span>
+                    <span>{entry.readTime} READ</span>
+                  </div>
+                  <h4 className="font-sans text-base font-normal text-garabel-ink group-hover:text-garabel-accent transition-colors">
+                    {entry.title}
+                  </h4>
+                  <p className="font-sans text-xs font-light text-garabel-mid leading-relaxed">
+                    {entry.excerpt}
+                  </p>
+                </div>
+                <div className="flex justify-start pt-4 border-t border-garabel-ink/5 mt-4">
+                  <span className="flex items-center gap-1 font-mono text-[8px] text-garabel-ink tracking-widest uppercase group-hover:translate-x-1 duration-300 transition-transform cursor-pointer">
+                    <Bookmark className="w-3 h-3 text-garabel-accent" />
+                    <span>Open Essay</span>
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Studio Manifesto + Subscription Section */}
+        <div className="lg:col-span-4 flex flex-col justify-between space-y-8">
+          
+          {/* Manifesto Callout Card */}
+          <div className="p-6 rounded-lg border border-garabel-ink/10 bg-garabel-sand bg-opacity-30 relative overflow-hidden shadow-craft-sm">
+            <div className="absolute inset-0 paper-grain pointer-events-none opacity-10"></div>
+            <span className="block font-mono text-[9px] text-garabel-ink font-semibold tracking-widest uppercase mb-3">
+              THE MANIFESTO
+            </span>
+            <blockquote className="font-sans font-light text-xs text-garabel-mid leading-relaxed italic">
+              "We believe physical packaging is the sacred sanctuary of luxury artifacts. By respecting organic fibers, giant bamboo cores, unbleached hemp wefts, and absolute geometric ratios, we cultivate profound, quiet respect between brand and client."
+            </blockquote>
+          </div>
+
+          {/* Email Subscription Coupling */}
+          <div className="space-y-4">
+            <span className="block font-mono text-[9px] text-garabel-ink font-bold tracking-widest uppercase">
+              SUBSCRIBE TO EDITIONS OF THE FUTURE:
+            </span>
+            <p className="font-sans text-xs font-light text-garabel-mid leading-relaxed">
+              We dispatch material samples and print booklets once per lunar season. Highly limited editions; zero marketing clutter.
+            </p>
+
+            {subscribed ? (
+              <div className="p-4 rounded border border-dashed border-green-500/30 bg-green-500/5 font-mono text-[9px] tracking-wider text-garabel-ink space-y-2">
+                <div className="flex items-center gap-1.5 text-green-500 font-semibold uppercase">
+                  <Check className="w-3.5 h-3.5" />
+                  <span>TRANSMISSION RECORDED // OK</span>
+                </div>
+                <div className="text-garabel-mid leading-relaxed">
+                  You have been coupled with our editions under <span className="text-garabel-ink font-bold font-mono">{ticketNum}</span>. Your tactile pulp sample coupon is pending stamp validation. Thank you.
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex gap-2">
+                <input
+                  type="email"
+                  required
+                  placeholder="director@house.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-grow px-4 py-3 rounded border border-garabel-ink/15 bg-garabel-cream bg-opacity-50 text-xs font-mono placeholder-garabel-mid/40 outline-none focus:border-garabel-ink/40 transition-colors"
+                />
+                <button
+                  type="submit"
+                  className="px-5 py-3 rounded bg-garabel-ink text-garabel-cream font-mono text-[10px] uppercase tracking-widest hover:bg-opacity-95 transition-all shadow-craft-sm flex items-center justify-center cursor-pointer"
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                </button>
+              </form>
+            )}
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* Outermost copyright and designer specs */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pt-10 text-[9px] font-mono tracking-widest text-garabel-mid opacity-70">
+        <div>
+          <span>© 2026 ATELIER GARABEL. COPH / MUNICH / TOKYO. ALL SPEC RIGHTS PERSIST.</span>
+        </div>
+        <div className="flex flex-wrap gap-x-6 gap-y-2">
+          <span>COMPOSTABLE CERTIFICATION NO. 299-A</span>
+          <span className="text-garabel-accent">DESIGN BY NATURAL RATIO SYSTEMS</span>
+        </div>
+      </div>
+    </footer>
+  );
+}

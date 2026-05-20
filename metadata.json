@@ -1,0 +1,6 @@
+{
+  "name": "Atelier Garabel Premium Packaging",
+  "description": "An elite sustainable luxury packaging house engineering biodegradable bags, rigid boxes, and custom pulp systems for high-end fashion, cosmetics, energy drinks, wellness, and cannabis brands.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
