@@ -56,7 +56,7 @@ export default function StudioBanner() {
   const slides: { id: number; img: string; label: string; tagline?: string; isFullPhoto?: boolean; }[] = [
     { id: 1, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 01" },
     { id: 2, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 02" },
-    { id: 3, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 03", tagline: "Carbon-conscious luxury packaging.", isFullPhoto: true },
+    { id: 3, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 03", tagline: "Carbon-conscious luxury packaging." },
     { id: 4, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 04" },
     { id: 5, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 05" },
   ];

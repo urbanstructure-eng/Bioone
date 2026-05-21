@@ -8,18 +8,18 @@ export default function ProjectShowcase() {
   return (
     <section 
       id="portfolio-section" 
-      className="relative w-full min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden select-none pt-32 sm:pt-40 md:pt-48 pb-20"
+      className="relative w-full min-h-[85vh] md:min-h-[95vh] flex items-center justify-center overflow-hidden select-none pt-40 sm:pt-48 md:pt-56 pb-24"
     >
-      {/* Immersive Green Leaf Background Image */}
-      <div className="absolute inset-0 w-full h-full z-0">
+      {/* Immersive Green Leaf Background Image - start below navigation space */}
+      <div className="absolute inset-x-0 bottom-0 top-32 sm:top-40 md:top-48 lg:top-52 z-0 overflow-hidden">
         <img 
           src={greenLeafBgPhoto} 
           alt="Lush green leaf background reflecting structural integrity" 
           className="w-full h-full object-cover object-[center_85%] select-none filter brightness-[0.75] contrast-[1.05]"
           referrerPolicy="no-referrer"
         />
-        {/* Darker top and bottom elegant organic matte gradients for outstanding nav overlay contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-black/95"></div>
+        {/* Elegant organic matte gradients */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-black/85"></div>
         <div className="absolute inset-0 bg-emerald-950/25 mix-blend-color"></div>
         <div className="absolute inset-0 paper-grain pointer-events-none opacity-10"></div>
       </div>
