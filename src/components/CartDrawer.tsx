@@ -1,4 +1,4 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
   ShoppingCart, 
@@ -18,9 +18,10 @@ import { useLanguage } from "../translations";
 interface CartDrawerProps {
   cart: UnifiedCartItem[];
   setCart: Dispatch<SetStateAction<UnifiedCartItem[]>>;
+  languageSwitcher?: React.ReactNode;
 }
 
-export default function CartDrawer({ cart, setCart }: CartDrawerProps) {
+export default function CartDrawer({ cart, setCart, languageSwitcher }: CartDrawerProps) {
   const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [soundEnabled] = useState(true);
@@ -123,8 +124,10 @@ export default function CartDrawer({ cart, setCart }: CartDrawerProps) {
 
   return (
     <>
-      {/* Floating Static Top Right Cart Trigger Icon Pin */}
-      <div className="fixed top-6 right-6 md:top-8 md:right-10 z-50 pointer-events-auto">
+      {/* Floating Static Top Right Header Group (Languages + Cart) */}
+      <div className="fixed top-6 right-6 md:top-8 md:right-10 z-50 pointer-events-auto flex items-center gap-3 sm:gap-4 md:gap-6">
+        {languageSwitcher}
+        
         <motion.button
           onClick={toggleDrawer}
           whileHover={{ scale: 1.03 }}

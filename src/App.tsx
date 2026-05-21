@@ -167,79 +167,82 @@ export default function App() {
         />
       </motion.div>
 
-      {/* Floating Quiet-Luxe Shopping Drawer Pin (Top Right) */}
-      <CartDrawer cart={cart} setCart={setCart} />
-
-      {/* Floating Quiet-Luxe Multi-Language Toggle (Top Navigation) */}
-      <div className="fixed top-6 right-[152px] sm:right-[175px] md:top-8 md:right-[230px] z-50 pointer-events-auto select-none">
-        {/* Desktop full bar */}
-        <div className="hidden sm:flex items-center gap-1 px-1 py-1 text-garabel-ink font-mono text-[9.5px] md:text-[10px] tracking-wide bg-transparent">
-          <Globe className="w-3.5 h-3.5 opacity-60 text-garabel-ink mr-2.5 ml-1" />
-          {LANGUAGES.map((lang, idx) => (
-            <span key={lang.code} className="relative group flex items-center gap-1.5">
-              <button
-                onClick={() => setLanguage(lang.code)}
-                className={`py-0.5 px-2 transition-all duration-300 cursor-pointer font-bold ${
-                  language === lang.code
-                    ? "text-[#376332] border-b-2 border-[#376332] scale-105"
-                    : "text-garabel-mid hover:text-garabel-ink"
-                }`}
-              >
-                {lang.flag}
-              </button>
-              
-              {/* Premium micro-tooltip */}
-              <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-garabel-ink text-white text-[8px] font-mono tracking-widest rounded shadow-craft-md pointer-events-none opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 ease-out whitespace-nowrap z-50">
-                {lang.tooltip}
-                <span className="absolute top-full left-1/2 -translate-x-1/2 border-bubble -mt-0.5 border-4 border-transparent border-t-garabel-ink"></span>
-              </span>
-
-              {idx < LANGUAGES.length - 1 && <span className="opacity-30 select-none font-light text-garabel-mid">/</span>}
-            </span>
-          ))}
-        </div>
-
-        {/* Mobile dropdown style */}
-        <div className="sm:hidden relative">
-          <button
-            onClick={() => setIsLangOpen(!isLangOpen)}
-            className="flex items-center gap-1 px-1 py-1.5 bg-transparent border-0 text-garabel-ink font-mono text-[9.5px] font-bold cursor-pointer hover:text-[#376332] transition-colors"
-          >
-            <Globe className="w-3.5 h-3.5 text-[#376332]" />
-            <span>{LANGUAGES.find(l => l.code === language)?.flag}</span>
-            <ChevronDown className={`w-3 h-3 text-[#376332] transition-transform duration-300 ${isLangOpen ? "rotate-180" : ""}`} />
-          </button>
-
-          <AnimatePresence>
-            {isLangOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                className="absolute right-0 mt-1.5 py-1 w-28 bg-garabel-cream border border-garabel-ink/10 rounded-lg shadow-craft-lg overflow-hidden flex flex-col z-50"
-              >
-                {LANGUAGES.map((lang) => (
+      {/* Floating Quiet-Luxe Shopping Drawer Pin (Top Right Header Group) */}
+      <CartDrawer 
+        cart={cart} 
+        setCart={setCart} 
+        languageSwitcher={
+          <div className="select-none flex items-center pr-1 sm:pr-2">
+            {/* Desktop full bar */}
+            <div className="hidden sm:flex items-center gap-1 px-1 py-1 text-garabel-ink font-mono text-[9.5px] md:text-[10px] tracking-wide bg-transparent">
+              <Globe className="w-5.5 h-5.5 md:w-6 md:h-6 text-white drop-shadow-[0_1px_2px_rgba(78,64,52,0.5)] mr-2.5 ml-1" />
+              {LANGUAGES.map((lang, idx) => (
+                <span key={lang.code} className="relative group flex items-center gap-1.5">
                   <button
-                    key={lang.code}
-                    onClick={() => {
-                      setLanguage(lang.code);
-                      setIsLangOpen(false);
-                    }}
-                    className={`flex items-center justify-between px-3 py-1.5 text-left font-mono text-[9px] tracking-wider transition-colors cursor-pointer ${
+                    onClick={() => setLanguage(lang.code)}
+                    className={`py-0.5 px-2 transition-all duration-300 cursor-pointer font-bold ${
                       language === lang.code
-                        ? "text-[#376332] bg-[#376332]/5 font-bold"
-                        : "text-garabel-ink hover:bg-garabel-sand/10"
+                        ? "text-[#376332] border-b-2 border-[#376332] scale-105"
+                        : "text-garabel-mid hover:text-garabel-ink"
                     }`}
                   >
-                    <span>{lang.name}</span>
-                    {language === lang.code && <Check className="w-2.5 h-2.5 text-[#376332]" />}
+                    {lang.flag}
                   </button>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
+                  
+                  {/* Premium micro-tooltip */}
+                  <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-garabel-ink text-white text-[8px] font-mono tracking-widest rounded shadow-craft-md pointer-events-none opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-200 ease-out whitespace-nowrap z-50">
+                    {lang.tooltip}
+                    <span className="absolute top-full left-1/2 -translate-x-1/2 border-bubble -mt-0.5 border-4 border-transparent border-t-garabel-ink"></span>
+                  </span>
+
+                  {idx < LANGUAGES.length - 1 && <span className="opacity-30 select-none font-light text-garabel-mid">/</span>}
+                </span>
+              ))}
+            </div>
+
+            {/* Mobile dropdown style */}
+            <div className="sm:hidden relative">
+              <button
+                onClick={() => setIsLangOpen(!isLangOpen)}
+                className="flex items-center gap-1.5 px-1 py-1 bg-transparent border-0 text-garabel-ink font-mono text-[9.5px] font-bold cursor-pointer hover:text-[#376332] transition-all"
+              >
+                <Globe className="w-5 h-5 text-white drop-shadow-[0_1px_1.5px_rgba(78,64,52,0.5)]" />
+                <span>{LANGUAGES.find(l => l.code === language)?.flag}</span>
+                <ChevronDown className={`w-3 h-3 text-[#376332] transition-transform duration-300 ${isLangOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              <AnimatePresence>
+                {isLangOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    className="absolute right-0 mt-1.5 py-1 w-28 bg-garabel-cream border border-garabel-ink/10 rounded-lg shadow-craft-lg overflow-hidden flex flex-col z-50"
+                  >
+                    {LANGUAGES.map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          setLanguage(lang.code);
+                          setIsLangOpen(false);
+                        }}
+                        className={`flex items-center justify-between px-3 py-1.5 text-left font-mono text-[9px] tracking-wider transition-colors cursor-pointer ${
+                          language === lang.code
+                            ? "text-[#376332] bg-[#376332]/5 font-bold"
+                            : "text-garabel-ink hover:bg-garabel-sand/10"
+                        }`}
+                      >
+                        <span>{lang.name}</span>
+                        {language === lang.code && <Check className="w-2.5 h-2.5 text-[#376332]" />}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        }
+      />
       
       {/* 1. Warmth Tint Overlay (Hue Tint Box multiplying paper tones) */}
       <div 
