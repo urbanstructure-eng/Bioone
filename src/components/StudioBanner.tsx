@@ -49,6 +49,33 @@ export default function StudioBanner() {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
 
+  // Luxury Slide Deck State (1 to 5) using the same high-end bag
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [slideDirection, setSlideDirection] = useState(1);
+
+  const slides = [
+    { id: 1, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 01" },
+    { id: 2, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 02" },
+    { id: 3, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 03" },
+    { id: 4, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 04" },
+    { id: 5, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 05" },
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const randomDir = Math.random() < 0.5 ? 1 : -1;
+      setSlideDirection(randomDir);
+      setCurrentSlideIndex((prev) => (prev + 1) % slides.length);
+    }, 40000);
+    return () => clearInterval(timer);
+  }, [currentSlideIndex]);
+
+  const handleSelectSlide = (index: number) => {
+    const randomDir = Math.random() < 0.5 ? 1 : -1;
+    setSlideDirection(randomDir);
+    setCurrentSlideIndex(index);
+  };
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
@@ -102,43 +129,94 @@ export default function StudioBanner() {
         </div>
       </motion.div>
 
-      {/* Pure 3D Interactive Floating Stage - No Boxes, Just the Bag (Scaled down 30% to 1.02) */}
-      <motion.div
-        initial={{ opacity: 0, y: 160, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1.02 }}
-        transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseReset}
-        onMouseEnter={() => setIsHovering(true)}
-        style={{
-          transform: `perspective(1800px) rotateX(${coords.y}deg) rotateY(${coords.x}deg)`,
-          transformStyle: "preserve-3d",
-          transition: isHovering ? "transform 0.05s ease-out" : "transform 0.9s cubic-bezier(0.16, 1, 0.3, 1)",
-        }}
-        className="relative w-full max-w-[1300px] h-[55vh] sm:h-[60vh] md:h-[68vh] flex items-center justify-center cursor-grab active:cursor-grabbing group z-10"
-      >
+      {/* Pure 3D Interactive Floating Stage Wrapper */}
+      <div className="relative w-full max-w-[1300px] h-[55vh] sm:h-[60vh] md:h-[68vh] flex items-center justify-center z-10">
         
-        {/* The Luxury Bag itself with continuous cinematic float and interactive 3D perspective tilt */}
-        <motion.img
-          src="https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA"
-          alt="Atelier Garabel Sustainable Organic Luxury Bag"
-          referrerPolicy="no-referrer"
-          animate={{
-            y: isHovering ? -15 : [0, -20, 0],
-            rotate: isHovering ? coords.x * 0.12 : [0, 1.0, 0, -1.0, 0],
-          }}
-          transition={{
-            y: isHovering 
-              ? { type: "spring", stiffness: 120, damping: 20 } 
-              : { repeat: Infinity, duration: 4.2, ease: "easeInOut" },
-            rotate: isHovering
-              ? { type: "spring", stiffness: 120, damping: 20 }
-              : { repeat: Infinity, duration: 5.5, ease: "easeInOut" }
-          }}
-          className="w-full h-full object-contain select-none filter drop-shadow-[0_40px_90px_rgba(40,36,32,0.22)]"
-        />
+        {/* Elegant vertical slide index controllers on the side (outside of the 3D tilt stream) */}
+        <div className="absolute right-0 sm:right-6 md:right-10 top-1/2 -translate-y-1/2 flex flex-col items-center gap-3.5 z-30">
+          <span className="font-mono text-[7px] tracking-[0.25em] text-garabel-mid/50 uppercase rotate-90 mb-5 translate-y-[-5px]">
+            SERIES
+          </span>
+          {slides.map((slide, idx) => {
+            const isActive = idx === currentSlideIndex;
+            return (
+              <button
+                key={slide.id}
+                onClick={() => handleSelectSlide(idx)}
+                className="group relative flex items-center justify-end py-1 px-2 focus:outline-none cursor-pointer"
+                aria-label={`Go to specimen slide ${slide.id}`}
+              >
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`font-mono text-[10px] md:text-[11px] font-bold tracking-tight transition-all duration-300 ${
+                      isActive
+                        ? "text-[#376332] scale-110"
+                        : "text-garabel-mid/40 hover:text-[#376332]"
+                    }`}
+                  >
+                    {`0${slide.id}`}
+                  </span>
+                  <div
+                    className={`h-[1px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                      isActive
+                        ? "w-8 sm:w-12 bg-[#376332]"
+                        : "w-2 sm:w-3 bg-garabel-ink/10 group-hover:bg-[#376332]/40"
+                    }`}
+                  />
+                </div>
+              </button>
+            );
+          })}
+        </div>
 
-      </motion.div>
+        {/* Interactive 3D tilt stage box */}
+        <motion.div
+          initial={{ opacity: 0, y: 160, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1.02 }}
+          transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseReset}
+          onMouseEnter={() => setIsHovering(true)}
+          style={{
+            transform: `perspective(1800px) rotateX(${coords.y}deg) rotateY(${coords.x}deg)`,
+            transformStyle: "preserve-3d",
+            transition: isHovering ? "transform 0.05s ease-out" : "transform 0.9s cubic-bezier(0.16, 1, 0.3, 1)",
+          }}
+          className="w-full h-full flex items-center justify-center cursor-grab active:cursor-grabbing group"
+        >
+          <AnimatePresence mode="wait">
+            {/* The Luxury Bag itself with continuous cinematic float and interactive 3D perspective tilt */}
+            <motion.img
+              key={currentSlideIndex}
+              src={slides[currentSlideIndex].img}
+              alt={`Atelier Garabel Sustainable Organic Luxury Bag Specimen ${currentSlideIndex + 1}`}
+              referrerPolicy="no-referrer"
+              initial={{ opacity: 0, x: slideDirection * 40, scale: 0.97 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                scale: 1,
+                y: isHovering ? -15 : [0, -20, 0],
+                rotate: isHovering ? coords.x * 0.12 : [0, 1.0, 0, -1.0, 0],
+              }}
+              exit={{ opacity: 0, x: -slideDirection * 40, scale: 0.97 }}
+              transition={{
+                x: { type: "spring", stiffness: 100, damping: 15 },
+                opacity: { duration: 0.4 },
+                scale: { duration: 0.4 },
+                y: isHovering 
+                  ? { type: "spring", stiffness: 120, damping: 20 } 
+                  : { repeat: Infinity, duration: 4.2, ease: "easeInOut" },
+                rotate: isHovering
+                  ? { type: "spring", stiffness: 120, damping: 20 }
+                  : { repeat: Infinity, duration: 5.5, ease: "easeInOut" }
+              }}
+              className="w-full h-full object-contain select-none filter drop-shadow-[0_40px_90px_rgba(40,36,32,0.22)]"
+            />
+          </AnimatePresence>
+        </motion.div>
+
+      </div>
 
       {/* Luxurious Editorial Scroll-Down Assist Badge */}
       <motion.button
