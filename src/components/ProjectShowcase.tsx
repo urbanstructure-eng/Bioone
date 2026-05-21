@@ -33,14 +33,14 @@ export default function ProjectShowcase() {
         className="relative z-10 text-left px-8 sm:px-16 md:px-24 lg:px-32 max-w-7xl w-full mx-auto"
       >
         <h2 className="text-[52px] sm:text-7xl md:text-[110px] lg:text-[145px] xl:text-[165px] font-sans font-black tracking-tighter text-[#fdfbf7] leading-[0.85] uppercase drop-shadow-[0_12px_40px_rgba(0,0,0,0.55)]">
-          Carbon-conscious<br />
-          luxury packaging.
+          {t("leaf_title_1")}<br />
+          {t("leaf_title_2")}
         </h2>
         
         <div className="mt-6 sm:mt-8 md:mt-12 space-y-1.5 sm:space-y-2 text-[#fdfbf7] opacity-90 font-sans font-normal text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl uppercase tracking-[0.15em] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
-          <p>• BPI Certified</p>
-          <p>• TÜV Austria OK Compost</p>
-          <p>• EN 13432 compliant</p>
+          <p>• {t("leaf_cert_1")}</p>
+          <p>• {t("leaf_cert_2")}</p>
+          <p>• {t("leaf_cert_3")}</p>
         </div>
       </motion.div>
     </section>
