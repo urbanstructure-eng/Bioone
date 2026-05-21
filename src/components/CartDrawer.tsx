@@ -194,10 +194,10 @@ export default function CartDrawer({ cart, setCart, languageSwitcher }: CartDraw
                   <div className="relative z-10 flex justify-between items-center">
                     <div className="space-y-1">
                       <span className="block font-mono text-[8.5px] text-garabel-accent font-bold tracking-widest uppercase">
-                        TACTILE ACQUISITION PANEL
+                        {t("cart_preview_title")}
                       </span>
                       <h3 className="font-sans text-xl font-light text-garabel-ink tracking-tight">
-                        Your <span className="italic font-normal text-garabel-mid">order preview</span>.
+                        {t("cart_preview_your")} <span className="italic font-normal text-garabel-mid">{t("cart_preview_order")}</span>.
                       </h3>
                     </div>
                     
@@ -219,10 +219,10 @@ export default function CartDrawer({ cart, setCart, languageSwitcher }: CartDraw
                       </div>
                       <div className="space-y-1.5">
                         <span className="block font-mono text-[9.5px] text-garabel-ink font-bold tracking-widest">
-                          LEDGER REGISTER VACANT
+                          {t("cart_empty")}
                         </span>
                         <p className="font-sans text-xs font-light text-garabel-mid max-w-[240px] leading-relaxed mx-auto">
-                          Choose packaging specimens, materials, or generate bespoke AI layout custom blueprints to load items on your dispatch card draft.
+                          {t("cart_empty_desc")}
                         </p>
                       </div>
                     </div>
@@ -230,14 +230,14 @@ export default function CartDrawer({ cart, setCart, languageSwitcher }: CartDraw
                     <div className="space-y-5">
                       <div className="flex justify-between items-center pb-2 border-b border-garabel-ink/10">
                         <span className="font-mono text-[8.5px] text-garabel-ink/60 font-bold uppercase tracking-wider">
-                          INDEXED ITEMS IN FLIGHT:
+                          {t("cart_items_count")}
                         </span>
                         <button
                           onClick={clearCart}
                           className="font-mono text-[8.5px] text-garabel-accent hover:underline cursor-pointer flex items-center gap-1 uppercase"
                         >
                           <Trash2 className="w-3 h-3" />
-                          <span>Clear Selection</span>
+                          <span>{t("cart_clear")}</span>
                         </button>
                       </div>
 
@@ -324,15 +324,15 @@ export default function CartDrawer({ cart, setCart, languageSwitcher }: CartDraw
                     {/* Invoice math summary */}
                     <div className="relative z-10 space-y-2.5 font-mono text-[9px] tracking-wider text-garabel-mid">
                       <div className="flex justify-between">
-                        <span>LEDGER SUB-TOTAL:</span>
+                        <span>{t("cart_ledger_subtotal")}</span>
                         <span className="text-garabel-ink font-semibold">${subtotal}.00 USD</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>ECO CARGO COURIER DISPATCH:</span>
+                        <span>{t("cart_eco_dispatch")}</span>
                         <span className="text-garabel-ink font-semibold">${ecoShipping}.00 USD</span>
                       </div>
                       <div className="flex justify-between border-t border-dashed border-stone-200 pt-2.5 text-[10.5px] text-garabel-ink font-bold">
-                        <span>TOTAL SPECIMEN INVESTMENT:</span>
+                        <span>{t("cart_specimen_total")}</span>
                         <span className="text-garabel-accent font-bold">${grandTotal}.00 USD</span>
                       </div>
                     </div>
@@ -351,7 +351,7 @@ export default function CartDrawer({ cart, setCart, languageSwitcher }: CartDraw
                         onClick={handleCheckoutScroll}
                         className="w-full flex items-center justify-center gap-2 py-4 rounded bg-garabel-ink hover:bg-opacity-95 text-garabel-cream font-mono text-[10px] uppercase tracking-widest transition-all cursor-pointer shadow-craft-md font-bold"
                       >
-                        <span>Proceed To Secure Checkout Desk</span>
+                        <span>{t("cart_proceed_checkout")}</span>
                         <ChevronRight className="w-3.5 h-3.5 text-garabel-accent" />
                       </button>
 
@@ -359,7 +359,7 @@ export default function CartDrawer({ cart, setCart, languageSwitcher }: CartDraw
                         onClick={toggleDrawer}
                         className="w-full py-2.5 font-mono text-[8px] text-stone-400 uppercase tracking-widest text-center hover:text-stone-600 transition-colors cursor-pointer"
                       >
-                        Keep Curating Remnants
+                        {t("cart_keep_curating")}
                       </button>
                     </div>
 

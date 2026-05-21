@@ -332,7 +332,7 @@ export default function AtelierStore({ cart, setCart }: AtelierStoreProps) {
         {/* Right Side: The Shopping Order Card and Checkout Desk */}
         <div className="lg:col-span-5 space-y-6">
           <span className="block font-mono text-[10px] tracking-widest text-garabel-mid uppercase border-b border-garabel-ink/10 pb-2">
-            YOUR TACTILE ORDER CARD:
+            {t("cart_title")}:
           </span>
 
           {!successOrder ? (
@@ -351,11 +351,11 @@ export default function AtelierStore({ cart, setCart }: AtelierStoreProps) {
                   <div className="flex items-center gap-2">
                     <ShoppingCart className="w-4 h-4 text-garabel-accent" />
                     <span className="font-mono text-[10px] text-garabel-ink font-bold tracking-widest">
-                      ORDER DETAILS CARD
+                      {t("order_details").toUpperCase()}
                     </span>
                   </div>
                   <span className="font-mono text-[9px] text-garabel-mid uppercase px-2 py-0.5 rounded border border-garabel-ink/10 bg-garabel-sand bg-opacity-30">
-                    ITEMS: {cart.reduce((s, c) => s + c.quantity, 0)}
+                    {t("cart_items_count")} {cart.reduce((s, c) => s + c.quantity, 0)}
                   </span>
                 </div>
 
@@ -363,10 +363,10 @@ export default function AtelierStore({ cart, setCart }: AtelierStoreProps) {
                 {cart.length === 0 ? (
                   <div className="py-12 text-center space-y-3">
                     <span className="block font-mono text-[10px] text-garabel-mid tracking-wide uppercase">
-                      [ CARD DISK EMPTY ]
+                      [ {t("cart_empty")} ]
                     </span>
                     <p className="font-sans text-xs font-light text-garabel-mid/60 leading-relaxed max-w-xs mx-auto">
-                      Explore material swatches on the left or scroll up to trigger our AI luxury design customizer to prepare custom products for order.
+                      {t("cart_empty_desc")}
                     </p>
                   </div>
                 ) : (
@@ -426,17 +426,17 @@ export default function AtelierStore({ cart, setCart }: AtelierStoreProps) {
                 {/* Subtotal metrics list */}
                 <div className="space-y-2 font-mono text-[9px] tracking-wider text-garabel-mid border-t border-dashed border-garabel-ink/15 pt-4">
                   <div className="flex justify-between">
-                    <span>CART SUB-VAL:</span>
+                    <span>{t("cart_subtotal")}</span>
                     <span className="text-garabel-ink font-semibold">${subtotal}.00 USD</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>SUSTAIN BOX DISPATCH:</span>
+                    <span>{t("eco_transit")}</span>
                     <span className="text-garabel-ink font-semibold">
                       {ecoShipping > 0 ? `$${ecoShipping}.00 USD` : "—"}
                     </span>
                   </div>
                   <div className="flex justify-between border-t border-garabel-ink/5 pt-2 text-[10px]">
-                    <span className="font-bold text-garabel-ink">TOTAL DESIGN INVESTMENT:</span>
+                    <span className="font-bold text-garabel-ink">{t("cart_total")}</span>
                     <span className="text-garabel-ink font-bold">${total}.00 USD</span>
                   </div>
                 </div>
