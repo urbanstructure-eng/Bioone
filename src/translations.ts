@@ -1,13 +1,14 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-export type LanguageCode = "en" | "fr" | "it" | "es" | "de";
+export type LanguageCode = "en" | "fr" | "it" | "es" | "de" | "ja";
 
-export const LANGUAGES: { code: LanguageCode; name: string; flag: string }[] = [
-  { code: "en", name: "English", flag: "EN" },
-  { code: "fr", name: "Français", flag: "FR" },
-  { code: "it", name: "Italiano", flag: "IT" },
-  { code: "es", name: "Español", flag: "ES" },
-  { code: "de", name: "Deutsch", flag: "DE" },
+export const LANGUAGES: { code: LanguageCode; name: string; flag: string; tooltip: string }[] = [
+  { code: "en", name: "English", flag: "EN", tooltip: "English" },
+  { code: "fr", name: "Français", flag: "FR", tooltip: "French (Français)" },
+  { code: "it", name: "Italiano", flag: "IT", tooltip: "Italian (Italiano)" },
+  { code: "es", name: "Español", flag: "ES", tooltip: "Spanish (Español)" },
+  { code: "de", name: "Deutsch", flag: "DE", tooltip: "German (Deutsch)" },
+  { code: "ja", name: "日本語", flag: "JP", tooltip: "Japanese (日本語)" },
 ];
 
 export const TRANSLATIONS: Record<LanguageCode, Record<string, string>> = {
@@ -523,6 +524,114 @@ export const TRANSLATIONS: Record<LanguageCode, Record<string, string>> = {
     subscribe_btn: "ABONNIEREN",
     sub_success: "ERFOLG: IHRE ADRESSE WURDE ERFOLGREICH REGISTRIERT.",
   },
+  ja: {
+    // Nav / Global
+    order_details: "注文詳細",
+    return_to_top: "トップに戻る",
+    // Hero Banner
+    hero_title_1: "ラグジュアリーパッケージの",
+    hero_title_2: "未来は",
+    hero_title_3: "生分解性へ",
+    hero_certified: "生分解性認証済み // 100% 天然未加工コポスタブル植物セルロース",
+    hero_scroll: "下にスクロールして探索する",
+    // Sustainability section
+    sustain_goals_1: "ブランドの",
+    sustain_goals_2: "サステナビリティ目標",
+    sustain_goals_3: "達成を支援する",
+    // Project Showcase
+    showcase_badge: "コラボレーション試作 // サンプル台帳シリーズ 01",
+    showcase_title_1: "構造的な美しさと",
+    showcase_title_2: "品格の追求",
+    showcase_desc: "私たちは、物理的な容器を建築的な傑作として捉えています。プラスチックラミネートや有害な接着剤は一切使用せず、純粋な有機繊維の配列、精巧なデボス加工の幾何学、および妥協を許さないクオリティを誇ります。",
+    project_metrics_1: "100% プラスチックフリー構造",
+    project_metrics_2: "12週間以内に生分解",
+    project_metrics_3: "高引張リネンコードサポート",
+    project_metrics_4: "有機土壌に安全に溶解",
+    project_metrics_5: "衝撃吸収スコア +350%",
+    project_metrics_6: "天然素材の抗菌コア",
+    project_metrics_7: "100% 消費者回収素材の筒型スピニング",
+    project_metrics_8: "100% リサイクル可能認定チューブ",
+    project_metrics_9: "防臭大豆油インナーライナー",
+    view_blueprint: "詳細仕様書を検証する",
+    close_specs: "仕様一覧を閉じる",
+    // Creative Desk (Estimator)
+    desk_badge: "発送見積り要請 // アトリエ-01",
+    desk_title: "仕様書データ",
+    desk_title_italic: "の微調整",
+    desk_desc: "プラスチック不使用の構造体をシミュレートします。アウターライナー、強固な芯材、持続可能な表面加工を以下で構成することで、コスト指数、体積質量、および炭素排出削減量を瞬時に計算します。",
+    desk_brand_label: "01 // 登録済みフラッグシップブランド名 入力:",
+    desk_prompt_label: "02 // 注文仕立てのデザインビジョン封筒:",
+    desk_prompt_placeholder: "ご希望のデザイン、質感、または幾何学的な視点（例：ブラインド型押しのゴールドモチーフ、砂粘土の質感など）を入力してください...",
+    desk_style_label: "03 // ラグジュアリーデザインの美学哲学:",
+    desk_style_aesop: "ボタニカルアポセカリー（イソップスタイル）",
+    desk_style_louis: "サルトリアル・リジッドキャンバス（ルイスタイル）",
+    desk_style_frama: "インダストリアル・ブルータリストウッド（フラマスタイル）",
+    desk_style_apple: "ハイパーストイック・エンジニアリング（アップルスタイル）",
+    desk_gen_btn_active: "✦ アトリエ・特注デザインサンプルを生成",
+    desk_gen_btn_running: "AIパッケージングレイアウトを構築中...",
+    desk_calib_smart: "04 // プレミアム・エコスマート統合の調整:",
+    option_small_batch: "小ロットプリセット",
+    option_small_batch_desc: "標準の5,000ロットからではなく、100箱から生産可能です。",
+    option_smart_chip: "QR/NFC スマートチップ",
+    option_smart_chip_desc: "生分解性パルプの下に圧着された目に見えない高級リンク。",
+    option_fulfillment: "超迅速 24-48時間発送",
+    option_fulfillment_desc: "地域ハブでの設計・試作における手術的な優先ハンドリング。",
+    option_carbon: "100% カーボンオフセット",
+    option_carbon_desc: "森林のルーツを起点とした、監査済みのゴールドスタンダード物流補正。",
+    option_hybrid: "再利用可能なハイブリッドコア",
+    option_hybrid_desc: "美術品トレイに変換可能な厚肉の2層構成の強固なボード。",
+    option_studio: "アトリエ・インタラクティブレビュー",
+    option_studio_desc: "バーチャルスタジオで上級デザイナーとの直接レビューミーティング。",
+    option_active: "アクティブ小ロット (100ユニット)",
+    option_embedded: "埋め込み型エコチップ",
+    option_analog: "アナログ天然繊維",
+    option_velocity: "高優先配送アクティブ",
+    option_offset: "ゼロエミッション保証",
+    option_standard: "標準発送時間",
+    option_reusable: "再利用可能な強度コア",
+    option_single_use: "使い捨てプレミアム製品",
+    option_consult: "専任アドバイザー含む",
+    option_independent: "単独製造体制",
+    estimate_title: "自重および請求構成要素一覧シート",
+    estimate_basis: "ブランド向け開発スペック基礎",
+    estimate_mass: "設計図上の総重量",
+    estimate_rate: "基本パッケージ開発レート",
+    estimate_multiplier: "数量・速度マルチプライヤー",
+    estimate_total: "推定製造ユニット価格",
+    add_custom_order: "AI特注設計を注文に追加する",
+    brand_identity_specs: "ブランドアイデンティティおよび生産指示書:",
+    substrate_recom: "推奨されるエコ基材:",
+    tagline_recom: "提案するラグジュアリー・コンセプトコピー:",
+    analysis_ai: "AIによる質感・構造・炭素分析:",
+    specs_sheet_title: "プロトタイプ要件仕様詳細:",
+    palette_title: "推奨デウェイスウォッチトーン（クロメティック）:",
+    // Shop
+    shop_subtitle: "アトリエ製作品の発送",
+    shop_title: "感覚的な残り香 &",
+    shop_title_italic: "見本帳ブティック",
+    shop_desc: "認定を受けた素材サンプルパックや、AIが作成した特注プロトタイプをご注文いただくことで、物理的なブランドパッケージ決定のご検討に貢献します。炭素に配慮した重厚な化粧箱に収めて、直ちに発送します。",
+    shop_badge: "利用可能なサステナブル見本およびプロトタイプ:",
+    add_to_order: "注文に追加する",
+    added_to_order: "追加されました！",
+    order_summary: "ご注文内容のご確認",
+    checkout_form_title: "カーボンニュートラル DHL発送仕様シート",
+    place_order_btn: "手数料を除外してPayPalで注文する",
+    submitting_order: "PayPal決済トランザクションを確認中...",
+    success_receipt: "限定譲渡トランザクション領収書",
+    order_num: "注文番号:",
+    status_label: "サンプルの発送状況:",
+    pay_email_label: "登録されたPayPalアカウント:",
+    recipient_label: "受取人様の住所ブロック:",
+    // Footer
+    footer_tag: "定期刊行される覚書 & マニフェスト",
+    footer_title: "エディトリアル",
+    footer_title_italic: "クロニクルズ",
+    footer_desc: "有機植物化学、折り紙細工のような構造、および世界の貨物物流における控えめな贅沢（クワイエット・ラグジュアリー）の哲学に焦点を当てた、年2回発行の定期刊行物。",
+    join_editorial: "無料のリネンファブリック端切れを四半期ごとに受け取るには、クロニクルズリストに登録してください。",
+    sub_placeholder: "会社公式メールアドレス...",
+    subscribe_btn: "購読登録",
+    sub_success: "完了：アトリエ登録簿に正常に記録されました。",
+  },
 };
 
 interface LanguageContextType {
@@ -536,7 +645,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<LanguageCode>(() => {
     const saved = localStorage.getItem("garabel_pref_lang");
-    if (saved && (saved === "en" || saved === "fr" || saved === "it" || saved === "es" || saved === "de")) {
+    if (saved && (saved === "en" || saved === "fr" || saved === "it" || saved === "es" || saved === "de" || saved === "ja")) {
       return saved as LanguageCode;
     }
     return "en";
@@ -580,10 +689,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     return key;
   };
 
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      {children}
-    </LanguageContext.Provider>
+  return React.createElement(
+    LanguageContext.Provider,
+    { value: { language, setLanguage, t } },
+    children
   );
 }
 
