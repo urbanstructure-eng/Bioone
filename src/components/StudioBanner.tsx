@@ -118,15 +118,9 @@ export default function StudioBanner() {
         <h2 className="font-sans font-black text-4xl sm:text-6xl md:text-7xl lg:text-[88px] uppercase text-[#376332] tracking-tighter leading-[0.88] max-w-6xl">
           {t("hero_title_1")}<br />{t("hero_title_2")}<br />{t("hero_title_3")}
         </h2>
-        <div className="flex items-center gap-2.5 opacity-95 py-1">
-          <svg className="w-4.5 h-4.5 text-garabel-ink shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z" />
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4" />
-          </svg>
-          <span className="font-mono text-[10.5px] sm:text-[13px] tracking-widest text-garabel-ink font-semibold uppercase leading-none">
-            {t("hero_certified")}
-          </span>
-        </div>
+        <p className="font-sans text-[2.3vw] xs:text-[2.1vw] sm:text-[1.8vw] md:text-[1.6vw] lg:text-[1.45vw] xl:text-[18px] tracking-tight text-garabel-ink font-bold max-w-6xl mx-auto whitespace-nowrap leading-none mt-4 md:mt-5">
+          {t("hero_certified")}
+        </p>
       </motion.div>
 
       {/* Pure 3D Interactive Floating Stage Wrapper */}
@@ -191,7 +185,7 @@ export default function StudioBanner() {
               src={slides[currentSlideIndex].img}
               alt={`Atelier Garabel Sustainable Organic Luxury Bag Specimen ${currentSlideIndex + 1}`}
               referrerPolicy="no-referrer"
-              initial={{ opacity: 0, x: slideDirection * 40, scale: 0.97 }}
+              initial={{ opacity: 0, x: slideDirection * 600, scale: 0.95 }}
               animate={{
                 opacity: 1,
                 x: 0,
@@ -199,11 +193,11 @@ export default function StudioBanner() {
                 y: isHovering ? -15 : [0, -20, 0],
                 rotate: isHovering ? coords.x * 0.12 : [0, 1.0, 0, -1.0, 0],
               }}
-              exit={{ opacity: 0, x: -slideDirection * 40, scale: 0.97 }}
+              exit={{ opacity: 0, x: -slideDirection * 600, scale: 0.95 }}
               transition={{
-                x: { type: "spring", stiffness: 100, damping: 15 },
-                opacity: { duration: 0.4 },
-                scale: { duration: 0.4 },
+                x: { type: "spring", stiffness: 240, damping: 30, mass: 0.7 },
+                opacity: { duration: 0.35 },
+                scale: { duration: 0.35 },
                 y: isHovering 
                   ? { type: "spring", stiffness: 120, damping: 20 } 
                   : { repeat: Infinity, duration: 4.2, ease: "easeInOut" },
