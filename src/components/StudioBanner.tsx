@@ -222,9 +222,11 @@ export default function StudioBanner() {
                     src={slides[currentSlideIndex].img}
                     alt={`Atelier Garabel Sustainable Organic luxury Specimen ${currentSlideIndex + 1}`}
                     referrerPolicy="no-referrer"
+                    initial={{ scale: slides[currentSlideIndex].id === 4 ? 1.00 : 1 }}
                     animate={{
                       y: isHovering ? -15 : [0, -20, 0],
                       rotate: isHovering ? coords.x * 0.12 : [0, 1.0, 0, -1.0, 0],
+                      scale: slides[currentSlideIndex].id === 4 ? 1.00 : 1,
                     }}
                     transition={{
                       y: isHovering 
@@ -232,7 +234,8 @@ export default function StudioBanner() {
                         : { repeat: Infinity, duration: 4.2, ease: "easeInOut" },
                       rotate: isHovering
                         ? { type: "spring", stiffness: 120, damping: 20 }
-                        : { repeat: Infinity, duration: 5.5, ease: "easeInOut" }
+                        : { repeat: Infinity, duration: 5.5, ease: "easeInOut" },
+                      scale: { duration: 0.3 }
                     }}
                     className="w-full h-full object-contain select-none filter drop-shadow-[0_45px_100px_rgba(40,36,32,0.18)] max-h-[85%]"
                   />
