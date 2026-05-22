@@ -56,7 +56,7 @@ export default function StudioBanner() {
   const slides: { id: number; img: string; label: string; tagline?: string; isFullPhoto?: boolean; }[] = [
     { id: 1, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 01" },
     { id: 2, img: "https://lh3.googleusercontent.com/d/1J4OdZOEmRy9jLM0yP6U6Z_tF7h5mi75U", label: "Specimen 02" },
-    { id: 3, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 03", tagline: "Carbon-conscious luxury packaging." },
+    { id: 3, img: "https://lh3.googleusercontent.com/d/14WF1dzWmjm3gQjgF7f1sm9zJoyojHhhe", label: "Specimen 03" },
     { id: 4, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 04" },
     { id: 5, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 05" },
   ];
@@ -118,7 +118,7 @@ export default function StudioBanner() {
         <h2 className="font-sans font-black text-4xl sm:text-6xl md:text-7xl lg:text-[88px] uppercase text-[#376332] tracking-tighter leading-[0.88] max-w-6xl">
           {t("hero_title_1")}<br />{t("hero_title_2")}<br />{t("hero_title_3")}
         </h2>
-        <p className="font-sans text-[2.3vw] xs:text-[2.1vw] sm:text-[1.8vw] md:text-[1.6vw] lg:text-[1.45vw] xl:text-[18px] tracking-tight text-garabel-ink font-bold max-w-6xl mx-auto whitespace-nowrap leading-none mt-4 md:mt-5">
+        <p className="font-sans text-[11px] xs:text-xs sm:text-sm md:text-base lg:text-lg xl:text-[18px] tracking-tight text-garabel-ink font-bold max-w-xl sm:max-w-4xl lg:max-w-6xl mx-auto leading-relaxed md:leading-none mt-3 sm:mt-4 md:mt-5 px-4">
           {t("hero_certified")}
         </p>
       </motion.div>

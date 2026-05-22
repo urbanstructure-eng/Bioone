@@ -151,19 +151,19 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-garabel-bg text-garabel-ink overflow-x-hidden transition-colors duration-500 selection:bg-garabel-accent selection:text-garabel-cream">
       
-      {/* Global Static Top Left Branding Logo (30% larger, fixed in place across cards) */}
+      {/* Global Static Top Left Branding Logo (adjusted size and position on mobile to match layout) */}
       <motion.div 
         initial={{ opacity: 0, x: -25 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-6 left-6 md:top-8 md:left-10 z-50 pointer-events-auto cursor-pointer"
+        className="fixed top-4 left-4 md:top-8 md:left-10 z-50 pointer-events-auto cursor-pointer"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
         <img
           src="https://lh3.googleusercontent.com/d/1U3YfW75P9JyKKTCWA7yoM31HCTW9L0fN"
           alt="Atelier Garabel"
           referrerPolicy="no-referrer"
-          className="h-[52px] sm:h-[62px] w-auto object-contain select-none animate-fadeIn"
+          className="h-[38px] sm:h-[48px] md:h-[62px] w-auto object-contain select-none animate-fadeIn"
         />
       </motion.div>
 
@@ -201,42 +201,52 @@ export default function App() {
             </div>
 
             {/* Mobile dropdown style */}
-            <div className="sm:hidden relative">
+            <div className="sm:hidden relative z-50">
               <button
                 onClick={() => setIsLangOpen(!isLangOpen)}
-                className="flex items-center gap-1.5 px-1 py-1 bg-transparent border-0 text-garabel-ink font-mono text-[9.5px] font-bold cursor-pointer hover:text-[#376332] transition-all"
+                className="flex items-center gap-1.5 px-3 py-2 bg-garabel-cream/95 backdrop-blur-sm border border-garabel-ink/15 rounded-full text-garabel-ink font-mono text-[11px] font-bold cursor-pointer hover:text-[#376332] transition-all shadow-craft-sm h-11 focus:outline-none"
+                id="mobile-lang-btn"
               >
-                <Globe className="w-5 h-5 text-white drop-shadow-[0_1px_1.5px_rgba(78,64,52,0.5)]" />
-                <span>{LANGUAGES.find(l => l.code === language)?.flag}</span>
-                <ChevronDown className={`w-3 h-3 text-[#376332] transition-transform duration-300 ${isLangOpen ? "rotate-180" : ""}`} />
+                <div className="absolute inset-0 paper-grain pointer-events-none opacity-10 rounded-full"></div>
+                <Globe className="w-4 h-4 text-garabel-mid" />
+                <span className="font-bold">{LANGUAGES.find(l => l.code === language)?.flag}</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-[#376332] transition-transform duration-300 ${isLangOpen ? "rotate-180" : ""}`} />
               </button>
 
               <AnimatePresence>
                 {isLangOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                    className="absolute right-0 mt-1.5 py-1 w-28 bg-garabel-cream border border-garabel-ink/10 rounded-lg shadow-craft-lg overflow-hidden flex flex-col z-50"
-                  >
-                    {LANGUAGES.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => {
-                          setLanguage(lang.code);
-                          setIsLangOpen(false);
-                        }}
-                        className={`flex items-center justify-between px-3 py-1.5 text-left font-mono text-[9px] tracking-wider transition-colors cursor-pointer ${
-                          language === lang.code
-                            ? "text-[#376332] bg-[#376332]/5 font-bold"
-                            : "text-garabel-ink hover:bg-garabel-sand/10"
-                        }`}
-                      >
-                        <span>{lang.name}</span>
-                        {language === lang.code && <Check className="w-2.5 h-2.5 text-[#376332]" />}
-                      </button>
-                    ))}
-                  </motion.div>
+                  <>
+                    {/* Seamless viewport backdrop click dismissal */}
+                    <div className="fixed inset-0 z-40 bg-transparent" onClick={() => setIsLangOpen(false)}></div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      className="absolute right-0 mt-2 py-1.5 w-36 bg-garabel-cream border border-garabel-ink/20 rounded-xl shadow-craft-lg overflow-hidden flex flex-col z-50"
+                    >
+                      <div className="absolute inset-0 paper-grain pointer-events-none opacity-20"></div>
+                      {LANGUAGES.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            setLanguage(lang.code);
+                            setIsLangOpen(false);
+                          }}
+                          className={`flex items-center justify-between px-4 py-3 text-left font-mono text-[11px] tracking-wider transition-colors cursor-pointer relative z-40 ${
+                            language === lang.code
+                              ? "text-[#376332] bg-[#376332]/5 font-bold"
+                              : "text-garabel-ink hover:bg-garabel-sand/10"
+                          }`}
+                        >
+                          <span className="flex items-center gap-2">
+                            <span className="opacity-60">{lang.flag}</span>
+                            <span>{lang.name}</span>
+                          </span>
+                          {language === lang.code && <Check className="w-3.5 h-3.5 text-[#376332]" />}
+                        </button>
+                      ))}
+                    </motion.div>
+                  </>
                 )}
               </AnimatePresence>
             </div>

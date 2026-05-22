@@ -50,7 +50,7 @@ export default function CardboardCustomizer({}: CardboardCustomizerProps) {
     >
       {/* Quiet luxury bold sustainability statement stacked on left - matching logo organic green */}
       <div className="max-w-6xl text-left">
-        <h2 className="text-[52px] sm:text-7xl md:text-[110px] lg:text-[145px] xl:text-[165px] font-sans font-black tracking-tighter text-[#376332] leading-[0.85] uppercase">
+        <h2 className="text-4xl xs:text-5xl sm:text-7xl md:text-[110px] lg:text-[145px] xl:text-[165px] font-sans font-black tracking-tighter text-[#376332] leading-[0.85] uppercase">
           {t("sustain_goals_1")}<br />
           {t("sustain_goals_2")}<br />
           {t("sustain_goals_3")}

@@ -125,22 +125,22 @@ export default function CartDrawer({ cart, setCart, languageSwitcher }: CartDraw
   return (
     <>
       {/* Floating Static Top Right Header Group (Languages + Cart) */}
-      <div className="fixed top-6 right-6 md:top-8 md:right-10 z-50 pointer-events-auto flex items-center gap-3 sm:gap-4 md:gap-6">
+      <div className="fixed top-4 right-4 md:top-8 md:right-10 z-50 pointer-events-auto flex items-center gap-2 sm:gap-4 md:gap-6">
         {languageSwitcher}
         
         <motion.button
           onClick={toggleDrawer}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
-          className="relative flex items-center gap-2 px-4.5 py-3 rounded-full border border-garabel-ink/15 bg-garabel-cream shadow-craft-md cursor-pointer hover:bg-white transition-colors select-none focus:outline-none h-11 md:h-13"
+          className="relative flex items-center justify-center gap-2 px-0 sm:px-4.5 py-3 rounded-full border border-garabel-ink/15 bg-garabel-cream shadow-craft-md cursor-pointer hover:bg-white transition-colors select-none focus:outline-none h-11 w-11 sm:h-11 md:h-13 sm:w-auto"
           title="Open Order Details Panel"
         >
           {/* Fiber & grain textures inside container */}
           <div className="absolute inset-0 paper-grain pointer-events-none opacity-20 rounded-full"></div>
           
-          <ShoppingCart className="w-4 h-4 md:w-4.5 md:h-4.5 text-garabel-ink" />
+          <ShoppingCart className="w-4 h-4 md:w-4.5 md:h-4.5 text-garabel-ink shrink-0" />
           
-          <span className="font-mono text-[9px] md:text-[10px] tracking-widest text-[#376332] font-bold uppercase select-none mr-0.5">
+          <span className="hidden sm:inline font-mono text-[9px] md:text-[10px] tracking-widest text-[#376332] font-bold uppercase select-none mr-0.5">
             {t("order_details")}
           </span>
           
@@ -151,7 +151,7 @@ export default function CartDrawer({ cart, setCart, languageSwitcher }: CartDraw
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0, opacity: 0 }}
-                className="flex h-5 w-5 items-center justify-center rounded-full bg-garabel-accent font-mono text-[9.5px] font-bold text-white shadow-craft-sm select-none"
+                className="absolute -top-1 -right-1 sm:static flex h-5 w-5 items-center justify-center rounded-full bg-garabel-accent font-mono text-[9.5px] font-bold text-white shadow-craft-sm select-none shrink-0"
               >
                 {totalItems}
               </motion.span>
