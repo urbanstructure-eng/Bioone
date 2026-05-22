@@ -57,7 +57,7 @@ export default function StudioBanner() {
     { id: 1, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 01" },
     { id: 2, img: "https://lh3.googleusercontent.com/d/1J4OdZOEmRy9jLM0yP6U6Z_tF7h5mi75U", label: "Specimen 02" },
     { id: 3, img: "https://lh3.googleusercontent.com/d/14WF1dzWmjm3gQjgF7f1sm9zJoyojHhhe", label: "Specimen 03" },
-    { id: 4, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 04" },
+    { id: 4, img: "https://lh3.googleusercontent.com/d/12DvtQKxBsdtXQZm61pebBmb-wrgKDxQT", label: "Specimen 04" },
     { id: 5, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 05" },
   ];
 
