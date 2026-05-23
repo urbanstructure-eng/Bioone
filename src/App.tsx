@@ -11,6 +11,7 @@ import StudioFooter from "./components/StudioFooter";
 import CartDrawer from "./components/CartDrawer";
 import { FlowArt, FlowSection } from "./components/FlowArt";
 import { useLanguage, LANGUAGES } from "./translations";
+import InquiryPage from "./components/InquiryPage";
 
 export interface OrganicTheme {
   id: "kraft" | "moss" | "clay" | "linen";
@@ -89,6 +90,17 @@ export const ORGANIC_THEMES: OrganicTheme[] = [
 export default function App() {
   const { language, setLanguage } = useLanguage();
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isInquiryOpen, setIsInquiryOpen] = useState(false);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const [params, setParams] = useState<MaterialParams>({
     grain: 24,
@@ -156,8 +168,14 @@ export default function App() {
         initial={{ opacity: 0, x: -25 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-4 left-4 md:top-8 md:left-10 z-50 pointer-events-auto cursor-pointer"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="fixed top-4 left-4 md:top-8 md:left-10 z-[110] pointer-events-auto cursor-pointer"
+        onClick={() => {
+          if (isInquiryOpen) {
+            setIsInquiryOpen(false);
+          } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        }}
       >
         <img
           src="https://lh3.googleusercontent.com/d/1U3YfW75P9JyKKTCWA7yoM31HCTW9L0fN"
@@ -289,8 +307,80 @@ export default function App() {
         ></div>
       </div>
 
-      {/* Main Interactive Layers */}
-      <div className="relative z-10">
+      {/* Tactile Hanging Label/Circular Tag on the Left Side of Page */}
+      <motion.div
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: 1.0, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed left-0 top-[38%] -translate-y-1/2 z-40"
+      >
+        <button
+          onClick={() => setIsInquiryOpen(true)}
+          className="group relative flex items-center justify-center w-24 h-24 md:w-28 md:h-28 bg-garabel-cream border-2 border-[#376332]/30 rounded-full shadow-craft-xl cursor-pointer hover:border-[#376332] hover:bg-white hover:scale-110 active:scale-95 transition-all duration-300"
+          style={{ marginLeft: "-24px" }}
+          aria-label="Order or Inquire Spec Project"
+        >
+          {/* Subtle radiating pulse core to make it immediately eye-catching */}
+          <span className="absolute -inset-1.5 rounded-full bg-[#376332]/5 animate-ping duration-1000 group-hover:bg-[#376332]/10 pointer-events-none"></span>
+
+          <div className="absolute inset-0 paper-grain pointer-events-none opacity-25 rounded-full"></div>
+          <div className="absolute left-0 -top-8 w-px h-8 bg-[#376332]/40"></div>
+          
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 28, ease: "linear", repeat: Infinity }}
+            className="absolute inset-[4px] rounded-full border border-dashed border-[#4e4034]/25 flex items-center justify-center"
+          >
+            <svg className="w-full h-full select-none" viewBox="0 0 100 100">
+              <path
+                id="tagPath"
+                fill="none"
+                stroke="none"
+                d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"
+              />
+              <text className="fill-[#376332] font-mono text-[7.5px] font-black tracking-[0.22em] uppercase">
+                <textPath href="#tagPath" startOffset="0%">
+                  ✦ ORDER SPECIMEN ✦ BESPOKE INQUIRY ✦ ATELIER GARABEL
+                </textPath>
+              </text>
+            </svg>
+          </motion.div>
+          
+          {/* Inner core wax seal style */}
+          <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[#376332] shadow-[inset_0_2px_4px_rgba(0,0,0,0.4),_0_2px_4px_rgba(55,99,50,0.3)] group-hover:scale-125 transition-transform duration-300 flex items-center justify-center relative">
+            <span className="absolute inset-0.5 rounded-full bg-[#faf7f2]/10"></span>
+            {/* Minimal visual brand indicator inside stamp */}
+            <span className="font-sans font-black text-[#faf7f2] text-[10px] md:text-[11px] select-none tracking-tighter">AG</span>
+          </div>
+
+          {/* Hanging tag bottom dynamic knot thread */}
+          <div className="absolute left-1/2 -translate-x-1/2 -bottom-2.5 w-1.5 h-1.5 rounded-full bg-[#376332] border border-garabel-cream shadow pointer-events-none group-hover:translate-y-0.5 transition-transform"></div>
+
+          {/* Premium Tooltip */}
+          <span className="absolute left-full ml-5 py-2 px-4 bg-garabel-ink text-[#fdfbf7] text-[10px] font-mono tracking-widest rounded-lg shadow-craft-2xl pointer-events-none opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-250 ease-out whitespace-nowrap z-50 border border-neutral-700/30">
+            <span className="text-[#376332] mr-1">✦</span> {language === "ja" ? "仕様のご注文 & 特注相談" : "ORDER SPECIMEN & BESPOKE INQUIRY"}
+            <span className="absolute right-full top-1/2 -translate-y-1/2 border-bubble ml-px border-6 border-transparent border-r-garabel-ink"></span>
+          </span>
+        </button>
+      </motion.div>
+
+      {/* Minimalist Inquiry Full-Page View */}
+      <AnimatePresence>
+        {isInquiryOpen && (
+          <InquiryPage onClose={() => setIsInquiryOpen(false)} />
+        )}
+      </AnimatePresence>
+
+      {/* Main Interactive Layers - slides completely right to reveal the full page drawer */}
+      <motion.div 
+        animate={{ 
+          x: isInquiryOpen ? "100%" : "0%",
+          scale: isInquiryOpen ? 0.95 : 1,
+          filter: isInquiryOpen ? "brightness(0.5) blur(2px)" : "none",
+        }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        className="relative z-10 origin-right transition-[filter]"
+      >
         <FlowArt>
           {/* Section 1: Hero Editorial Masthead */}
           <FlowSection className="bg-garabel-bg" aria-label="Atelier Garabel Entry">
@@ -329,7 +419,7 @@ export default function App() {
             <StudioFooter />
           </FlowSection>
         </FlowArt>
-      </div>
+      </motion.div>
     </div>
   );
 }

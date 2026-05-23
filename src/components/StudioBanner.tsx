@@ -195,64 +195,41 @@ export default function StudioBanner() {
               }}
               className="w-full h-full flex flex-col items-center justify-center relative"
             >
-              {slides[currentSlideIndex].isFullPhoto ? (
-                /* Full photography slide (not the floating rotating animation) */
-                <div className="relative w-full h-full rounded-[32px] overflow-hidden border border-garabel-ink/10 shadow-[0_45px_100px_rgba(40,36,32,0.18)]">
-                  <div className="absolute inset-0 paper-grain pointer-events-none opacity-20 z-10 animate-pulse-slow"></div>
-                  <img
-                    src={slides[currentSlideIndex].img}
-                    alt={slides[currentSlideIndex].label}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover select-none"
-                  />
-                  {slides[currentSlideIndex].tagline && (
-                    <div 
-                      className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap"
-                    >
-                      <span className="font-sans text-[2.3vw] xs:text-[2.1vw] sm:text-[1.8vw] md:text-[1.6vw] lg:text-[1.45vw] xl:text-[20px] tracking-tight text-white font-black uppercase text-center drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)]">
-                        {slides[currentSlideIndex].tagline}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                /* Floating animated bag specimen display */
-                <>
-                  <motion.img
-                    src={slides[currentSlideIndex].img}
-                    alt={`Atelier Garabel Sustainable Organic luxury Specimen ${currentSlideIndex + 1}`}
-                    referrerPolicy="no-referrer"
-                    initial={{ scale: slides[currentSlideIndex].id === 4 ? 1.00 : 1 }}
-                    animate={{
-                      y: isHovering ? -15 : [0, -20, 0],
-                      rotate: isHovering ? coords.x * 0.12 : [0, 1.0, 0, -1.0, 0],
-                      scale: slides[currentSlideIndex].id === 4 ? 1.00 : 1,
-                    }}
-                    transition={{
-                      y: isHovering 
-                        ? { type: "spring", stiffness: 120, damping: 20 } 
-                        : { repeat: Infinity, duration: 4.2, ease: "easeInOut" },
-                      rotate: isHovering
-                        ? { type: "spring", stiffness: 120, damping: 20 }
-                        : { repeat: Infinity, duration: 5.5, ease: "easeInOut" },
-                      scale: { duration: 0.3 }
-                    }}
-                    className="w-full h-full object-contain select-none filter drop-shadow-[0_45px_100px_rgba(40,36,32,0.18)] max-h-[85%]"
-                  />
+              <>
+                <motion.img
+                  src={slides[currentSlideIndex].img}
+                  alt={`Atelier Garabel Sustainable Organic luxury Specimen ${currentSlideIndex + 1}`}
+                  referrerPolicy="no-referrer"
+                  initial={{ scale: slides[currentSlideIndex].id === 4 ? 0.95 : 1 }}
+                  animate={{
+                    y: isHovering ? -15 : [0, -20, 0],
+                    rotate: isHovering ? coords.x * 0.12 : [0, 1.0, 0, -1.0, 0],
+                    scale: slides[currentSlideIndex].id === 4 ? 0.95 : 1,
+                  }}
+                  transition={{
+                    y: isHovering 
+                      ? { type: "spring", stiffness: 120, damping: 20 } 
+                      : { repeat: Infinity, duration: 4.2, ease: "easeInOut" },
+                    rotate: isHovering
+                      ? { type: "spring", stiffness: 120, damping: 20 }
+                      : { repeat: Infinity, duration: 5.5, ease: "easeInOut" },
+                    scale: { duration: 0.3 }
+                  }}
+                  className="w-full h-full object-contain select-none filter drop-shadow-[0_45px_100px_rgba(40,36,32,0.18)] max-h-[85%]"
+                />
 
-                  {slides[currentSlideIndex].tagline && (
-                    <div 
-                      className="absolute bottom-2 md:bottom-8 px-5 py-2.5 rounded-full bg-[#fdfbf7]/90 backdrop-blur-md border border-[#376332]/20 shadow-[0_10px_30px_rgba(55,99,50,0.06)] flex items-center gap-2 pointer-events-none select-none"
-                      style={{ transform: "translateZ(40px)" }}
-                    >
-                      <span className="w-1.5 h-1.5 bg-[#376332] rounded-full animate-ping" />
-                      <span className="font-sans font-bold text-xs sm:text-sm tracking-wide text-garabel-ink uppercase">
-                        {slides[currentSlideIndex].tagline}
-                      </span>
-                    </div>
-                  )}
-                </>
-              )}
+                {slides[currentSlideIndex].tagline && (
+                  <div 
+                    className="absolute bottom-2 md:bottom-8 px-5 py-2.5 rounded-full bg-[#fdfbf7]/90 backdrop-blur-md border border-[#376332]/20 shadow-[0_10px_30px_rgba(55,99,50,0.06)] flex items-center gap-2 pointer-events-none select-none"
+                    style={{ transform: "translateZ(40px)" }}
+                  >
+                    <span className="w-1.5 h-1.5 bg-[#376332] rounded-full animate-ping" />
+                    <span className="font-sans font-bold text-xs sm:text-sm tracking-wide text-garabel-ink uppercase">
+                      {slides[currentSlideIndex].tagline}
+                    </span>
+                  </div>
+                )}
+              </>
             </motion.div>
           </AnimatePresence>
         </motion.div>
