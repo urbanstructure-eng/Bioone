@@ -42,33 +42,26 @@ export default function CreativeDesk({ onAddCustomDesign }: CreativeDeskProps) {
       <div className="relative z-30 max-w-4xl px-8 sm:px-14 md:px-20 text-right pb-16 sm:pb-20 md:pb-24">
         <h2 className="font-sans font-black text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase text-[#fdfbf7] tracking-tighter leading-[0.88] text-right drop-shadow-[0_12px_40px_rgba(0,0,0,0.55)] animate-fadeIn">
           {language === "en" && (
-            <>Packaging That<br />Elevates Brands.<br />Zero Carbon Impact.</>
+            <>Help Your Brand<br />Stand Out —<br />Not Pollute</>
           )}
           {language === "fr" && (
-            <>L'Emballage Qui<br />Élève Les Marques.<br />Impact Carbone Nul.</>
+            <>Démarquez Votre<br />Marque —<br />Pas La Planète</>
           )}
           {language === "it" && (
-            <>Packaging Che<br />Eleva I Marchi.<br />Impatto Zero Carbonio.</>
+            <>Distingui Il Tuo<br />Marchio —<br />Senza Inquinare</>
           )}
           {language === "es" && (
-            <>Embalaje Que<br />Eleva Las Marcas.<br />Impacto Cero Carbono.</>
+            <>Destaque Su<br />Marca —<br />Sin Contaminar</>
           )}
           {language === "de" && (
-            <>Verpackungen, Die<br />Marken Aufwerten.<br />Null CO2-Belastung.</>
+            <>Ihre Marke Hervorheben<br />— Ohne Die Umwelt<br />Zu Belasten</>
           )}
           {language === "ja" && (
-            <>ブランドを高める<br />パッケージ。<br />カーボンインパクトゼロ。</>
+            <>ブランドを際立たせる<br />環境を汚さない<br />ものづくり</>
           )}
         </h2>
 
-        {/* Dynamic decorative minimal border */}
-        <div className="mt-8 w-20 h-1 bg-[#376332] ml-auto"></div>
 
-        <p className="mt-6 font-mono text-[9px] sm:text-[10px] tracking-[0.25em] text-[#fdfbf7]/80 uppercase leading-relaxed max-w-xl ml-auto text-right">
-          ✦ ATELIER GARABEL<br />
-          // SUSTAINABLE<br />
-          SPECTRA DESIGN
-        </p>
       </div>
     </div>
   );
