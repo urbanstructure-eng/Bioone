@@ -42,30 +42,32 @@ export default function CreativeDesk({ onAddCustomDesign }: CreativeDeskProps) {
       <div className="relative z-30 max-w-4xl px-8 sm:px-14 md:px-20 text-right pb-16 sm:pb-20 md:pb-24">
         <h2 className="font-sans font-black text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl uppercase text-[#fdfbf7] tracking-tighter leading-[0.88] text-right drop-shadow-[0_12px_40px_rgba(0,0,0,0.55)] animate-fadeIn">
           {language === "en" && (
-            <>We help brands<br />standout in<br />the market.</>
+            <>Packaging That<br />Elevates Brands.<br />Zero Carbon Impact.</>
           )}
           {language === "fr" && (
-            <>Nous aidons<br />les marques à se<br />démarquer.</>
+            <>L'Emballage Qui<br />Élève Les Marques.<br />Impact Carbone Nul.</>
           )}
           {language === "it" && (
-            <>Aiutiamo i<br />marchi a<br />distinguersi.</>
+            <>Packaging Che<br />Eleva I Marchi.<br />Impatto Zero Carbonio.</>
           )}
           {language === "es" && (
-            <>Ayudamos a<br />las marcas a<br />destacar.</>
+            <>Embalaje Que<br />Eleva Las Marcas.<br />Impacto Cero Carbono.</>
           )}
           {language === "de" && (
-            <>Wir helfen<br />Marken, sich im<br />Markt abzuheben.</>
+            <>Verpackungen, Die<br />Marken Aufwerten.<br />Null CO2-Belastung.</>
           )}
           {language === "ja" && (
-            <>ブランドが<br />市場で際立つよう<br />サポートします。</>
+            <>ブランドを高める<br />パッケージ。<br />カーボンインパクトゼロ。</>
           )}
         </h2>
 
         {/* Dynamic decorative minimal border */}
         <div className="mt-8 w-20 h-1 bg-[#376332] ml-auto"></div>
 
-        <p className="mt-6 font-mono text-[10px] sm:text-xs tracking-[0.25em] text-[#fdfbf7]/80 uppercase leading-relaxed max-w-xl ml-auto text-right">
-          ✦ ATELIER GARABEL // SUSTAINABLE SPECTRA DESIGN
+        <p className="mt-6 font-mono text-[9px] sm:text-[10px] tracking-[0.25em] text-[#fdfbf7]/80 uppercase leading-relaxed max-w-xl ml-auto text-right">
+          ✦ ATELIER GARABEL<br />
+          // SUSTAINABLE<br />
+          SPECTRA DESIGN
         </p>
       </div>
     </div>
