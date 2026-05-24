@@ -12,6 +12,7 @@ import CartDrawer from "./components/CartDrawer";
 import { FlowArt, FlowSection } from "./components/FlowArt";
 import { useLanguage, LANGUAGES } from "./translations";
 import InquiryPage from "./components/InquiryPage";
+import { smoothScrollTo } from "./lib/scrollUtils";
 
 export interface OrganicTheme {
   id: "kraft" | "moss" | "clay" | "linen";
@@ -153,10 +154,7 @@ export default function App() {
 
     // Smooth scroll to store section so the client sees checkout item instantly
     setTimeout(() => {
-      const storeSection = document.getElementById("atelier-objects-store");
-      if (storeSection) {
-        storeSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      smoothScrollTo("#atelier-objects-store");
     }, 100);
   };
 

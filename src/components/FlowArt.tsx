@@ -5,6 +5,11 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Register globally for our ScrollTrigger-aware smoothScrollTo helper
+if (typeof window !== "undefined") {
+  (window as any).ScrollTrigger = ScrollTrigger;
+}
+
 function cx(...parts: Array<string | undefined | false | null>): string {
   return parts.filter(Boolean).join(' ');
 }
@@ -82,7 +87,8 @@ export const FlowArt: React.FC<FlowArtProps> = ({
         if (!inner) return;
 
         if (i > 0) {
-          gsap.set(inner, { rotation: 30, transformOrigin: 'bottom left' });
+          // Subtle, elegant 14 degree rotation prevents text clamping on smaller heights
+          gsap.set(inner, { rotation: 14, transformOrigin: 'bottom left' });
           const tween = gsap.to(inner, {
             rotation: 0,
             ease: 'none',
@@ -90,7 +96,7 @@ export const FlowArt: React.FC<FlowArtProps> = ({
               trigger: section,
               start: 'top bottom',
               end: 'top 25%',
-              scrub: true,
+              scrub: 1, // Momentum dampener for exceptionally fluid movement
             },
           });
           if (tween.scrollTrigger) triggers.push(tween.scrollTrigger);
@@ -112,7 +118,17 @@ export const FlowArt: React.FC<FlowArtProps> = ({
       ScrollTrigger.refresh();
 
       return () => {
-        triggers.forEach((t) => t.kill());
+        triggers.forEach((t) => {
+          t.kill(true); // Complete restore of pinning markup, removing pin spacers safely
+        });
+        sections.forEach((section) => {
+          const inner = section.querySelector<HTMLElement>('.flow-art-container');
+          if (inner) {
+            gsap.killTweensOf(inner);
+            gsap.set(inner, { clearProps: "all" });
+          }
+        });
+        ScrollTrigger.refresh();
       };
     },
     { scope: containerRef, dependencies: [childCount(children), reducedMotion] },

@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { UnifiedCartItem } from "../types";
 import { useLanguage } from "../translations";
+import { smoothScrollTo } from "../lib/scrollUtils";
 
 interface CartDrawerProps {
   cart: UnifiedCartItem[];
@@ -105,11 +106,10 @@ export default function CartDrawer({ cart, setCart, languageSwitcher }: CartDraw
     playTactileSound(800, 0.06);
     
     setTimeout(() => {
-      const storeSection = document.getElementById("atelier-objects-store");
-      if (storeSection) {
-        storeSection.scrollIntoView({ behavior: "smooth", block: "start" });
-        
-        // Highlight the checkout form elements temporarily for UI help
+      smoothScrollTo("#atelier-objects-store");
+      
+      // Highlight the checkout form elements temporarily for UI help
+      setTimeout(() => {
         const inputField = document.querySelector('input[placeholder="Recipient Full Name"]');
         if (inputField) {
           (inputField as HTMLElement).focus();
@@ -118,7 +118,7 @@ export default function CartDrawer({ cart, setCart, languageSwitcher }: CartDraw
             inputField.classList.remove("ring-2", "ring-garabel-accent");
           }, 1500);
         }
-      }
+      }, 800);
     }, 300);
   };
 

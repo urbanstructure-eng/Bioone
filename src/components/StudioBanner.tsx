@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Compass, Sparkles, Sliders, ChevronDown, Check, Eye, Layers } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useLanguage } from "../translations";
+import { smoothScrollTo } from "../lib/scrollUtils";
 
 interface ClockProps {
   label: string;
@@ -57,7 +58,7 @@ export default function StudioBanner() {
     { id: 1, img: "https://lh3.googleusercontent.com/d/1dtROyzNWJyFe1_AGfCEjw1jhSIqUiTDA", label: "Specimen 01" },
     { id: 2, img: "https://lh3.googleusercontent.com/d/1J4OdZOEmRy9jLM0yP6U6Z_tF7h5mi75U", label: "Specimen 02" },
     { id: 3, img: "https://lh3.googleusercontent.com/d/14WF1dzWmjm3gQjgF7f1sm9zJoyojHhhe", label: "Specimen 03" },
-    { id: 4, img: "https://lh3.googleusercontent.com/d/12DvtQKxBsdtXQZm61pebBmb-wrgKDxQT", label: "Specimen 04" },
+    { id: 4, img: "https://docs.google.com/uc?export=download&id=1I6MCpIMgvJF9ONAy1gz1iUSBu0Z0Akyk", label: "Specimen 04" },
     { id: 5, img: "https://lh3.googleusercontent.com/d/1TGu3aWYwAxJKFttKmzU4hlfu6Y3x_fPZ", label: "Specimen 05" },
   ];
 
@@ -94,12 +95,7 @@ export default function StudioBanner() {
   };
 
   const scrollToExplore = () => {
-    const secondSection = document.querySelector('[aria-label="Creative Material Lab"]');
-    if (secondSection) {
-      secondSection.scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
-    }
+    smoothScrollTo('[aria-label="Creative Material Lab"]');
   };
 
   return (
@@ -200,6 +196,28 @@ export default function StudioBanner() {
                   src={slides[currentSlideIndex].img}
                   alt={`Atelier Garabel Sustainable Organic luxury Specimen ${currentSlideIndex + 1}`}
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const currentSrc = e.currentTarget.src;
+                    if (currentSrc.includes("lh3.googleusercontent.com") || currentSrc.includes("docs.google.com")) {
+                      let fileId = "";
+                      if (currentSrc.includes("/d/")) {
+                        fileId = currentSrc.split("/d/")[1] || "";
+                      } else if (currentSrc.includes("id=")) {
+                        try {
+                          const urlObj = new URL(currentSrc);
+                          fileId = urlObj.searchParams.get("id") || "";
+                        } catch (err) {
+                          // Fallback regex if URL constructor fails
+                          const match = currentSrc.match(/[?&]id=([^&]+)/);
+                          if (match) fileId = match[1];
+                        }
+                      }
+                      
+                      if (fileId && !currentSrc.includes("thumbnail")) {
+                        e.currentTarget.src = `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+                      }
+                    }
+                  }}
                   initial={{ scale: slides[currentSlideIndex].id === 4 ? 0.95 : 1 }}
                   animate={{
                     y: isHovering ? -15 : [0, -20, 0],
