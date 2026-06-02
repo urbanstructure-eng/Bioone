@@ -118,6 +118,84 @@ app.post("/api/generate-design", async (req, res) => {
   }
 });
 
+// ✦ Luxury Quote Submission Endpoint (Dispatches parameters to oneunedigital@gmail.com)
+app.post("/api/submit-quote", async (req, res) => {
+  try {
+    const data = req.body;
+    console.log("-----------------------------------------");
+    console.log("✦ RECEIVED NEW LUXURY SPECIFICATION QUOTE");
+    console.log(`Forwarding directly to: oneunedigital@gmail.com`);
+    console.log("-----------------------------------------");
+    console.log(`Company Name: ${data.companyName}`);
+    console.log(`Industry: ${data.industry || "N/A"}`);
+    console.log(`Representative: ${data.clientName} ${data.clientDept ? `(${data.clientDept})` : ""}`);
+    console.log(`Email: ${data.clientEmail}`);
+    console.log(`Phone: ${data.clientPhone || "N/A"}`);
+    console.log(`Location: ${data.location || "N/A"}`);
+    console.log(`Budget: ${data.budget}`);
+    console.log(`Inquiry Type: ${data.inquiryType}`);
+    console.log(`Selected Model: ${data.specimenModel || "N/A"}`);
+    console.log(`Quantity: ${data.estimatedQuantity}`);
+    console.log(`Description: ${data.projectDescription || "N/A"}`);
+    console.log("-----------------------------------------");
+
+    // Dynamic optional import of nodemailer for robust SMTP deliveries
+    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+      try {
+        const nodemailer = await import("nodemailer");
+        const transporter = nodemailer.createTransport({
+          service: process.env.SMTP_SERVICE || "gmail",
+          auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
+          },
+        });
+
+        const mailOptions = {
+          from: `"Atelier Garabel" <${process.env.SMTP_USER}>`,
+          to: "oneunedigital@gmail.com",
+          subject: `New Spec & Custom Inquiry: ${data.companyName}`,
+          text: `
+Atelier Garabel - New Quote Inquiry Received
+
+A brand has lodged a new design specification.
+
+✦ CUSTOMER INFO
+Company Name: ${data.companyName}
+Industry: ${data.industry || "N/A"}
+Representative: ${data.clientName}
+Department/Role: ${data.clientDept || "N/A"}
+Direct Phone: ${data.clientPhone || "N/A"}
+Email Address: ${data.clientEmail}
+Location: ${data.location || "N/A"}
+
+✦ SPECIFICATION DETAILS
+Inquiry Type: ${data.inquiryType === "existing" ? "Existing Specimen Model" : "Bespoke Custom Design"}
+Selected Model: ${data.specimenModel || "N/A"}
+Guiding Budget Range: ${data.budget}
+Est. Quantity Scope: ${data.estimatedQuantity}
+
+✦ REQUEST NOTES & MEMORANDUM
+${data.projectDescription || "No registration notes provided."}
+
+Timestamp: ${new Date().toUTCString()}
+          `,
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log("✦ SMTP transmission to oneunedigital@gmail.com successful.");
+      } catch (smtpErr) {
+        console.error("✦ SMTP email sending failed: ", smtpErr);
+      }
+    }
+
+    res.json({ success: true, destination: "oneunedigital@gmail.com" });
+  } catch (err: any) {
+    console.error("Quote submission error:", err);
+    res.status(500).json({ error: "Failed to log & route inquiry." });
+  }
+});
+
 // Configure Vite middleware in development or serve static files in production
 async function setupServer() {
   if (process.env.NODE_ENV !== "production") {

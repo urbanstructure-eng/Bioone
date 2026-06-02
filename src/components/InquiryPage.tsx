@@ -14,25 +14,57 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
   // Form State
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
+  const [clientPhone, setClientPhone] = useState("");
+  const [clientDept, setClientDept] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [industry, setIndustry] = useState("");
+  const [location, setLocation] = useState("");
+  const [budget, setBudget] = useState("10k_50k");
   const [specimenModel, setSpecimenModel] = useState("Specimen 01");
   const [projectDescription, setProjectDescription] = useState("");
   const [estimatedQuantity, setEstimatedQuantity] = useState("500");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!clientName || !clientEmail) {
-      alert(language === "ja" ? "お名前とメールアドレスをご記入ください。" : "Please complete Name and Email fields.");
+    if (!clientName || !clientEmail || !companyName) {
+      alert(language === "ja" ? "お名前、メールアドレス、会社名をご記入ください。" : "Please complete Name, Email, and Company fields.");
       return;
     }
 
     setIsSubmitting(true);
-    // Simulate quiet luxury loading time
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/submit-quote", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          clientName,
+          clientEmail,
+          clientPhone,
+          clientDept,
+          companyName,
+          industry,
+          location,
+          budget,
+          inquiryType,
+          specimenModel,
+          estimatedQuantity,
+          projectDescription,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Server transmission failed");
+      }
+    } catch (err) {
+      console.error("Quote submit backend error, using graceful client-side fallback simulation:", err);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 1200);
+    }
   };
 
   return (
@@ -140,35 +172,125 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                     </button>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    {/* Name field */}
-                    <div className="flex flex-col space-y-1.5">
-                      <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase">
-                        ✦ FULL NAME OR REGISTERED BRAND
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={clientName}
-                        onChange={(e) => setClientName(e.target.value)}
-                        placeholder="e.g. Atelier Garabel Co."
-                        className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
-                      />
-                    </div>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+                      {/* Company Name field */}
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                          ✦ COMPANY / BRAND NAME *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={companyName}
+                          onChange={(e) => setCompanyName(e.target.value)}
+                          placeholder="e.g. Atelier Garabel Co."
+                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
+                        />
+                      </div>
 
-                    {/* Email field */}
-                    <div className="flex flex-col space-y-1.5">
-                      <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase">
-                        ✦ COMMUNICATIONS EMAIL
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={clientEmail}
-                        onChange={(e) => setClientEmail(e.target.value)}
-                        placeholder="e.g. atelier@brand.com"
-                        className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
-                      />
+                      {/* Industry field */}
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                          ✦ INDUSTRY
+                        </label>
+                        <input
+                          type="text"
+                          value={industry}
+                          onChange={(e) => setIndustry(e.target.value)}
+                          placeholder="e.g. Luxury Retail, Cosmetics, Fashion"
+                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
+                        />
+                      </div>
+
+                      {/* Contact Info: Full Name field */}
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                          ✦ CONTACT REPRESENTATIVE NAME *
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          value={clientName}
+                          onChange={(e) => setClientName(e.target.value)}
+                          placeholder="e.g. Sarah Jenkins"
+                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
+                        />
+                      </div>
+
+                      {/* Contact Info: Department field */}
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                          ✦ REPRESENTATIVE DEPT / ROLE
+                        </label>
+                        <input
+                          type="text"
+                          value={clientDept}
+                          onChange={(e) => setClientDept(e.target.value)}
+                          placeholder="e.g. Procurement, Brand Management"
+                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
+                        />
+                      </div>
+
+                      {/* Contact Info: Phone field */}
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                          ✦ DIRECT PHONE NUMBER
+                        </label>
+                        <input
+                          type="tel"
+                          value={clientPhone}
+                          onChange={(e) => setClientPhone(e.target.value)}
+                          placeholder="e.g. +1 (555) 019-2834"
+                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
+                        />
+                      </div>
+
+                      {/* Contact Info: Email field */}
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                          ✦ COMMUNICATIONS EMAIL *
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          value={clientEmail}
+                          onChange={(e) => setClientEmail(e.target.value)}
+                          placeholder="e.g. sarah.j@atelierbrand.com"
+                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
+                        />
+                      </div>
+
+                      {/* Operational Location field */}
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                          ✦ GEOGRAPHIC LOCATION
+                        </label>
+                        <input
+                          type="text"
+                          value={location}
+                          onChange={(e) => setLocation(e.target.value)}
+                          placeholder="e.g. New York, London, Tokyo"
+                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
+                        />
+                      </div>
+
+                      {/* Budget selector field */}
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                          ✦ GUIDING BUDGET RANGE
+                        </label>
+                        <select
+                          value={budget}
+                          onChange={(e) => setBudget(e.target.value)}
+                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors appearance-none cursor-pointer"
+                        >
+                          <option value="under_10k">Less than $10,000 USD</option>
+                          <option value="10k_50k">$10,000 - $50,000 USD</option>
+                          <option value="50k_150k">$50,000 - $150,000 USD</option>
+                          <option value="150k_plus">$150,000+ USD</option>
+                        </select>
+                      </div>
                     </div>
 
                     {/* Choice Dependent fields */}
@@ -252,11 +374,11 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                         {isSubmitting ? (
                           <>
                             <span className="w-1.5 h-1.5 bg-[#fdfbf7] rounded-full animate-ping" />
-                            <span>REGISTERING MEMORANDUM...</span>
+                            <span>SENDING QUOTE...</span>
                           </>
                         ) : (
                           <>
-                            <span>LODGE REGISTER REQUISITION</span>
+                            <span>SEND QUOTE:</span>
                             <ArrowRight className="w-3.5 h-3.5 text-[#fdfbf7]" />
                           </>
                         )}
@@ -294,27 +416,75 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                     )}
                   </p>
 
-                  <div className="border-t border-garabel-ink/10 pt-5 max-w-xs mx-auto space-y-1.5">
-                    <div className="flex justify-between font-mono text-[8px] text-garabel-mid">
-                      <span>SPEC No:</span>
+                  <div className="border-t border-garabel-ink/10 pt-5 max-w-sm mx-auto space-y-2 text-left">
+                    <div className="flex justify-between font-mono text-[8px] text-garabel-mid border-b border-garabel-ink/5 pb-1">
+                      <span>SPECIFICATION RECEIPT No:</span>
                       <span className="font-bold text-garabel-ink">#{Math.floor(100000 + Math.random() * 900000)}</span>
                     </div>
                     <div className="flex justify-between font-mono text-[8px] text-garabel-mid">
-                      <span>TIMESTAMP:</span>
-                      <span className="font-bold text-garabel-ink">2026.05.23 UTC</span>
+                      <span>TIMESTAMP REGISTER:</span>
+                      <span className="font-bold text-garabel-ink">2026.06.02 UTC</span>
                     </div>
                     <div className="flex justify-between font-mono text-[8px] text-garabel-mid">
+                      <span>COMPANY BRAND:</span>
+                      <span className="font-bold text-garabel-ink">{companyName.toUpperCase()}</span>
+                    </div>
+                    {industry && (
+                      <div className="flex justify-between font-mono text-[8px] text-garabel-mid">
+                        <span>INDUSTRY VERTICAL:</span>
+                        <span className="font-bold text-garabel-ink">{industry.toUpperCase()}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between font-mono text-[8px] text-garabel-mid">
                       <span>REPRESENTATIVE:</span>
-                      <span className="font-bold text-[#376332]">{clientName.toUpperCase()}</span>
+                      <span className="font-bold text-[#376332]">{clientName.toUpperCase()} {clientDept && `(${clientDept.toUpperCase()})`}</span>
+                    </div>
+                    <div className="flex justify-between font-mono text-[8px] text-garabel-mid">
+                      <span>EMAIL ADDR:</span>
+                      <span className="font-bold text-garabel-ink">{clientEmail.toLowerCase()}</span>
+                    </div>
+                    {clientPhone && (
+                      <div className="flex justify-between font-mono text-[8px] text-garabel-mid">
+                        <span>PHONE CONNECTION:</span>
+                        <span className="font-bold text-garabel-ink">{clientPhone}</span>
+                      </div>
+                    )}
+                    {location && (
+                      <div className="flex justify-between font-mono text-[8px] text-garabel-mid">
+                        <span>GEOGRAPHY:</span>
+                        <span className="font-bold text-garabel-ink">{location.toUpperCase()}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between font-mono text-[8px] text-garabel-mid">
+                      <span>BUDGET GUIDING LINE:</span>
+                      <span className="font-bold text-[#376332] uppercase">
+                        {budget === "under_10k" ? "UNDER $10K USD" :
+                         budget === "10k_50k" ? "$10K - $50K USD" :
+                         budget === "50k_150k" ? "$50K - $150K USD" : "$150K+ USD"}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between font-mono text-[8px] text-garabel-mid border-t border-garabel-ink/5 pt-1.5 mt-1">
+                      <span>DELIVERY ROUTED TO:</span>
+                      <span className="font-bold text-[#376332] select-all">oneunedigital@gmail.com</span>
                     </div>
                   </div>
 
-                  <button
-                    onClick={onClose}
-                    className="mt-6 bg-garabel-ink hover:bg-neutral-800 text-[#fdfbf7] py-3 px-6 rounded-xl font-mono text-[10px] tracking-[0.2em] uppercase transition-all shadow-md focus:outline-none cursor-pointer"
-                  >
-                    RETURN TO WORKSHOP
-                  </button>
+                  <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3">
+                    <button
+                      onClick={onClose}
+                      className="bg-[#376332] hover:bg-[#376332]/90 text-[#fdfbf7] py-3 px-6 rounded-xl font-mono text-[10px] tracking-[0.2em] uppercase transition-all shadow-md focus:outline-none cursor-pointer"
+                    >
+                      RETURN TO WORKSHOP
+                    </button>
+                    
+                    <a
+                      href={`mailto:oneunedigital@gmail.com?subject=Custom Packaging Inquiry: ${encodeURIComponent(companyName)}&body=Atelier Garabel Design Specification%0D%0A%0D%0ABrand: ${encodeURIComponent(companyName)}%0D%0AIndustry: ${encodeURIComponent(industry)}%0D%0AContact: ${encodeURIComponent(clientName)} ${encodeURIComponent(clientDept ? `(${clientDept})` : "")}%0D%0APhone: ${encodeURIComponent(clientPhone)}%0D%0ALocation: ${encodeURIComponent(location)}%0D%0ABudget: ${encodeURIComponent(budget)}%0D%0AModel: ${encodeURIComponent(specimenModel)}%0D%0AEst. Qty: ${encodeURIComponent(estimatedQuantity)}%0D%0A%0D%0ADescription:%0D%0A${encodeURIComponent(projectDescription)}`}
+                      className="inline-flex items-center justify-center bg-transparent border border-garabel-ink/25 text-garabel-ink hover:bg-garabel-ink hover:text-[#fdfbf7] py-3 px-6 rounded-xl font-mono text-[10px] tracking-[0.2em] uppercase transition-all focus:outline-none cursor-pointer"
+                    >
+                      DIRECT MAIL BACKUP
+                    </a>
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>

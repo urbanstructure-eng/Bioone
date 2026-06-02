@@ -232,13 +232,37 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
                 </p>
 
                 {onOpenInquiry && (
-                  <button 
+                  <motion.button 
                     onClick={onOpenInquiry}
-                    className="inline-flex items-center gap-2 group font-sans text-sm font-bold text-garabel-accent hover:text-[#376332] transition-colors cursor-pointer"
+                    className="mt-3 w-full inline-flex items-center justify-between gap-4 px-5 py-3.5 bg-[#376332] hover:bg-[#2b4c27] text-white rounded-xl transition-all duration-300 cursor-pointer group border border-[#376332]/10 shadow-lg select-none"
+                    animate={{
+                      scale: [1, 1.02, 1],
+                      boxShadow: [
+                        "0 4px 6px -1px rgba(55, 99, 50, 0.15), 0 2px 4px -1px rgba(55, 99, 50, 0.1)",
+                        "0 10px 15px -3px rgba(55, 99, 50, 0.3), 0 4px 6px -2px rgba(55, 99, 50, 0.15)",
+                        "0 4px 6px -1px rgba(55, 99, 50, 0.15), 0 2px 4px -1px rgba(55, 99, 50, 0.1)"
+                      ]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <span>Get a Custom Quote Today</span>
-                    <span className="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
-                  </button>
+                    <div className="flex flex-col text-left">
+                      <span className="font-mono text-[9px] tracking-widest text-[#a8d3a1] uppercase font-bold">
+                        ✦ ATELIER SERVICE // DESIGN
+                      </span>
+                      <span className="font-sans text-sm sm:text-base font-black tracking-wide uppercase text-[#faf7f2] mt-0.5">
+                        Get a Custom Quote Today
+                      </span>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-[#faf7f2]/10 group-hover:bg-[#faf7f2]/20 flex items-center justify-center transition-colors">
+                      <span className="text-[#faf7f2] text-sm font-bold group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </div>
+                  </motion.button>
                 )}
               </div>
             </div>
