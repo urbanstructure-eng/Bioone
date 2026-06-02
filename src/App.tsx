@@ -414,7 +414,7 @@ export default function App() {
 
           {/* Section 6: Manifesto Reading & Lunar Subscriptions Box */}
           <FlowSection className="bg-garabel-bg" aria-label="Journal Publications">
-            <StudioFooter />
+            <StudioFooter onOpenInquiry={() => setIsInquiryOpen(true)} />
           </FlowSection>
         </FlowArt>
       </motion.div>
