@@ -184,7 +184,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                           required
                           value={companyName}
                           onChange={(e) => setCompanyName(e.target.value)}
-                          placeholder="e.g. Atelier Garabel Co."
+                          placeholder="e.g. ONE Biodegradable Brand Solutions"
                           className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
                         />
                       </div>
@@ -410,9 +410,9 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
 
                   <p className="font-sans text-xs text-garabel-mid leading-relaxed max-w-sm mx-auto mb-6">
                     {language === "ja" ? (
-                      "ご要望がサーバーアトリエ台帳に登録されました。担当のパッケージングエンジニアが24時間以内にご連絡いたします。"
+                      "ご要望がONE Biodegradable Brand Solutionsに登録されました。担当のパッケージングエンジニアが24時間以内にご連絡いたします。"
                     ) : (
-                      "Your aesthetic and physical parameters are successfully queued into our Atelier ledger. A specialist design coordinator will contact your communications envelope shortly."
+                      "Your aesthetic and physical parameters are successfully queued into ONE Biodegradable Brand Solutions. A specialist design coordinator will contact your communications envelope shortly."
                     )}
                   </p>
 
@@ -479,7 +479,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                     </button>
                     
                     <a
-                      href={`mailto:oneunedigital@gmail.com?subject=Custom Packaging Inquiry: ${encodeURIComponent(companyName)}&body=Atelier Garabel Design Specification%0D%0A%0D%0ABrand: ${encodeURIComponent(companyName)}%0D%0AIndustry: ${encodeURIComponent(industry)}%0D%0AContact: ${encodeURIComponent(clientName)} ${encodeURIComponent(clientDept ? `(${clientDept})` : "")}%0D%0APhone: ${encodeURIComponent(clientPhone)}%0D%0ALocation: ${encodeURIComponent(location)}%0D%0ABudget: ${encodeURIComponent(budget)}%0D%0AModel: ${encodeURIComponent(specimenModel)}%0D%0AEst. Qty: ${encodeURIComponent(estimatedQuantity)}%0D%0A%0D%0ADescription:%0D%0A${encodeURIComponent(projectDescription)}`}
+                      href={`mailto:oneunedigital@gmail.com?subject=Custom Packaging Inquiry: ${encodeURIComponent(companyName)}&body=ONE Biodegradable Brand Solutions Design Specification%0D%0A%0D%0ABrand: ${encodeURIComponent(companyName)}%0D%0AIndustry: ${encodeURIComponent(industry)}%0D%0AContact: ${encodeURIComponent(clientName)} ${encodeURIComponent(clientDept ? `(${clientDept})` : "")}%0D%0APhone: ${encodeURIComponent(clientPhone)}%0D%0ALocation: ${encodeURIComponent(location)}%0D%0ABudget: ${encodeURIComponent(budget)}%0D%0AModel: ${encodeURIComponent(specimenModel)}%0D%0AEst. Qty: ${encodeURIComponent(estimatedQuantity)}%0D%0A%0D%0ADescription:%0D%0A${encodeURIComponent(projectDescription)}`}
                       className="inline-flex items-center justify-center bg-transparent border border-garabel-ink/25 text-garabel-ink hover:bg-garabel-ink hover:text-[#fdfbf7] py-3 px-6 rounded-xl font-mono text-[10px] tracking-[0.2em] uppercase transition-all focus:outline-none cursor-pointer"
                     >
                       DIRECT MAIL BACKUP

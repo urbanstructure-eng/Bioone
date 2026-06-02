@@ -44,7 +44,7 @@ app.post("/api/generate-design", async (req, res) => {
     const ai = getAi();
     
     const prompt = `
-      You are an elite, minimalist sustainable luxury structural designer for high-end boutique house Atelier Garabel.
+      You are an elite, minimalist sustainable luxury structural designer for high-end boutique house ONE Biodegradable Brand Solutions.
       Create a tailored custom biodegradable packaging design specification.
       
       Client Parameters:
@@ -152,11 +152,11 @@ app.post("/api/submit-quote", async (req, res) => {
         });
 
         const mailOptions = {
-          from: `"Atelier Garabel" <${process.env.SMTP_USER}>`,
+          from: `"ONE Biodegradable Brand Solutions" <${process.env.SMTP_USER}>`,
           to: "oneunedigital@gmail.com",
           subject: `New Spec & Custom Inquiry: ${data.companyName}`,
           text: `
-Atelier Garabel - New Quote Inquiry Received
+ONE Biodegradable Brand Solutions - New Quote Inquiry Received
 
 A brand has lodged a new design specification.
 

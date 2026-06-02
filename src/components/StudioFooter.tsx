@@ -253,7 +253,7 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
                   >
                     <div className="flex flex-col text-left">
                       <span className="font-mono text-[9px] tracking-widest text-[#a8d3a1] uppercase font-bold">
-                        ✦ ATELIER SERVICE // DESIGN
+                        ✦ ONE BRAND SERVICE // DESIGN
                       </span>
                       <span className="font-sans text-sm sm:text-base font-black tracking-wide uppercase text-[#faf7f2] mt-0.5">
                         Get a Custom Quote Today

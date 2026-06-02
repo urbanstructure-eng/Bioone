@@ -124,7 +124,7 @@ export default function AtelierStore({ cart, setCart }: AtelierStoreProps) {
         {/* Luxury details disclosure at the bottom */}
         <div className="p-4 md:p-6 rounded border border-garabel-ink/10 bg-garabel-sand bg-opacity-30 font-mono text-[10px] text-garabel-mid leading-relaxed flex items-center gap-4">
           <AlertCircle className="w-5 h-5 text-garabel-accent shrink-0" />
-          <span>Atelier Garabel operates an exclusive high-confidentiality brand program. All custom designs and orders are verified with tactile proof copies to guarantee absolute sustainable perfection.</span>
+          <span>ONE Biodegradable Brand Solutions operates an exclusive high-confidentiality brand program. All custom designs and orders are verified with tactile proof copies to guarantee absolute sustainable perfection.</span>
         </div>
 
       </div>

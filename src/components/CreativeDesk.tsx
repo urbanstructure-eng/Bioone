@@ -18,7 +18,7 @@ export default function CreativeDesk({ onAddCustomDesign }: CreativeDeskProps) {
       <div className="absolute inset-x-0 bottom-0 top-24 sm:top-28 md:top-36 lg:top-40 overflow-hidden z-0 bg-transparent">
         <motion.img
           src="https://lh3.googleusercontent.com/d/1REWtt1T_yXgST80yZVkhGKdRk1T_24CE"
-          alt="Atelier Garabel Brand Experience"
+          alt="ONE Biodegradable Brand Solutions Brand Experience"
           referrerPolicy="no-referrer"
           animate={{
             scale: [1.10, 1.15, 1.10],

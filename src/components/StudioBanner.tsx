@@ -194,7 +194,7 @@ export default function StudioBanner() {
               <>
                 <motion.img
                   src={slides[currentSlideIndex].img}
-                  alt={`Atelier Garabel Sustainable Organic luxury Specimen ${currentSlideIndex + 1}`}
+                  alt={`ONE Biodegradable Brand Solutions Sustainable Organic luxury Specimen ${currentSlideIndex + 1}`}
                   referrerPolicy="no-referrer"
                   onError={(e) => {
                     const currentSrc = e.currentTarget.src;

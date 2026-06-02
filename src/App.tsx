@@ -177,7 +177,7 @@ export default function App() {
       >
         <img
           src="https://lh3.googleusercontent.com/d/1U3YfW75P9JyKKTCWA7yoM31HCTW9L0fN"
-          alt="Atelier Garabel"
+          alt="ONE Biodegradable Brand Solutions"
           referrerPolicy="no-referrer"
           className="h-[38px] sm:h-[48px] md:h-[62px] w-auto object-contain select-none animate-fadeIn"
         />
@@ -338,7 +338,7 @@ export default function App() {
               />
               <text className="fill-[#376332] font-mono text-[7.5px] font-black tracking-[0.22em] uppercase">
                 <textPath href="#tagPath" startOffset="0%">
-                  ✦ ORDER SPECIMEN ✦ BESPOKE INQUIRY ✦ ATELIER GARABEL
+                  ✦ ORDER SPECIMEN ✦ BESPOKE INQUIRY ✦ ONE BIODEGRADABLE
                 </textPath>
               </text>
             </svg>
@@ -348,7 +348,7 @@ export default function App() {
           <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[#376332] shadow-[inset_0_2px_4px_rgba(0,0,0,0.4),_0_2px_4px_rgba(55,99,50,0.3)] group-hover:scale-125 transition-transform duration-300 flex items-center justify-center relative">
             <span className="absolute inset-0.5 rounded-full bg-[#faf7f2]/10"></span>
             {/* Minimal visual brand indicator inside stamp */}
-            <span className="font-sans font-black text-[#faf7f2] text-[10px] md:text-[11px] select-none tracking-tighter">AG</span>
+            <span className="font-sans font-black text-[#faf7f2] text-[10px] md:text-[11px] select-none tracking-tighter">ONE</span>
           </div>
 
           {/* Hanging tag bottom dynamic knot thread */}
@@ -381,7 +381,7 @@ export default function App() {
       >
         <FlowArt>
           {/* Section 1: Hero Editorial Masthead */}
-          <FlowSection className="bg-garabel-bg" aria-label="Atelier Garabel Entry">
+          <FlowSection className="bg-garabel-bg" aria-label="ONE Biodegradable Brand Solutions Entry">
             <StudioBanner />
           </FlowSection>
 
