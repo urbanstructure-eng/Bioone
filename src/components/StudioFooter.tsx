@@ -276,31 +276,34 @@ export default function StudioFooter() {
 
       </div>
 
-      {/* Centered Bigger & More Prominent Minimalist Return Arrow */}
-      <div className="flex flex-col items-center justify-center pt-16 pb-12">
+      {/* Centered Bigger & More Prominent Minimalist Return Arrow and Copyright in Premium Ink Dark Brown Block */}
+      <div className="mt-16 -mx-6 -mb-12 px-6 py-12 bg-garabel-ink text-garabel-cream flex flex-col items-center justify-center gap-10 rounded-b-lg relative overflow-hidden">
+        {/* Subtle decorative grain to enhance luxury paper feel */}
+        <div className="absolute inset-0 paper-grain pointer-events-none opacity-20"></div>
+        
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="flex flex-col items-center gap-4 group cursor-pointer focus:outline-none z-30"
           aria-label="Return to top"
         >
-          <div className="w-16 h-16 rounded-full border border-garabel-ink/15 group-hover:border-garabel-ink bg-garabel-cream/20 group-hover:bg-garabel-ink/5 flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-sm">
-            <ArrowUp className="w-7 h-7 text-garabel-ink group-hover:-translate-y-1.5 transition-transform duration-300 stroke-[1.25]" />
+          <div className="w-16 h-16 rounded-full border border-garabel-cream/25 group-hover:border-garabel-cream bg-garabel-cream/10 group-hover:bg-garabel-cream/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-sm">
+            <ArrowUp className="w-7 h-7 text-garabel-cream group-hover:-translate-y-1.5 transition-transform duration-300 stroke-[1.5]" />
           </div>
-          <span className="font-mono text-[9px] uppercase tracking-[0.34em] text-garabel-mid group-hover:text-garabel-ink transition-colors duration-300 font-bold">
+          <span className="font-mono text-[10px] uppercase tracking-[0.34em] text-garabel-cream/80 group-hover:text-white transition-colors duration-300 font-bold">
             Return to top
           </span>
         </button>
-      </div>
 
-      {/* Outermost copyright and designer specs */}
-      <div className="border-t border-garabel-ink/10 pt-8 flex flex-col items-center justify-center text-center gap-4 text-[9px] font-mono tracking-widest text-garabel-mid opacity-75">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-center gap-2 sm:gap-6">
-          <span>© 2026 ATELIER GARABEL. COPH / MUNICH / TOKYO. ALL SPEC RIGHTS PERSIST.</span>
-          <span className="hidden sm:inline text-garabel-mid/30">•</span>
-          <span>COMPOSTABLE CERTIFICATION NO. 299-A</span>
-        </div>
-        <div className="text-garabel-accent font-bold uppercase tracking-[0.2em]">
-          DESIGN BY NATURAL RATIO SYSTEMS
+        {/* Outermost copyright and designer specs with white/cream reverse theme */}
+        <div className="w-full max-w-5xl border-t border-garabel-cream/15 pt-8 flex flex-col items-center justify-center text-center gap-3 text-[9px] font-mono tracking-widest text-garabel-cream/70 z-30">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-center gap-2 sm:gap-6">
+            <span>© 2026 ATELIER GARABEL. COPH / MUNICH / TOKYO. ALL SPEC RIGHTS PERSIST.</span>
+            <span className="hidden sm:inline text-garabel-cream/35">•</span>
+            <span>COMPOSTABLE CERTIFICATION NO. 299-A</span>
+          </div>
+          <div className="text-white font-bold uppercase tracking-[0.2em] opacity-95">
+            DESIGN BY NATURAL RATIO SYSTEMS
+          </div>
         </div>
       </div>
     </footer>

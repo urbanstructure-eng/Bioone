@@ -241,91 +241,93 @@ export default function AtelierStore({ cart, setCart }: AtelierStoreProps) {
     >
       {/* Visual Header Grid layout */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12 md:mb-16">
-        <div className="max-w-xl">
+        <div className="max-w-2xl">
           <span className="block font-mono text-[10px] tracking-widest text-[#376332] uppercase mb-2 md:mb-3 font-bold">
-            {t("shop_subtitle")}
+            Sustainable Brand Engineering
           </span>
-          <h2 className="text-3xl md:text-5xl font-sans font-light tracking-tight text-garabel-ink">
-            {t("shop_title")} <span className="italic font-normal text-[#376332]">{t("shop_title_italic")}</span>.
+          <h2 className="text-3xl md:text-5xl font-sans font-light tracking-tight text-garabel-ink leading-tight">
+            Packaging That Builds Brands.<br />
+            <span className="italic font-normal text-garabel-accent">Sustainability That Drives Growth.</span>
           </h2>
         </div>
-        <p className="text-xs md:text-sm font-sans font-light text-garabel-mid max-w-sm leading-relaxed">
-          {t("shop_desc")}
+        <p className="text-xs md:text-sm font-sans font-light text-garabel-mid max-w-sm leading-relaxed pt-2">
+          Your packaging is often the first physical interaction customers have with your brand. Make it unforgettable.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
         
-        {/* Left Side: Exclusive Sensory Remnants Catalog */}
-        <div className="lg:col-span-7 space-y-8">
-          <span className="block font-mono text-[10px] tracking-widest text-garabel-mid uppercase border-b border-garabel-ink/10 pb-2">
-            {t("shop_badge")}
-          </span>
+        {/* Left Side: Brand Packaging Philosophy & Differentiators */}
+        <div className="lg:col-span-7 space-y-10">
+          <div className="space-y-6 text-garabel-ink">
+            <span className="block font-mono text-[10px] tracking-widest text-[#376332] uppercase border-b border-[#376332]/10 pb-2 font-bold">
+              Our Packaging Mission & Philosophy
+            </span>
+            <p className="font-sans text-sm md:text-base font-light leading-relaxed text-garabel-ink/90">
+              We create premium custom biodegradable and zero-emission packaging solutions designed to help brands stand out, strengthen customer loyalty, and reduce environmental impact without compromising quality or aesthetics.
+            </p>
+            <p className="font-sans text-xs md:text-sm font-light leading-relaxed text-garabel-mid">
+              Whether you're an emerging retailer, a growing cannabis brand, a luxury fashion label, or an established e-commerce business, our sustainable packaging helps you deliver a premium experience from the moment your product reaches your customer.
+            </p>
+          </div>
 
           <div className="space-y-6">
-            {EXCLUSIVE_ITEMS.map((item) => (
-              <div 
-                key={item.id}
-                className="group relative rounded-lg border border-garabel-ink/10 bg-garabel-cream/40 p-5 md:p-6 hover:bg-opacity-85 transition-all duration-300 flex flex-col md:flex-row gap-6 shadow-craft-sm"
-              >
-                {/* Visual border framework */}
-                <div className="absolute inset-0 border-double-cut pointer-events-none rounded-lg"></div>
-                <div className="absolute inset-0 paper-grain pointer-events-none opacity-[0.08]"></div>
-
-                {/* Left Thumbnail representing premium object */}
-                <div className="relative w-full md:w-32 aspect-[4/3] bg-garabel-sand bg-opacity-30 rounded border border-garabel-ink/5 overflow-hidden flex-shrink-0">
-                  <div className="absolute inset-0 paper-grain pointer-events-none opacity-20"></div>
-                  <img 
-                    src={item.image} 
-                    alt={item.name} 
-                    className="w-full h-full object-cover grayscale opacity-[0.9] duration-700 transition-transform group-hover:scale-105"
-                  />
-                </div>
-
-                {/* Item Details */}
-                <div className="flex-grow flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between items-start gap-4 mb-1">
-                      <span className="font-mono text-[9px] text-garabel-accent uppercase tracking-widest font-semibold">
-                        {item.category}
-                      </span>
-                      <span className="font-sans text-sm font-medium text-garabel-ink">
-                        ${item.price}.00 USD
-                      </span>
-                    </div>
-                    
-                    <h3 className="font-sans text-base text-garabel-ink group-hover:text-garabel-accent transition-colors font-medium mb-2">
-                      {item.name}
-                    </h3>
-
-                    <p className="font-sans text-xs font-light text-garabel-mid leading-relaxed mb-4">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap justify-between items-center gap-4 pt-3 border-t border-dashed border-garabel-ink/10 font-mono text-[8px] text-garabel-mid">
-                    <span className="uppercase tracking-wider">
-                      SPEC // SIZE: {item.dimensions} // WEIGHT: {item.weight.split(" ")[0]}
-                    </span>
-                    
-                    <button
-                      onClick={() => addToCart(item)}
-                      className="flex items-center gap-1.5 px-3.5 py-1.5 rounded bg-garabel-ink hover:bg-opacity-90 text-garabel-cream font-mono text-[9px] tracking-widest uppercase transition-all duration-300 cursor-pointer shadow-craft-sm"
-                    >
-                      <ShoppingCart className="w-3 h-3" />
-                      <span>Add to Order</span>
-                    </button>
-                  </div>
-                </div>
-
+            <span className="block font-mono text-[10px] tracking-widest text-garabel-accent uppercase border-b border-garabel-accent/10 pb-2 font-bold">
+              Why Leading Brands Choose Us
+            </span>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+              <div className="p-5 rounded-lg border border-garabel-ink/5 bg-garabel-cream/50 relative shadow-craft-sm hover:scale-[1.01] transition-transform duration-300">
+                <div className="absolute inset-0 paper-grain pointer-events-none opacity-[0.05]"></div>
+                <span className="block font-mono text-[10px] text-garabel-accent uppercase tracking-widest font-bold mb-2">01 // VISUAL IMPACT</span>
+                <h4 className="font-sans text-sm font-semibold text-garabel-ink mb-2">Elevate Brand Perception</h4>
+                <p className="font-sans text-xs font-light text-garabel-mid leading-relaxed">
+                  Transform every purchase into a memorable brand experience with beautifully designed custom packaging.
+                </p>
               </div>
-            ))}
+
+              <div className="p-5 rounded-lg border border-garabel-ink/5 bg-garabel-cream/50 relative shadow-craft-sm hover:scale-[1.01] transition-transform duration-300">
+                <div className="absolute inset-0 paper-grain pointer-events-none opacity-[0.05]"></div>
+                <span className="block font-mono text-[10px] text-garabel-accent uppercase tracking-widest font-bold mb-2">02 // ECO ADVANTAGE</span>
+                <h4 className="font-sans text-sm font-semibold text-garabel-ink mb-2">Reduce Environmental Impact</h4>
+                <p className="font-sans text-xs font-light text-garabel-mid leading-relaxed">
+                  Our eco-conscious materials and zero-emission approach help your business move toward a more sustainable future.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-lg border border-garabel-ink/5 bg-garabel-cream/50 relative shadow-craft-sm hover:scale-[1.01] transition-transform duration-300">
+                <div className="absolute inset-0 paper-grain pointer-events-none opacity-[0.05]"></div>
+                <span className="block font-mono text-[10px] text-garabel-accent uppercase tracking-widest font-bold mb-2">03 // TAILORED SYSTEM</span>
+                <h4 className="font-sans text-sm font-semibold text-garabel-ink mb-2">Custom Designed for Your Brand</h4>
+                <p className="font-sans text-xs font-light text-garabel-mid leading-relaxed">
+                  From shopping bags and mailers to complete packaging systems, every solution is tailored to reflect your unique identity.
+                </p>
+              </div>
+
+              <div className="p-5 rounded-lg border border-garabel-ink/5 bg-garabel-cream/50 relative shadow-craft-sm hover:scale-[1.01] transition-transform duration-300">
+                <div className="absolute inset-0 paper-grain pointer-events-none opacity-[0.05]"></div>
+                <span className="block font-mono text-[10px] text-garabel-accent uppercase tracking-widest font-bold mb-2">04 // HIGHER STANDARDS</span>
+                <h4 className="font-sans text-sm font-semibold text-garabel-ink mb-2">Premium Quality Without Compromise</h4>
+                <p className="font-sans text-xs font-light text-garabel-mid leading-relaxed">
+                  Durable, elegant, and designed to perform while meeting the expectations of modern consumers.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-5 rounded-lg border border-garabel-ink/5 bg-garabel-cream/50 relative shadow-craft-sm hover:scale-[1.01] transition-transform duration-300">
+              <div className="absolute inset-0 paper-grain pointer-events-none opacity-[0.05]"></div>
+              <span className="block font-mono text-[10px] text-garabel-accent uppercase tracking-widest font-bold mb-2">05 // SCALABILITY</span>
+              <h4 className="font-sans text-sm font-semibold text-garabel-ink mb-2">Flexible for Businesses of Any Size</h4>
+              <p className="font-sans text-xs font-light text-garabel-mid leading-relaxed">
+                Whether you're launching your first store or managing multiple retail locations, we offer scalable solutions that grow with your business.
+              </p>
+            </div>
           </div>
 
           {/* Luxury details disclosure */}
           <div className="p-4 rounded border border-garabel-ink/10 bg-garabel-sand bg-opacity-30 font-mono text-[9px] text-garabel-mid leading-relaxed flex items-start gap-3">
             <AlertCircle className="w-4 h-4 text-garabel-accent shrink-0 mt-0.5" />
-            <span>Atelier Garabel operates an exclusive zero-cookie, high-confidentiality catalog. Payment operations do not use client tracking metrics or complex direct gateway integrations. We collect PayPal emails to process high-security paper receipt invoices.</span>
+            <span>Atelier Garabel operates an exclusive high-confidentiality brand program. Payment operations do not use tracking metrics. We collect PayPal emails to process secure blueprints and custom orders routed via carbon-neutral dispatch.</span>
           </div>
         </div>
 
