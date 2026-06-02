@@ -196,6 +196,25 @@ Timestamp: ${new Date().toUTCString()}
   }
 });
 
+// Proxy route to secure and translate Google Drive images into Base64 so they can enter PDFs easily
+app.get("/api/logo-base64", async (req, res) => {
+  try {
+    const logoUrl = "https://lh3.googleusercontent.com/d/1U3YfW75P9JyKKTCWA7yoM31HCTW9L0fN";
+    const response = await fetch(logoUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch logo image: status ${response.status}`);
+    }
+    const arrayBuffer = await response.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    const contentType = response.headers.get("content-type") || "image/png";
+    const base64String = `data:${contentType};base64,${buffer.toString("base64")}`;
+    res.json({ base64: base64String });
+  } catch (err: any) {
+    console.error("Proxy endpoint error:", err);
+    res.status(500).json({ error: "Failed to proxy image as base64" });
+  }
+});
+
 // Configure Vite middleware in development or serve static files in production
 async function setupServer() {
   if (process.env.NODE_ENV !== "production") {

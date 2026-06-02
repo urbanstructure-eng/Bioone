@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useLanguage } from "../translations";
 import { Check, ArrowRight, ArrowLeft, X, Download, FileText } from "lucide-react";
@@ -12,6 +12,25 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
   const { language } = useLanguage();
   const [inquiryType, setInquiryType] = useState<"existing" | "custom">("existing");
   
+  // Base64 Logo state retrieved securely from full-stack api
+  const [logoBase64, setLogoBase64] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/logo-base64")
+      .then((res) => {
+        if (!res.ok) throw new Error("Status: " + res.status);
+        return res.json();
+      })
+      .then((data) => {
+        if (data && data.base64) {
+          setLogoBase64(data.base64);
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to load base64 logo:", err);
+      });
+  }, []);
+
   // Form State
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
@@ -50,16 +69,36 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
     doc.setFillColor(55, 99, 50);
     doc.rect(15, 15, 180, 28, "F");
 
-    // Brand Monogram logo on Left side of header
-    doc.setTextColor(255, 255, 255);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(22);
-    doc.text("O N E", 23, 28);
+    // Brand Logo on Left side of header (embedded with high contrast white badge)
+    if (logoBase64) {
+      try {
+        doc.setFillColor(255, 255, 255);
+        // Rounded white container for logo
+        (doc as any).roundedRect(18, 17, 68, 24, 2, 2, "F");
+        // Logo image itself
+        doc.addImage(logoBase64, "PNG", 20, 18.5, 64, 21);
+      } catch (err) {
+        doc.setTextColor(255, 255, 255);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(22);
+        doc.text("O N E", 23, 28);
 
-    doc.setTextColor(168, 211, 161); // Soft micro green (#a8d3a1)
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(8.5);
-    doc.text("BIODEGRADABLE BRAND SOLUTIONS", 23, 35);
+        doc.setTextColor(168, 211, 161); // Soft micro green (#a8d3a1)
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(8.5);
+        doc.text("BIODEGRADABLE SOLUTIONS", 23, 35);
+      }
+    } else {
+      doc.setTextColor(255, 255, 255);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(22);
+      doc.text("O N E", 23, 28);
+
+      doc.setTextColor(168, 211, 161); // Soft micro green (#a8d3a1)
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8.5);
+      doc.text("BIODEGRADABLE SOLUTIONS", 23, 35);
+    }
 
     // Document header designation on Right side
     doc.setTextColor(255, 255, 255);
@@ -106,11 +145,22 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
     doc.setFontSize(7.5);
     doc.text("APPROVED RECORD", 154.5, 59.5);
 
-    // Monogram inside seal
-    doc.setTextColor(55, 99, 50);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(14);
-    doc.text("O N E", 161, 72);
+    // Brand Logo inside seal
+    if (logoBase64) {
+      try {
+        doc.addImage(logoBase64, "PNG", 154, 64, 34, 11);
+      } catch (err) {
+        doc.setTextColor(55, 99, 50);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(14);
+        doc.text("O N E", 161, 72);
+      }
+    } else {
+      doc.setTextColor(55, 99, 50);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(14);
+      doc.text("O N E", 161, 72);
+    }
     
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7);
@@ -576,10 +626,16 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                     <Check className="w-8 h-8 text-[#376332]" />
                   </div>
 
-                  {/* Brand Monogram Seal Display */}
-                  <div className="border border-[#376332]/25 rounded-md p-3.5 bg-[#376332]/5 flex flex-col items-center justify-center max-w-[240px] mx-auto mb-5 font-mono select-none">
-                    <span className="font-black tracking-[0.3em] text-sm text-[#376332]">O N E</span>
-                    <span className="text-[7px] tracking-[0.18em] text-[#376332]/75 uppercase mt-1 font-bold">BIODEGRADABLE SOLUTIONS</span>
+                  {/* Brand Logo Display */}
+                  <div className="flex justify-center mb-6">
+                    <div className="border border-[#376332]/10 bg-white/40 p-4 rounded-xl flex items-center justify-center shadow-inner max-w-xs animate-fadeIn duration-500">
+                      <img 
+                        src="https://lh3.googleusercontent.com/d/1U3YfW75P9JyKKTCWA7yoM31HCTW9L0fN" 
+                        alt="ONE Biodegradable Brand Solutions" 
+                        referrerPolicy="no-referrer"
+                        className="h-10 sm:h-12 w-auto object-contain select-none"
+                      />
+                    </div>
                   </div>
 
                   <span className="font-mono text-[10px] tracking-[0.3em] text-[#376332] uppercase block mb-1">
