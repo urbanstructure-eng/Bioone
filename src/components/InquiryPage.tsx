@@ -8,6 +8,103 @@ interface InquiryPageProps {
   onClose: () => void;
 }
 
+const SUGGESTED_FORMATS = [
+  {
+    id: "slit-tube",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <ellipse cx="12" cy="5" rx="6" ry="2.5" />
+        <path d="M6 5v14c0 1.38 2.69 2.5 6 2.5s6-1.12 6-2.5V5" />
+        <path d="M6 12c0 1.38 2.69 2.5 6 2.5s6-1.12 6-2.5" />
+      </svg>
+    ),
+    title: "Cylinder Slit-Tube",
+    titleJa: "シリンダー スリットチューブ",
+    desc: "Rigid double-rolled paper tube for fine spirits, cosmetics, and organic beauty.",
+    descJa: "高級飲料、化粧品、オーガニック製品向けの頑丈な二重巻き丸筒容器。",
+    specText: "Format Spec: Cylinder Slit-Tube Archetype\n- Core material: Recovered organic high-density cellulose fiberboard\n- Closure standard: Friction slide double-cap lining"
+  },
+  {
+    id: "hex-prism",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z" />
+        <path d="M12 2v20" />
+        <path d="M12 12l8.66-5" />
+        <path d="M12 12l-8.66-5" />
+      </svg>
+    ),
+    title: "Hexagonal Prism",
+    titleJa: "ヘキサゴナル プリズム",
+    desc: "A geometrical folding outer carton with secure slide lock and custom organic display layout.",
+    descJa: "スライドロック式の幾何学的で洗練された折り畳み用生分解外箱。",
+    specText: "Format Spec: Hexagonal Prism Carton Archetype\n- Material: Heavyweight unbleached Kraft paper board with flax fibers\n- Print Finish: Biodegradable organic soy inks with selective debossing"
+  },
+  {
+    id: "pulp-hinge",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <rect x="3" y="3" width="7" height="12" rx="1" />
+        <rect x="14" y="3" width="7" height="12" rx="1" />
+        <path d="M10 9h4" />
+        <circle cx="6.5" cy="9" r="1.5" />
+        <circle cx="17.5" cy="9" r="1.5" />
+      </svg>
+    ),
+    title: "Thermoformed Pulp Case",
+    titleJa: "高触感 成形パルプケース",
+    desc: "Cushioned double-hinged box molded with raw organic plant-based fiber inserts.",
+    descJa: "高触感の天然竹やサトウキビの搾りかす繊維から金型成形された緩衝ヒンジボックス。",
+    specText: "Format Spec: Thermoformed Bio-Pulp Hinge Case Archetype\n- Molded compound: Recycled bamboo stalk and agricultural bagasse fibers\n- Profile: Fully cushioned contour-fit product cradle cavities"
+  },
+  {
+    id: "rigid-box",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <rect x="3" y="6" width="18" height="12" rx="1.5" />
+        <path d="M3 10h18" />
+        <path d="M12 6v12" />
+        <rect x="6" y="9" width="12" height="6" rx="0.5" />
+      </svg>
+    ),
+    title: "Bespoke Rigid Shell",
+    titleJa: "特注ビスポーク リジッドシェル",
+    desc: "Heavy board frame wrapped in high-tactility linen-fiber wrapping with elegant dry debossing.",
+    descJa: "有機デボス紙を贅沢にあしらった、リネン麻貼りの頑丈なギフト保存用セットアップボックス。",
+    specText: "Format Spec: Bespoke Rigid Gift Shell Archetype\n- Structural frame: Recovered eco greyboard sheets of high thickness\n- Wrapping: Raw organic unbleached linen-rag paper wrap"
+  },
+  {
+    id: "pouch-sleeve",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M4 4h16v12H4z" />
+        <path d="M4 8h16" />
+        <circle cx="12" cy="12" r="2" />
+        <path d="M12 14c0 3 4 3 4 5" />
+      </svg>
+    ),
+    title: "Slide Flat Pouch",
+    titleJa: "スライド フラットポーチ",
+    desc: "Sleek flat-packing slide folder secured by custom twisted hemp cord button loops.",
+    descJa: "天然有機麻紐ループフックを配した、プレミアムファブリックや高級アート用の平型ポーチ。",
+    specText: "Format Spec: Slide-Out Flat Pouch Archetype\n- Material: Dense organic unbleached cotton cellulose and recycled kraft pulps\n- Fasteners: Hand-anchored natural circular button card locks"
+  },
+  {
+    id: "cord-carrier",
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M6 19L5 8h14l-1 11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z" />
+        <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+      </svg>
+    ),
+    title: "Modular Cord Carrier",
+    titleJa: "モジュラー コードキャリア",
+    desc: "Biodegradable gusseted retail carrier with heavy load capacity twisted-cellulose handles.",
+    descJa: "独自のモザイク織り丸紐高級ハンドルを配した、生分解性のマチ付きファッションショッピングバッグ。",
+    specText: "Format Spec: Modular Eco Kraft Cord Carrier Archetype\n- Wood pulp grade: High tear resistance long-fiber unbleached Scandinavian Kraft\n- Handles: Double-twisted cotton cellulose ropes glued with water extracts"
+  }
+];
+
 export default function InquiryPage({ onClose }: InquiryPageProps) {
   const { language } = useLanguage();
   const [inquiryType, setInquiryType] = useState<"existing" | "custom">("existing");
@@ -45,6 +142,22 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
   const [estimatedQuantity, setEstimatedQuantity] = useState("500");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedFormatId, setSelectedFormatId] = useState<string | null>(null);
+
+  const handleSelectFormat = (format: typeof SUGGESTED_FORMATS[0]) => {
+    setSelectedFormatId(format.id);
+    setInquiryType("custom");
+    setProjectDescription(format.specText);
+    
+    // Smooth scroll down to form's focus areas gracefully
+    setTimeout(() => {
+      const formElement = document.getElementById("quote_form_bottom_notes");
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: "smooth", block: "center" });
+        formElement.focus();
+      }
+    }, 100);
+  };
 
   // Stable luxury receipt details generated once per session/form load
   const [receiptNo] = useState(() => Math.floor(100000 + Math.random() * 900000));
@@ -356,6 +469,77 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
             </p>
           </motion.div>
 
+          {/* Minimalist Earthy Brown Suggested Formats Grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.22 }}
+            className="border-2 border-[#8a684f]/25 rounded-2xl bg-[#eaab7a]/5 p-5 md:p-6 shadow-[0_4px_24px_rgba(138,104,79,0.06)] relative overflow-hidden"
+          >
+            <div className="absolute inset-0 paper-grain pointer-events-none opacity-[0.06] select-none"></div>
+            
+            <div className="flex flex-col space-y-1.5 mb-4 relative z-10 text-left">
+              <span className="font-mono text-[9px] sm:text-[10px] tracking-widest text-[#7c5d47] uppercase font-black flex items-center gap-1.5">
+                <span className="inline-block w-1.5 h-1.5 bg-[#8a684f] rounded-full animate-pulse"></span>
+                ✦ SUGGESTED STRUCTURAL FORMATS // 6 SPEC ARCHETYPES
+              </span>
+              <p className="font-sans text-[11px] sm:text-xs text-[#5c4a3c] leading-relaxed max-w-xl">
+                {language === "ja" ? (
+                  "ONEの生分解性パッケージングにおける6つの代表的な素材形状設計です。選択すると仕様パラメータが自動的に読み込まれます。"
+                ) : (
+                  "Review six core, lightweight structural layouts handcrafted in tactile cardboard textures. Click a design shell below to instantly populate parameters into your request envelope."
+                )}
+              </p>
+            </div>
+
+            {/* 6 Grid layout */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3.5 relative z-10">
+              {SUGGESTED_FORMATS.map((format) => {
+                const isActive = selectedFormatId === format.id;
+                return (
+                  <button
+                    key={format.id}
+                    onClick={() => handleSelectFormat(format)}
+                    type="button"
+                    className={`text-left rounded-xl border p-4 flex flex-col justify-between transition-all duration-300 transform active:scale-[0.98] cursor-pointer group focus:outline-none ${
+                      isActive
+                        ? "border-[#5c4033] bg-[#8a684f]/15 shadow-sm ring-1 ring-[#5c4033]"
+                        : "border-[#8a684f]/20 bg-[#faf8f5]/90 hover:bg-[#8a684f]/10 hover:border-[#8a684f]/40 hover:shadow-craft-sm"
+                    }`}
+                  >
+                    <div>
+                      {/* Minimalist Kraft icon frame */}
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3.5 transition-all duration-300 ${
+                        isActive 
+                          ? "bg-[#5c4033] text-[#faf7f2] border border-[#5c4033]/15 scale-105" 
+                          : "bg-[#8a684f]/10 text-[#5c4033] border border-[#8a684f]/20 group-hover:bg-[#5c4033] group-hover:text-[#faf7f2] group-hover:scale-105"
+                      }`}>
+                        {format.icon}
+                      </div>
+
+                      <h4 className="font-sans font-bold text-xs sm:text-[13px] text-[#3e2c1e] tracking-tight line-clamp-1 leading-snug">
+                        {language === "ja" ? format.titleJa : format.title}
+                      </h4>
+                      
+                      <p className="font-sans text-[10px] text-[#5c4a3c]/85 leading-snug mt-1.5 line-clamp-3 select-none">
+                        {language === "ja" ? format.descJa : format.desc}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 pt-2.5 border-t border-[#8a684f]/15 flex items-center justify-between">
+                      <span className="font-mono text-[8px] sm:text-[9.5px] text-[#7c5d47] tracking-wider uppercase font-bold group-hover:text-[#3e2c1e]">
+                        {isActive ? "✦ LOADED" : "SELECT SPEC"}
+                      </span>
+                      <ArrowRight className={`w-3.5 h-3.5 text-[#7c5d47] transition-all duration-300 ${
+                        isActive ? "rotate-90 text-[#3e2c1e]" : "group-hover:translate-x-1 group-hover:text-[#3e2c1e]"
+                      }`} />
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
+
           {/* Form Container */}
           <div className="w-full">
             <AnimatePresence mode="wait">
@@ -577,11 +761,12 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                     </div>
 
                     {/* Memorandum Message details */}
-                    <div className="flex flex-col space-y-1.5">
+                    <div className="flex flex-col space-y-1.5 align-top">
                       <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase">
                         ✦ SPECIFICATION MEMORANDUM & REQUEST NOTES
                       </label>
                       <textarea
+                        id="quote_form_bottom_notes"
                         rows={2}
                         value={projectDescription}
                         onChange={(e) => setProjectDescription(e.target.value)}
