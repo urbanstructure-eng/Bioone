@@ -27,6 +27,10 @@ const LOGO_PARTNERS = [
   {
     name: "Collaborative Brand VI",
     logoUrl: "https://lh3.googleusercontent.com/d/1DQtEZVL-uSp-Uzv3vd6QOs5W6-cYpkdt"
+  },
+  {
+    name: "Collaborative Brand VII",
+    logoUrl: "https://lh3.googleusercontent.com/d/1_NGnekCoWk9gLrBWjKMIY2KeCdOhKPSf"
   }
 ];
 
