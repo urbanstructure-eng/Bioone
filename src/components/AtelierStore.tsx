@@ -42,7 +42,7 @@ export default function AtelierStore({ cart, setCart }: AtelierStoreProps) {
           </div>
           <div className="lg:col-span-8 space-y-6">
             <p className="font-sans text-lg md:text-2xl font-light leading-relaxed text-garabel-ink/90">
-              We create premium custom biodegradable and zero-emission packaging solutions designed to help brands stand out, strengthen customer loyalty, and reduce environmental impact without compromising quality or aesthetics.
+              We create premium custom compostable, carbon-reduced, and circular FSC-certified packaging systems designed to help brands stand out, strengthen customer loyalty, and eliminate waste without compromising luxury, quality, or aesthetics.
             </p>
             <p className="font-sans text-sm md:text-base font-light leading-relaxed text-garabel-mid">
               Whether you're an emerging retailer, a growing cannabis brand, a luxury fashion label, or an established e-commerce business, our sustainable packaging helps you deliver a premium experience from the moment your product reaches your customer.

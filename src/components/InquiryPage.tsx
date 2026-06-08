@@ -8,102 +8,91 @@ interface InquiryPageProps {
   onClose: () => void;
 }
 
-const SUGGESTED_FORMATS = [
-  {
-    id: "slit-tube",
-    icon: (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <ellipse cx="12" cy="5" rx="6" ry="2.5" />
-        <path d="M6 5v14c0 1.38 2.69 2.5 6 2.5s6-1.12 6-2.5V5" />
-        <path d="M6 12c0 1.38 2.69 2.5 6 2.5s6-1.12 6-2.5" />
-      </svg>
-    ),
-    title: "Cylinder Slit-Tube",
-    titleJa: "シリンダー スリットチューブ",
-    desc: "Rigid double-rolled paper tube for fine spirits, cosmetics, and organic beauty.",
-    descJa: "高級飲料、化粧品、オーガニック製品向けの頑丈な二重巻き丸筒容器。",
-    specText: "Format Spec: Cylinder Slit-Tube Archetype\n- Core material: Recovered organic high-density cellulose fiberboard\n- Closure standard: Friction slide double-cap lining"
-  },
-  {
-    id: "hex-prism",
-    icon: (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z" />
-        <path d="M12 2v20" />
-        <path d="M12 12l8.66-5" />
-        <path d="M12 12l-8.66-5" />
-      </svg>
-    ),
-    title: "Hexagonal Prism",
-    titleJa: "ヘキサゴナル プリズム",
-    desc: "A geometrical folding outer carton with secure slide lock and custom organic display layout.",
-    descJa: "スライドロック式の幾何学的で洗練された折り畳み用生分解外箱。",
-    specText: "Format Spec: Hexagonal Prism Carton Archetype\n- Material: Heavyweight unbleached Kraft paper board with flax fibers\n- Print Finish: Biodegradable organic soy inks with selective debossing"
-  },
-  {
-    id: "pulp-hinge",
-    icon: (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="3" y="3" width="7" height="12" rx="1" />
-        <rect x="14" y="3" width="7" height="12" rx="1" />
-        <path d="M10 9h4" />
-        <circle cx="6.5" cy="9" r="1.5" />
-        <circle cx="17.5" cy="9" r="1.5" />
-      </svg>
-    ),
-    title: "Thermoformed Pulp Case",
-    titleJa: "高触感 成形パルプケース",
-    desc: "Cushioned double-hinged box molded with raw organic plant-based fiber inserts.",
-    descJa: "高触感の天然竹やサトウキビの搾りかす繊維から金型成形された緩衝ヒンジボックス。",
-    specText: "Format Spec: Thermoformed Bio-Pulp Hinge Case Archetype\n- Molded compound: Recycled bamboo stalk and agricultural bagasse fibers\n- Profile: Fully cushioned contour-fit product cradle cavities"
-  },
-  {
-    id: "rigid-box",
-    icon: (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="3" y="6" width="18" height="12" rx="1.5" />
-        <path d="M3 10h18" />
-        <path d="M12 6v12" />
-        <rect x="6" y="9" width="12" height="6" rx="0.5" />
-      </svg>
-    ),
-    title: "Bespoke Rigid Shell",
-    titleJa: "特注ビスポーク リジッドシェル",
-    desc: "Heavy board frame wrapped in high-tactility linen-fiber wrapping with elegant dry debossing.",
-    descJa: "有機デボス紙を贅沢にあしらった、リネン麻貼りの頑丈なギフト保存用セットアップボックス。",
-    specText: "Format Spec: Bespoke Rigid Gift Shell Archetype\n- Structural frame: Recovered eco greyboard sheets of high thickness\n- Wrapping: Raw organic unbleached linen-rag paper wrap"
-  },
-  {
-    id: "pouch-sleeve",
-    icon: (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M4 4h16v12H4z" />
-        <path d="M4 8h16" />
-        <circle cx="12" cy="12" r="2" />
-        <path d="M12 14c0 3 4 3 4 5" />
-      </svg>
-    ),
-    title: "Slide Flat Pouch",
-    titleJa: "スライド フラットポーチ",
-    desc: "Sleek flat-packing slide folder secured by custom twisted hemp cord button loops.",
-    descJa: "天然有機麻紐ループフックを配した、プレミアムファブリックや高級アート用の平型ポーチ。",
-    specText: "Format Spec: Slide-Out Flat Pouch Archetype\n- Material: Dense organic unbleached cotton cellulose and recycled kraft pulps\n- Fasteners: Hand-anchored natural circular button card locks"
-  },
-  {
-    id: "cord-carrier",
-    icon: (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M6 19L5 8h14l-1 11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z" />
-        <path d="M9 8V6a3 3 0 0 1 6 0v2" />
-      </svg>
-    ),
-    title: "Modular Cord Carrier",
-    titleJa: "モジュラー コードキャリア",
-    desc: "Biodegradable gusseted retail carrier with heavy load capacity twisted-cellulose handles.",
-    descJa: "独自のモザイク織り丸紐高級ハンドルを配した、生分解性のマチ付きファッションショッピングバッグ。",
-    specText: "Format Spec: Modular Eco Kraft Cord Carrier Archetype\n- Wood pulp grade: High tear resistance long-fiber unbleached Scandinavian Kraft\n- Handles: Double-twisted cotton cellulose ropes glued with water extracts"
-  }
-];
+interface FileUploadSlotProps {
+  label: string;
+  fileName: string | null;
+  onFileSelect: (name: string) => void;
+  onClear: () => void;
+}
+
+function FileUploadSlot({ label, fileName, onFileSelect, onClear }: FileUploadSlotProps) {
+  const [isDragOver, setIsDragOver] = React.useState(false);
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      onFileSelect(e.dataTransfer.files[0].name);
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      onFileSelect(e.target.files[0].name);
+    }
+  };
+
+  return (
+    <div 
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+      className={`border border-dashed rounded-xl p-3 flex flex-col items-center justify-center text-center transition-all duration-300 relative min-h-[100px] ${
+        isDragOver 
+          ? "border-[#376332] bg-[#376332]/5 scale-[1.01]" 
+          : fileName 
+            ? "border-[#376332]/40 bg-[#376332]/5" 
+            : "border-[#8a684f]/20 hover:border-[#376332]/35 bg-[#eaab7a]/5 hover:bg-[#eaab7a]/10"
+      }`}
+    >
+      <input 
+        type="file" 
+        onChange={handleFileChange}
+        className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10" 
+      />
+      
+      {fileName ? (
+        <div className="flex flex-col items-center space-y-1 relative z-20 w-full px-2">
+          <div className="w-6 h-6 rounded-full bg-[#376332]/10 flex items-center justify-center text-[#376332]">
+            <Check className="w-3.5 h-3.5" />
+          </div>
+          <span className="font-mono text-[8px] tracking-wider text-garabel-mid uppercase block">✦ FILE ATTACHED</span>
+          <p className="font-sans text-[10px] font-bold text-garabel-ink truncate w-full select-all">
+            {fileName}
+          </p>
+          <button 
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              onClear();
+            }}
+            className="text-[8px] font-mono text-red-600 hover:underline mt-1 font-black cursor-pointer px-1 relative z-30"
+          >
+            [ REMOVE ]
+          </button>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center space-y-1 pointer-events-none">
+          <svg className="w-4 h-4 text-[#8a684f]/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+          </svg>
+          <span className="font-mono text-[8px] sm:text-[9px] tracking-wider text-[#5c4a3c] uppercase font-bold">{label}</span>
+          <p className="font-sans text-[9px] text-[#5c4a3c]/60">Drag/Drop or click</p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function InquiryPage({ onClose }: InquiryPageProps) {
   const { language } = useLanguage();
@@ -129,35 +118,48 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
   }, []);
 
   // Form State
+  const [companyName, setCompanyName] = useState("");
+  const [companyWebsite, setCompanyWebsite] = useState("");
+  const [industry, setIndustry] = useState("Luxury Retail");
   const [clientName, setClientName] = useState("");
+  const [clientDept, setClientDept] = useState("Founder");
   const [clientEmail, setClientEmail] = useState("");
   const [clientPhone, setClientPhone] = useState("");
-  const [clientDept, setClientDept] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [industry, setIndustry] = useState("");
-  const [location, setLocation] = useState("");
-  const [budget, setBudget] = useState("10k_50k");
+
+  // Project Scope
+  const [engagementType, setEngagementType] = useState("Custom Packaging Development");
+  const [annualSpend, setAnnualSpend] = useState("$10,000 – $50,000");
+  const [orderVolume, setOrderVolume] = useState("5,000 – 25,000");
+
+  // Sustainability Objectives
+  const [sustainabilityObjectives, setSustainabilityObjectives] = useState<string[]>([
+    "Plastic Reduction"
+  ]);
+
+  // Packaging Requirements
+  const [packagingCategories, setPackagingCategories] = useState<string[]>([]);
+  const [desiredMaterials, setDesiredMaterials] = useState<string[]>([]);
+
+  // Design Assets
+  const [brandAssetsStatus, setBrandAssetsStatus] = useState("Logo Only");
+
+  // Simulated File Upload states (store file names)
+  const [brandGuidelinesFileName, setBrandGuidelinesFileName] = useState<string | null>(null);
+  const [existingPackagingFileName, setExistingPackagingFileName] = useState<string | null>(null);
+  const [productPhotographyFileName, setProductPhotographyFileName] = useState<string | null>(null);
+  const [technicalSpecsFileName, setTechnicalSpecsFileName] = useState<string | null>(null);
+
+  // Procurement Information
+  const [geographicDistribution, setGeographicDistribution] = useState("Regional");
+  const [launchTimeline, setLaunchTimeline] = useState("1–3 Months");
+
+  // Final Strategic Question
+  const [strategicOutcome, setStrategicOutcome] = useState("");
+
   const [specimenModel, setSpecimenModel] = useState("Specimen 01");
   const [projectDescription, setProjectDescription] = useState("");
-  const [estimatedQuantity, setEstimatedQuantity] = useState("500");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedFormatId, setSelectedFormatId] = useState<string | null>(null);
-
-  const handleSelectFormat = (format: typeof SUGGESTED_FORMATS[0]) => {
-    setSelectedFormatId(format.id);
-    setInquiryType("custom");
-    setProjectDescription(format.specText);
-    
-    // Smooth scroll down to form's focus areas gracefully
-    setTimeout(() => {
-      const formElement = document.getElementById("quote_form_bottom_notes");
-      if (formElement) {
-        formElement.scrollIntoView({ behavior: "smooth", block: "center" });
-        formElement.focus();
-      }
-    }, 100);
-  };
 
   // Stable luxury receipt details generated once per session/form load
   const [receiptNo] = useState(() => Math.floor(100000 + Math.random() * 900000));
@@ -166,7 +168,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
     return `${d.getUTCFullYear()}.${String(d.getUTCMonth() + 1).padStart(2, "0")}.${String(d.getUTCDate()).padStart(2, "0")} ${String(d.getUTCHours()).padStart(2, "0")}:${String(d.getUTCMinutes()).padStart(2, "0")} UTC`;
   });
 
-  // Gorgeous Sustainable Luxury PDF generator
+  // Gorgeous Sustainable Luxury PDF generator (2 Pages, complete partnership profiling)
   const handleDownloadPDF = () => {
     const doc = new jsPDF({
       orientation: "portrait",
@@ -174,21 +176,21 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
       format: "a4"
     });
 
-    // 1. Fill beautiful warm off-white cream paper background
+    // --- PAGE 1: Brand Profile & Relationship Scope ---
+    // Fill beautiful warm off-white cream paper background
     doc.setFillColor(250, 247, 242);
     doc.rect(0, 0, 210, 297, "F");
 
-    // 2. Prestigious Leaf-Green Header Banner (matching visual language of #376332)
+    // Prestigious Leaf-Green Header Banner (matching visual language of #376332)
     doc.setFillColor(55, 99, 50);
     doc.rect(15, 15, 180, 28, "F");
 
-    // Brand Logo on Left side of header (embedded with high contrast white badge)
+    // Brand Logo on Left side of header
     if (logoBase64) {
       try {
         doc.setFillColor(255, 255, 255);
         // Rounded white container for logo
         (doc as any).roundedRect(18, 17, 68, 24, 2, 2, "F");
-        // Logo image itself
         doc.addImage(logoBase64, "PNG", 20, 18.5, 64, 21);
       } catch (err) {
         doc.setTextColor(255, 255, 255);
@@ -196,10 +198,10 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
         doc.setFontSize(22);
         doc.text("O N E", 23, 28);
 
-        doc.setTextColor(168, 211, 161); // Soft micro green (#a8d3a1)
+        doc.setTextColor(168, 211, 161);
         doc.setFont("helvetica", "normal");
-        doc.setFontSize(8.5);
-        doc.text("BIODEGRADABLE SOLUTIONS", 23, 35);
+        doc.setFontSize(8);
+        doc.text("SUSTAINABLE PACKAGING SYSTEMS", 23, 35);
       }
     } else {
       doc.setTextColor(255, 255, 255);
@@ -207,162 +209,215 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
       doc.setFontSize(22);
       doc.text("O N E", 23, 28);
 
-      doc.setTextColor(168, 211, 161); // Soft micro green (#a8d3a1)
+      doc.setTextColor(168, 211, 161);
       doc.setFont("helvetica", "normal");
-      doc.setFontSize(8.5);
-      doc.text("BIODEGRADABLE SOLUTIONS", 23, 35);
+      doc.setFontSize(8);
+      doc.text("SUSTAINABLE PACKAGING SYSTEMS", 23, 35);
     }
 
     // Document header designation on Right side
     doc.setTextColor(255, 255, 255);
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(9.5);
-    doc.text("DESIGN SPECIFICATION", 142, 27);
+    doc.setFontSize(9);
+    doc.text("PARTNERSHIP RECORD", 142, 25);
     
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(8);
+    doc.setFontSize(7.5);
     doc.setTextColor(215, 230, 210);
-    doc.text(`RECORD ID: #${receiptNo}`, 142, 33);
+    doc.text(`RECORD ID: #${receiptNo}`, 142, 31);
+    doc.text(`DATE: ${timestamp.split(' ')[0]}`, 142, 36);
 
-    // 3. Document Subtitle & Metadata Section
+    // Document Title
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(12);
+    doc.setFontSize(11);
     doc.setTextColor(30, 30, 30);
-    doc.text("OFFICIAL LODGED SPECIFICATION", 20, 60);
+    doc.text("OFFICIAL PARTNERSHIP procurement specification".toUpperCase(), 18, 54);
 
     // Custom forest green rule accent
     doc.setDrawColor(55, 99, 50);
     doc.setLineWidth(0.6);
-    doc.line(20, 64, 140, 64);
+    doc.line(18, 57, 140, 57);
 
     // Short descriptive greeting note
     doc.setFont("helvetica", "italic");
-    doc.setFontSize(9);
+    doc.setFontSize(8.5);
     doc.setTextColor(80, 80, 80);
-    const summaryText = language === "ja"
-      ? "ONE Biodegradable Brand Solutionsにご登録いただいた最高級特注パッケージ仕様書の控えです。"
-      : "Official copy of the physical & material design parameters registered securely inside our ecological ledger.";
-    doc.text(summaryText, 20, 70);
+    doc.text("Design parameters and corporate specifications filed in the Sustainable Packaging Procurement Portal.", 18, 62);
 
-    // 4. Custom Architectural Verified Seal/Stamp element on right
+    // Custom Architectural Verified Seal/Stamp element on right
     doc.setDrawColor(55, 99, 50);
     doc.setLineWidth(0.8);
     doc.setFillColor(255, 255, 255);
-    doc.rect(152, 54, 38, 38, "FD");
+    doc.rect(152, 48, 38, 28, "FD");
     
     // Top inner fill
     doc.setFillColor(55, 99, 50);
-    doc.rect(152, 54, 38, 7.5, "F");
+    doc.rect(152, 48, 38, 6, "F");
     doc.setTextColor(255, 255, 255);
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(7.5);
-    doc.text("APPROVED RECORD", 154.5, 59.5);
+    doc.setFontSize(6.5);
+    doc.text("APPROVED RECORD", 157.5, 52.5);
 
-    // Brand Logo inside seal
-    if (logoBase64) {
-      try {
-        doc.addImage(logoBase64, "PNG", 154, 64, 34, 11);
-      } catch (err) {
-        doc.setTextColor(55, 99, 50);
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(14);
-        doc.text("O N E", 161, 72);
-      }
-    } else {
-      doc.setTextColor(55, 99, 50);
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(14);
-      doc.text("O N E", 161, 72);
-    }
+    // Mini Brand text inside seal
+    doc.setTextColor(55, 99, 50);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.text("O N E", 166, 63);
     
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(7);
-    doc.text("VERIFIED OK", 163.5, 80);
-    
-    doc.setFontSize(6.5);
+    doc.setFontSize(6);
     doc.setTextColor(110, 110, 110);
-    doc.text(`NO. ${receiptNo}`, 162.5, 87);
+    doc.text(`LEDGER NO. ${receiptNo}`, 155.5, 71);
 
-    // 5. Parameter Specifications List Layout
+    // Specifications List Layout
     doc.setDrawColor(220, 215, 205);
     doc.setLineWidth(0.35);
 
-    let y = 104;
+    let y = 88;
 
     const drawSpecRow = (label: string, val: string) => {
       // Draw label
       doc.setFont("helvetica", "bold");
-      doc.setFontSize(8.5);
+      doc.setFontSize(8);
       doc.setTextColor(90, 100, 85);
-      doc.text(label, 20, y);
+      doc.text(label, 18, y);
 
       // Draw value
       doc.setFont("helvetica", "normal");
-      doc.setFontSize(9.5);
+      doc.setFontSize(8.5);
       doc.setTextColor(35, 35, 35);
-      doc.text(val, 72, y);
+      doc.text(val || "N/A", 70, y);
 
       // Underlying Divider node
-      doc.line(20, y + 2, 190, y + 2);
+      doc.line(18, y + 2.2, 190, y + 2.2);
       y += 10.5;
     };
 
-    drawSpecRow("SPECIFICATION RECEIPT NO:", `#${receiptNo}`);
-    drawSpecRow("TIMESTAMP OF LODGING:", timestamp);
+    // Subsection Header 1
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9.5);
+    doc.setTextColor(55, 99, 50);
+    doc.text("1. COMPANY PROFILE & COGNATES", 18, y - 5);
+
     drawSpecRow("REGISTERED COMPANY:", companyName.toUpperCase());
-    drawSpecRow("INDUSTRY VERTICAL:", (industry || "Not Specified").toUpperCase());
-    drawSpecRow("REPRESENTATIVE OFFICER:", `${clientName.toUpperCase()} ${clientDept ? `(${clientDept.toUpperCase()})` : ""}`);
+    drawSpecRow("CORPORATE WEBSITE:", companyWebsite || "Not Specified");
+    drawSpecRow("INDUSTRY SECTOR:", industry.toUpperCase());
+    drawSpecRow("PRIMARY REPRESENTATIVE:", clientName.toUpperCase());
+    drawSpecRow("POSITION / DEPARTMENT:", clientDept.toUpperCase());
     drawSpecRow("COMMUNICATIONS EMAIL:", clientEmail.toLowerCase());
-    drawSpecRow("PHONE CONNECTION:", clientPhone || "N/A");
-    drawSpecRow("GEOGRAPHY / LOCATION:", (location || "Global").toUpperCase());
-    
-    const budgetStr = budget === "under_10k" ? "UNDER $10K USD" :
-                      budget === "10k_50k" ? "$10K - $50K USD" :
-                      budget === "50k_150k" ? "$50K - $150K USD" : "$150K+ USD";
-    drawSpecRow("BUDGET GUIDANCE RANGE:", budgetStr);
-    
-    const typeLabel = inquiryType === "existing" ? `ORDER SPECIMEN MODEL (${specimenModel.toUpperCase()})` : "BESPOKE CUSTOM DESIGN PROJECT";
-    drawSpecRow("SPECIFICATION INQUIRY:", typeLabel);
+    drawSpecRow("PHONE CONNECTION:", clientPhone || "Not Specified");
 
-    const qtyLabel = estimatedQuantity === "100-500" ? "SMALL BATCH (100 - 500 UNITS)" : 
-                     estimatedQuantity === "500" ? "MEDIUM RUN (500 - 2,500 UNITS)" :
-                     estimatedQuantity === "2500" ? "FLAGSHIP SCALE (2,500 - 10,000 UNITS)" : "GLOBAL RUN / DISTRIBUTION (10,000+ UNITS)";
-    drawSpecRow("TARGET QUANTITY REQUIREMENT:", qtyLabel);
+    y += 4;
 
-    // 6. Project Description & Board Notes section (wraps text automatically)
+    // Subsection Header 2
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9.5);
+    doc.setTextColor(55, 99, 50);
+    doc.text("2. STRATEGIC RELATIONSHIP SCOPE", 18, y - 5);
+
+    drawSpecRow("ENGAGEMENT REQUIREMENT:", engagementType.toUpperCase());
+    drawSpecRow("EST. ANNUAL PACKAGING SPEND:", annualSpend.toUpperCase() + " (CRITICAL)");
+    drawSpecRow("EXPECTED ORDER VOLUME:", orderVolume.toUpperCase());
+    drawSpecRow("GEOGRAPHIC DISTRIBUTION:", geographicDistribution.toUpperCase());
+    drawSpecRow("REQUIRED LAUNCH TIMELINE:", launchTimeline.toUpperCase());
+
+
+    // --- PAGE 2: Specifications, Files & Strategic Alignment ---
+    doc.addPage();
+    // Fill beautiful warm off-white cream paper background
+    doc.setFillColor(250, 247, 242);
+    doc.rect(0, 0, 210, 297, "F");
+
+    // Header strip
+    doc.setFillColor(55, 99, 50);
+    doc.rect(15, 12, 180, 8, "F");
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(7.5);
+    doc.text("ONE PREMIUM SUSTAINABLE PACKAGING SYSTEMS // COMPREHENSIVE SPECIFICATION RECORD", 20, 17);
+
+    y = 30;
+
+    const formatList = (arr: string[]) => arr.length > 0 ? arr.join(", ") : "None Specified";
+
+    // Subsection Header 3
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9.5);
+    doc.setTextColor(55, 99, 50);
+    doc.text("3. ENVIRONMENTAL & MATERIAL DESIGN MATRIX", 18, y - 5);
+
+    drawSpecRow("SUSTAINABILITY OBJECTIVES:", formatList(sustainabilityObjectives));
+    drawSpecRow("PACKAGING CATEGORIES:", formatList(packagingCategories));
+    drawSpecRow("DESIRED PACKAGING MATERIALS:", formatList(desiredMaterials));
+    drawSpecRow("EXISTING BRAND GUIDELINES DISPOSITION:", brandAssetsStatus.toUpperCase());
+
+    y += 4;
+
+    // Subsection Header 4
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9.5);
+    doc.setTextColor(55, 99, 50);
+    doc.text("4. DEPOSITED COLLATERAL & DESIGN DOCUMENTS", 18, y - 5);
+
+    drawSpecRow("UPLOADED BRAND GUIDELINES:", brandGuidelinesFileName || "NO FILE DEPOSITED");
+    drawSpecRow("UPLOADED EXISTING PACKAGING:", existingPackagingFileName || "NO FILE DEPOSITED");
+    drawSpecRow("UPLOADED PRODUCT PHOTOGRAPHY:", productPhotographyFileName || "NO FILE DEPOSITED");
+    drawSpecRow("UPLOADED TECHNICAL BLUEPRINTS:", technicalSpecsFileName || "NO FILE DEPOSITED");
+
+    y += 4;
+
+    // Section 5
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9.5);
+    doc.setTextColor(55, 99, 50);
+    doc.text("5. PORTAL STRATEGIC OUTCOME ALIGNMENT", 18, y - 5);
+    y += 1;
+
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(8);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Detailed definition of project strategic success & metrics requested by client:", 18, y);
+    y += 5;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8.5);
+    doc.setTextColor(40, 40, 40);
+    const outcomeText = strategicOutcome.trim() || "No customized strategic outcomes recorded. Handled via default materials consultation metrics.";
+    const splitOutcome = doc.splitTextToSize(outcomeText, 172);
+    doc.text(splitOutcome, 18, y);
+    y += Math.max(12, splitOutcome.length * 4);
+
     if (projectDescription.trim()) {
-      y += 4;
       doc.setFont("helvetica", "bold");
-      doc.setFontSize(8.5);
-      doc.setTextColor(90, 100, 85);
-      doc.text("BOARD SPECIFICATION MEMORANDUM & REQUEST NOTES:", 20, y);
-      
-      y += 5.5;
-      doc.setFont("helvetica", "normal");
       doc.setFontSize(9);
-      doc.setTextColor(60, 60, 60);
+      doc.setTextColor(55, 99, 50);
+      doc.text("6. SPECIAL EMBEDDED DESIGN COMPONENT NOTES", 18, y - 4);
       
-      const splitNotes = doc.splitTextToSize(projectDescription, 170);
-      doc.text(splitNotes, 20, y);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.setTextColor(60, 60, 60);
+      const splitDesc = doc.splitTextToSize(projectDescription, 172);
+      doc.text(splitDesc, 18, y);
+      y += Math.max(12, splitDesc.length * 4);
     }
 
-    // 7. Signature / Seal area at bottom
+    // Bottom signatures & Legal disclaimer
     doc.setDrawColor(55, 99, 50);
     doc.setLineWidth(0.4);
-    doc.line(135, 274, 185, 274);
+    doc.line(135, 271, 185, 271);
     
     doc.setFont("helvetica", "italic");
     doc.setFontSize(7.5);
     doc.setTextColor(115, 115, 115);
-    doc.text("Authorized Design Architect Seal", 141, 278.5);
+    doc.text("Authorized Representative Sign-Off", 137, 275.5);
     
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(8.5);
+    doc.setFontSize(8);
     doc.setTextColor(80, 90, 75);
-    doc.text("ONE BIODEGRADABLE BRAND SOLUTIONS // TECHNICAL ASSURANCE DIVISION", 20, 278.5);
+    doc.text("ONE PREMIUM SUSTAINABLE PACKAGING SYSTEMS // STRATEGIC ADVISORY BOARD", 18, 275.5);
 
-    // 8. Generate and download file with custom registration name
-    doc.save(`ONE_Specification_Receipt_${receiptNo}.pdf`);
+    // Save and download
+    doc.save(`ONE_Partnership_Specification_${receiptNo}.pdf`);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -380,18 +435,30 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          companyName,
+          companyWebsite,
+          industry,
           clientName,
+          clientDept,
           clientEmail,
           clientPhone,
-          clientDept,
-          companyName,
-          industry,
-          location,
-          budget,
-          inquiryType,
-          specimenModel,
-          estimatedQuantity,
+          engagementType,
+          annualSpend,
+          orderVolume,
+          sustainabilityObjectives,
+          packagingCategories,
+          desiredMaterials,
+          brandAssetsStatus,
+          brandGuidelinesFile: brandGuidelinesFileName,
+          existingPackagingFile: existingPackagingFileName,
+          productPhotographyFile: productPhotographyFileName,
+          technicalSpecsFile: technicalSpecsFileName,
+          geographicDistribution,
+          launchTimeline,
+          strategicOutcome,
           projectDescription,
+          inquiryType: "custom",
+          specimenModel: "Bespoke Custom"
         }),
       });
 
@@ -449,95 +516,24 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
             className="space-y-4"
           >
             <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.3em] text-[#376332] uppercase block">
-              ✦ OFFICE OF ACQUISITION // SPECIFICATION DESK
+              ✦ PORTAL FOR MATERIAL CONSULTANCY & PROCUREMENT
             </span>
-            <h1 className="font-sans font-black text-3xl sm:text-4xl md:text-5xl uppercase text-garabel-ink tracking-tight leading-[0.95]">
+            <h1 className="font-sans font-black text-2xl sm:text-3xl md:text-4xl uppercase text-garabel-ink tracking-tight leading-[0.95] max-w-xl">
               {language === "ja" ? (
-                <>特注・仕様<br />お申し込み</>
+                <>持続可能パッケージ<br />調達・提携ポータル</>
               ) : (
-                <>Spec & Custom<br />Request Desk</>
+                <>Sustainable Packaging<br />Procurement Portal</>
               )}
             </h1>
             <div className="w-12 h-0.5 bg-[#376332] mt-4"></div>
             
-            <p className="font-sans text-[12px] sm:text-[13px] text-garabel-mid leading-relaxed max-w-md pt-2">
+            <p className="font-sans text-xs sm:text-[13px] text-garabel-mid leading-relaxed max-w-2xl pt-2">
               {language === "ja" ? (
-                "アトリエ・ガラベルの既存スペシメンのご注文、またはご希望の仕様に合わせた完全オリジナルの特注プロジェクトの計画をご案内します。お気軽にお問い合わせください。"
+                "私たちの材料・製造チームとのパッケージングコンサルテーションを開始します。持続可能な小売用パッケージの調達、特注の構造コンセプトの開発、または長期的な調達パートナーシップの評価など、お客様のブランド目標、サステナビリティ目標、および製造要件に沿った仕立ての提案書をご用意いたします。進取の気性に富む小売業者、ラグジュアリーブランド、医療用大麻事業者、および妥協のない高品質を求める一般消費財企業に信頼されています。"
               ) : (
-                "Initiate order placement for our existing structural specimens or request bespoke material designs. Our artisans and engineers formulate sustainable fiber alignments tailored perfectly to your brand presence."
+                "Initiate a packaging consultation with our materials and manufacturing team. Whether you are sourcing sustainable retail packaging, developing a bespoke structural concept, or evaluating long-term procurement partnerships, our team will prepare a tailored proposal aligned with your brand objectives, sustainability goals, and production requirements. Trusted by forward-thinking retailers, luxury brands, cannabis operators, and consumer product companies seeking premium packaging solutions without compromise."
               )}
             </p>
-          </motion.div>
-
-          {/* Minimalist Earthy Brown Suggested Formats Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.22 }}
-            className="border-2 border-[#8a684f]/25 rounded-2xl bg-[#eaab7a]/5 p-5 md:p-6 shadow-[0_4px_24px_rgba(138,104,79,0.06)] relative overflow-hidden"
-          >
-            <div className="absolute inset-0 paper-grain pointer-events-none opacity-[0.06] select-none"></div>
-            
-            <div className="flex flex-col space-y-1.5 mb-4 relative z-10 text-left">
-              <span className="font-mono text-[9px] sm:text-[10px] tracking-widest text-[#7c5d47] uppercase font-black flex items-center gap-1.5">
-                <span className="inline-block w-1.5 h-1.5 bg-[#8a684f] rounded-full animate-pulse"></span>
-                ✦ SUGGESTED STRUCTURAL FORMATS // 6 SPEC ARCHETYPES
-              </span>
-              <p className="font-sans text-[11px] sm:text-xs text-[#5c4a3c] leading-relaxed max-w-xl">
-                {language === "ja" ? (
-                  "ONEの生分解性パッケージングにおける6つの代表的な素材形状設計です。選択すると仕様パラメータが自動的に読み込まれます。"
-                ) : (
-                  "Review six core, lightweight structural layouts handcrafted in tactile cardboard textures. Click a design shell below to instantly populate parameters into your request envelope."
-                )}
-              </p>
-            </div>
-
-            {/* 6 Grid layout */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3.5 relative z-10">
-              {SUGGESTED_FORMATS.map((format) => {
-                const isActive = selectedFormatId === format.id;
-                return (
-                  <button
-                    key={format.id}
-                    onClick={() => handleSelectFormat(format)}
-                    type="button"
-                    className={`text-left rounded-xl border p-4 flex flex-col justify-between transition-all duration-300 transform active:scale-[0.98] cursor-pointer group focus:outline-none ${
-                      isActive
-                        ? "border-[#5c4033] bg-[#8a684f]/15 shadow-sm ring-1 ring-[#5c4033]"
-                        : "border-[#8a684f]/20 bg-[#faf8f5]/90 hover:bg-[#8a684f]/10 hover:border-[#8a684f]/40 hover:shadow-craft-sm"
-                    }`}
-                  >
-                    <div>
-                      {/* Minimalist Kraft icon frame */}
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3.5 transition-all duration-300 ${
-                        isActive 
-                          ? "bg-[#5c4033] text-[#faf7f2] border border-[#5c4033]/15 scale-105" 
-                          : "bg-[#8a684f]/10 text-[#5c4033] border border-[#8a684f]/20 group-hover:bg-[#5c4033] group-hover:text-[#faf7f2] group-hover:scale-105"
-                      }`}>
-                        {format.icon}
-                      </div>
-
-                      <h4 className="font-sans font-bold text-xs sm:text-[13px] text-[#3e2c1e] tracking-tight line-clamp-1 leading-snug">
-                        {language === "ja" ? format.titleJa : format.title}
-                      </h4>
-                      
-                      <p className="font-sans text-[10px] text-[#5c4a3c]/85 leading-snug mt-1.5 line-clamp-3 select-none">
-                        {language === "ja" ? format.descJa : format.desc}
-                      </p>
-                    </div>
-
-                    <div className="mt-4 pt-2.5 border-t border-[#8a684f]/15 flex items-center justify-between">
-                      <span className="font-mono text-[8px] sm:text-[9.5px] text-[#7c5d47] tracking-wider uppercase font-bold group-hover:text-[#3e2c1e]">
-                        {isActive ? "✦ LOADED" : "SELECT SPEC"}
-                      </span>
-                      <ArrowRight className={`w-3.5 h-3.5 text-[#7c5d47] transition-all duration-300 ${
-                        isActive ? "rotate-90 text-[#3e2c1e]" : "group-hover:translate-x-1 group-hover:text-[#3e2c1e]"
-                      }`} />
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
           </motion.div>
 
           {/* Form Container */}
@@ -582,214 +578,459 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                     </button>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
-                      {/* Company Name field */}
-                      <div className="flex flex-col space-y-1.5">
-                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
-                          ✦ COMPANY / BRAND NAME *
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={companyName}
-                          onChange={(e) => setCompanyName(e.target.value)}
-                          placeholder="e.g. ONE Biodegradable Brand Solutions"
-                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
-                        />
+                  <form onSubmit={handleSubmit} className="space-y-9">
+                    
+                    {/* SECTION 1: Company Information */}
+                    <div className="space-y-5 border-l-2 border-[#8a684f]/20 pl-4">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 01</span>
+                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Company & Contact Information</h3>
                       </div>
 
-                      {/* Industry field */}
-                      <div className="flex flex-col space-y-1.5">
-                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
-                          ✦ INDUSTRY
-                        </label>
-                        <input
-                          type="text"
-                          value={industry}
-                          onChange={(e) => setIndustry(e.target.value)}
-                          placeholder="e.g. Luxury Retail, Cosmetics, Fashion"
-                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
-                        />
-                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="flex flex-col space-y-1">
+                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Brand or Company Name *</label>
+                          <input
+                            type="text"
+                            required
+                            value={companyName}
+                            onChange={(e) => setCompanyName(e.target.value)}
+                            placeholder="e.g. Acme Corp"
+                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors"
+                          />
+                        </div>
 
-                      {/* Contact Info: Full Name field */}
-                      <div className="flex flex-col space-y-1.5">
-                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
-                          ✦ CONTACT REPRESENTATIVE NAME *
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={clientName}
-                          onChange={(e) => setClientName(e.target.value)}
-                          placeholder="e.g. Sarah Jenkins"
-                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
-                        />
-                      </div>
+                        <div className="flex flex-col space-y-1">
+                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Corporate Website *</label>
+                          <input
+                            type="url"
+                            required
+                            value={companyWebsite}
+                            onChange={(e) => setCompanyWebsite(e.target.value)}
+                            placeholder="e.g. https://www.acme.com"
+                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors"
+                          />
+                        </div>
 
-                      {/* Contact Info: Department field */}
-                      <div className="flex flex-col space-y-1.5">
-                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
-                          ✦ REPRESENTATIVE DEPT / ROLE
-                        </label>
-                        <input
-                          type="text"
-                          value={clientDept}
-                          onChange={(e) => setClientDept(e.target.value)}
-                          placeholder="e.g. Procurement, Brand Management"
-                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
-                        />
-                      </div>
+                        <div className="flex flex-col space-y-1">
+                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Industry Sector *</label>
+                          <select
+                            value={industry}
+                            onChange={(e) => setIndustry(e.target.value)}
+                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
+                          >
+                            <option value="Luxury Retail">Luxury Retail</option>
+                            <option value="Fashion & Apparel">Fashion & Apparel</option>
+                            <option value="Beauty & Cosmetics">Beauty & Cosmetics</option>
+                            <option value="Cannabis Retail">Cannabis Retail</option>
+                            <option value="Food & Beverage">Food & Beverage</option>
+                            <option value="Hospitality">Hospitality</option>
+                            <option value="Consumer Goods">Consumer Goods</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </div>
 
-                      {/* Contact Info: Phone field */}
-                      <div className="flex flex-col space-y-1.5">
-                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
-                          ✦ DIRECT PHONE NUMBER
-                        </label>
-                        <input
-                          type="tel"
-                          value={clientPhone}
-                          onChange={(e) => setClientPhone(e.target.value)}
-                          placeholder="e.g. +1 (555) 019-2834"
-                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
-                        />
-                      </div>
+                        <div className="flex flex-col space-y-1">
+                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Primary Contact Name *</label>
+                          <input
+                            type="text"
+                            required
+                            value={clientName}
+                            onChange={(e) => setClientName(e.target.value)}
+                            placeholder="e.g. Jonathan Doe"
+                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors"
+                          />
+                        </div>
 
-                      {/* Contact Info: Email field */}
-                      <div className="flex flex-col space-y-1.5">
-                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
-                          ✦ COMMUNICATIONS EMAIL *
-                        </label>
-                        <input
-                          type="email"
-                          required
-                          value={clientEmail}
-                          onChange={(e) => setClientEmail(e.target.value)}
-                          placeholder="e.g. sarah.j@atelierbrand.com"
-                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
-                        />
-                      </div>
+                        <div className="flex flex-col space-y-1">
+                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Position / Department *</label>
+                          <select
+                            value={clientDept}
+                            onChange={(e) => setClientDept(e.target.value)}
+                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
+                          >
+                            <option value="Founder">Founder</option>
+                            <option value="CEO">CEO</option>
+                            <option value="Procurement">Procurement</option>
+                            <option value="Brand Management">Brand Management</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Operations">Operations</option>
+                            <option value="Sustainability">Sustainability</option>
+                          </select>
+                        </div>
 
-                      {/* Operational Location field */}
-                      <div className="flex flex-col space-y-1.5">
-                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
-                          ✦ GEOGRAPHIC LOCATION
-                        </label>
-                        <input
-                          type="text"
-                          value={location}
-                          onChange={(e) => setLocation(e.target.value)}
-                          placeholder="e.g. New York, London, Tokyo"
-                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors placeholder:text-garabel-mid/40"
-                        />
-                      </div>
+                        <div className="flex flex-col space-y-1">
+                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Direct Phone Number</label>
+                          <input
+                            type="tel"
+                            value={clientPhone}
+                            onChange={(e) => setClientPhone(e.target.value)}
+                            placeholder="e.g. +1 (555) 019-2834"
+                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors"
+                          />
+                        </div>
 
-                      {/* Budget selector field */}
-                      <div className="flex flex-col space-y-1.5">
-                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
-                          ✦ GUIDING BUDGET RANGE
-                        </label>
-                        <select
-                          value={budget}
-                          onChange={(e) => setBudget(e.target.value)}
-                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors appearance-none cursor-pointer"
-                        >
-                          <option value="under_10k">Less than $10,000 USD</option>
-                          <option value="10k_50k">$10,000 - $50,000 USD</option>
-                          <option value="50k_150k">$50,000 - $150,000 USD</option>
-                          <option value="150k_plus">$150,000+ USD</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    {/* Choice Dependent fields */}
-                    {inquiryType === "existing" ? (
-                      <div className="flex flex-col space-y-1.5 animate-fadeIn">
-                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase">
-                          ✦ SELECT EXISTING SPECIMEN MODEL
-                        </label>
-                        <select
-                          value={specimenModel}
-                          onChange={(e) => setSpecimenModel(e.target.value)}
-                          className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors appearance-none cursor-pointer"
-                        >
-                          <option value="Specimen 01">Specimen 01 // Slit Tube Box</option>
-                          <option value="Specimen 02">Specimen 02 // Hexagonal Shell</option>
-                          <option value="Specimen 03">Specimen 03 // Ribbed Hinge Case</option>
-                          <option value="Specimen 04">Specimen 04 // Cardboard Cord Carrier</option>
-                          <option value="Specimen 05">Specimen 05 // Heavy Linen Specimen Set</option>
-                        </select>
-                      </div>
-                    ) : (
-                      <div className="flex flex-col space-y-1.5 animate-fadeIn">
-                        <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase">
-                          ✦ ECO INTEGRATION PRINCIPLES
-                        </label>
-                        <div className="grid grid-cols-2 gap-2 pt-1 font-mono text-[8px] sm:text-[8.5px] tracking-wider">
-                          <span className="flex items-center gap-1.5 text-garabel-ink">
-                            <Check className="w-3 h-3 text-[#376332]" /> 100% PLASTIC-FREE
-                          </span>
-                          <span className="flex items-center gap-1.5 text-garabel-ink">
-                            <Check className="w-3 h-3 text-[#376332]" /> ORGANIC BIODEGRADABILITY
-                          </span>
-                          <span className="flex items-center gap-1.5 text-garabel-ink">
-                            <Check className="w-3 h-3 text-[#376332]" /> INVISIBLE RFID CHIPS
-                          </span>
-                          <span className="flex items-center gap-1.5 text-garabel-ink">
-                            <Check className="w-3 h-3 text-[#376332]" /> DEBOSSING METALS
-                          </span>
+                        <div className="flex flex-col space-y-1 md:col-span-2">
+                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Communications Email *</label>
+                          <input
+                            type="email"
+                            required
+                            value={clientEmail}
+                            onChange={(e) => setClientEmail(e.target.value)}
+                            placeholder="e.g. j.doe@acme.com"
+                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors"
+                          />
                         </div>
                       </div>
-                    )}
-
-                    {/* Target Quantities Selection */}
-                    <div className="flex flex-col space-y-1.5">
-                      <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase">
-                        ✦ TARGET QUANTITY SCOPE
-                      </label>
-                      <select
-                        value={estimatedQuantity}
-                        onChange={(e) => setEstimatedQuantity(e.target.value)}
-                        className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors appearance-none cursor-pointer"
-                      >
-                        <option value="100-500">Small Batch (100 - 500 units)</option>
-                        <option value="500">Medium Run (500 - 2,500 units)</option>
-                        <option value="2500">Flagship Scale (2,500 - 10,000 units)</option>
-                        <option value="10000+">Global Distribution (10,000+ units)</option>
-                      </select>
                     </div>
 
-                    {/* Memorandum Message details */}
-                    <div className="flex flex-col space-y-1.5 align-top">
-                      <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase">
-                        ✦ SPECIFICATION MEMORANDUM & REQUEST NOTES
-                      </label>
-                      <textarea
-                        id="quote_form_bottom_notes"
-                        rows={2}
-                        value={projectDescription}
-                        onChange={(e) => setProjectDescription(e.target.value)}
-                        placeholder="Outline any dimensional details, weight specifications, design goals or core materials needed..."
-                        className="w-full bg-transparent border-b border-garabel-ink/20 py-1.5 font-sans text-xs sm:text-sm text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors resize-none placeholder:text-garabel-mid/40"
-                      ></textarea>
+                    {/* SECTION 2: Project Scope & Credentials */}
+                    <div className="space-y-5 border-l-2 border-[#8a684f]/20 pl-4">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 02</span>
+                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Strategic Project Scope</h3>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div className="flex flex-col space-y-1.5">
+                          <span className="font-mono text-[8.5px] tracking-wider text-[#7c5d47] uppercase font-black">Engagement Sought</span>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            {[
+                              "Existing Specimen Order",
+                              "Custom Packaging Development",
+                              "Sustainable Packaging Consultation",
+                              "Long-Term Manufacturing Partnership",
+                              "Multi-Location Retail Program"
+                            ].map((opt) => (
+                              <button
+                                key={opt}
+                                type="button"
+                                onClick={() => setEngagementType(opt)}
+                                className={`text-left text-[11px] px-3 py-2 rounded-lg border transition-all duration-200 cursor-pointer ${
+                                  engagementType === opt
+                                    ? "bg-[#376332] text-white border-[#376332] font-semibold"
+                                    : "bg-[#eaab7a]/5 border-[#8a684f]/20 text-[#5c4a3c] hover:bg-[#eaab7a]/15"
+                                }`}
+                              >
+                                {opt}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="flex flex-col space-y-1">
+                            <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold flex flex-wrap items-center gap-1.5">
+                              <span>Estimated Annual Spend *</span>
+                              <span className="font-sans text-[7.5px] font-black tracking-normal px-1.5 py-0.5 bg-red-800 text-[#fff] rounded-full uppercase leading-none select-none">Critical Validation</span>
+                            </label>
+                            <select
+                              value={annualSpend}
+                              onChange={(e) => setAnnualSpend(e.target.value)}
+                              className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
+                            >
+                              <option value="Under $10,000">Under $10,000</option>
+                              <option value="$10,000 – $50,000">$10,000 – $50,000</option>
+                              <option value="$50,000 – $250,000">$50,000 – $250,000</option>
+                              <option value="$250,000 – $1M">$250,000 – $1M</option>
+                              <option value="$1M+">$1M+</option>
+                            </select>
+                          </div>
+
+                          <div className="flex flex-col space-y-1">
+                            <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Expected Order Volume</label>
+                            <select
+                              value={orderVolume}
+                              onChange={(e) => setOrderVolume(e.target.value)}
+                              className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
+                            >
+                              <option value="Under 5,000 Units">Under 5,000 Units</option>
+                              <option value="5,000 – 25,000">5,000 – 25,000</option>
+                              <option value="25,000 – 100,000">25,000 – 100,000</option>
+                              <option value="100,000 – 500,000">100,000 – 500,000</option>
+                              <option value="500,000+">500,000+</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
-                    {/* Submit button */}
-                    <div className="pt-2">
+                    {/* SECTION 3: Sustainability Objectives */}
+                    <div className="space-y-4 border-l-2 border-[#8a684f]/20 pl-4">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 03</span>
+                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Sustainability Objectives</h3>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                        {[
+                          "Plastic Reduction",
+                          "Carbon Neutral Goals",
+                          "ESG Reporting",
+                          "Regulatory Compliance",
+                          "Sustainable Rebranding",
+                          "Customer Experience Enhancement",
+                          "Retail Packaging Upgrade"
+                        ].map((goal) => {
+                          const isChecked = sustainabilityObjectives.includes(goal);
+                          return (
+                            <button
+                              key={goal}
+                              type="button"
+                              onClick={() => {
+                                if (isChecked) {
+                                  setSustainabilityObjectives(sustainabilityObjectives.filter(x => x !== goal));
+                                } else {
+                                  setSustainabilityObjectives([...sustainabilityObjectives, goal]);
+                                }
+                              }}
+                              className={`flex items-center gap-2.5 text-left text-[11px] px-3 py-2 rounded-lg border transition-all duration-200 cursor-pointer ${
+                                isChecked
+                                  ? "bg-[#376332]/10 border-[#376332] text-garabel-ink font-semibold"
+                                  : "bg-[#faf8f5]/80 border-[#8a684f]/15 hover:bg-[#8a684f]/5 text-[#5c4a3c]/90"
+                              }`}
+                            >
+                              <div className={`w-4 h-4 rounded flex items-center justify-center transition-all ${isChecked ? "bg-[#376332] text-white" : "border border-[#8a684f]/40 bg-white"}`}>
+                                {isChecked && <Check className="w-3 h-3 text-white stroke-[3.5]" />}
+                              </div>
+                              <span className="truncate leading-none">{goal}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* SECTION 4: Packaging and Materials Requirements */}
+                    <div className="space-y-5 border-l-2 border-[#8a684f]/20 pl-4">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 04</span>
+                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Packaging Categories & Preferred Materials Matrix</h3>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div className="flex flex-col space-y-1.5">
+                          <span className="font-mono text-[8.5px] tracking-wider text-[#7c5d47] uppercase font-black">Categories Required</span>
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                            {[
+                              "Luxury Shopping Bags",
+                              "Retail Carry Bags",
+                              "Product Packaging",
+                              "Gift Packaging",
+                              "Shipping Mailers",
+                              "Cannabis Packaging",
+                              "Sustainable Packaging System",
+                              "Bespoke Structural Packaging"
+                            ].map((cat) => {
+                              const isChecked = packagingCategories.includes(cat);
+                              return (
+                                <button
+                                  key={cat}
+                                  type="button"
+                                  onClick={() => {
+                                    if (isChecked) {
+                                      setPackagingCategories(packagingCategories.filter(x => x !== cat));
+                                    } else {
+                                      setPackagingCategories([...packagingCategories, cat]);
+                                    }
+                                  }}
+                                  className={`flex items-center gap-1.5 text-left text-[9.5px] font-mono tracking-wider uppercase px-2.5 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer ${
+                                    isChecked
+                                      ? "bg-[#376332]/15 border-[#376332] text-[#376332] font-semibold"
+                                      : "bg-[#faf8f5]/80 border-[#8a684f]/15 hover:bg-[#8a684f]/5 text-[#5c4a3c]/90"
+                                  }`}
+                                >
+                                  <div className={`w-3 h-3 rounded flex items-center justify-center transition-all ${isChecked ? "bg-[#376332]" : "border border-[#8a684f]/40 bg-white"}`}>
+                                    {isChecked && <Check className="w-2.5 h-2.5 text-white stroke-[3.5]" />}
+                                  </div>
+                                  <span className="truncate leading-none">{cat}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col space-y-1.5">
+                          <span className="font-mono text-[8.5px] tracking-wider text-[#7c5d47] uppercase font-black">Environmental Materials Profile</span>
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                            {[
+                              "Compostable",
+                              "Biodegradable",
+                              "FSC Certified Paper",
+                              "Recycled Content",
+                              "Plant Fiber Composite",
+                              "Require Consultation"
+                            ].map((mat) => {
+                              const isChecked = desiredMaterials.includes(mat);
+                              return (
+                                <button
+                                  key={mat}
+                                  type="button"
+                                  onClick={() => {
+                                    if (isChecked) {
+                                      setDesiredMaterials(desiredMaterials.filter(x => x !== mat));
+                                    } else {
+                                      setDesiredMaterials([...desiredMaterials, mat]);
+                                    }
+                                  }}
+                                  className={`flex items-center gap-1.5 text-left text-[9.5px] font-mono tracking-wider uppercase px-2.5 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer ${
+                                    isChecked
+                                      ? "bg-[#376332]/15 border-[#376332] text-[#376332] font-semibold"
+                                      : "bg-[#faf8f5]/80 border-[#8a684f]/15 hover:bg-[#8a684f]/5 text-[#5c4a3c]/90"
+                                  }`}
+                                >
+                                  <div className={`w-3 h-3 rounded flex items-center justify-center transition-all ${isChecked ? "bg-[#376332]" : "border border-[#8a684f]/40 bg-white"}`}>
+                                    {isChecked && <Check className="w-2.5 h-2.5 text-white stroke-[3.5]" />}
+                                  </div>
+                                  <span className="truncate leading-none">{mat}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* SECTION 5: Collaborative Design Assets Upload */}
+                    <div className="space-y-5 border-l-2 border-[#8a684f]/20 pl-4">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 05</span>
+                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Design Assets & Collaborative Attachment Chest</h3>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div className="flex flex-col space-y-1">
+                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Current Layout Assets</label>
+                          <select
+                            value={brandAssetsStatus}
+                            onChange={(e) => setBrandAssetsStatus(e.target.value)}
+                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
+                          >
+                            <option value="Brand Guidelines Available">Brand Guidelines & Palette Available</option>
+                            <option value="Fully Completed CAD Files">Fully Completed CAD Files Available</option>
+                            <option value="Logo Only">Logo Only</option>
+                            <option value="No Digital Assets">No Digital Design Assets (Require Complete Design Partnership)</option>
+                          </select>
+                        </div>
+
+                        {/* 4 Multi-Upload grids */}
+                        <div className="grid grid-cols-2 gap-3 pt-1">
+                          <FileUploadSlot 
+                            label="Brand Guidelines (.pdf, .ai)"
+                            fileName={brandGuidelinesFileName}
+                            onFileSelect={(name) => setBrandGuidelinesFileName(name)}
+                            onClear={() => setBrandGuidelinesFileName(null)}
+                          />
+                          <FileUploadSlot 
+                            label="Existing Packaging Specs"
+                            fileName={existingPackagingFileName}
+                            onFileSelect={(name) => setExistingPackagingFileName(name)}
+                            onClear={() => setExistingPackagingFileName(null)}
+                          />
+                          <FileUploadSlot 
+                            label="Product Photo / Render"
+                            fileName={productPhotographyFileName}
+                            onFileSelect={(name) => setProductPhotographyFileName(name)}
+                            onClear={() => setProductPhotographyFileName(null)}
+                          />
+                          <FileUploadSlot 
+                            label="Core Technical Blueprints"
+                            fileName={technicalSpecsFileName}
+                            onFileSelect={(name) => setTechnicalSpecsFileName(name)}
+                            onClear={() => setTechnicalSpecsFileName(null)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* SECTION 6: Procurement Logistics */}
+                    <div className="space-y-5 border-l-2 border-[#8a684f]/20 pl-4">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 06</span>
+                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Procurement Logistics & Distribution</h3>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="flex flex-col space-y-1">
+                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Geographic Distribution</label>
+                          <select
+                            value={geographicDistribution}
+                            onChange={(e) => setGeographicDistribution(e.target.value)}
+                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
+                          >
+                            <option value="Regional">Regional Hub Only</option>
+                            <option value="National">National Coverage</option>
+                            <option value="Global Multi-Hub">Global Multi-Location Retail Network</option>
+                          </select>
+                        </div>
+
+                        <div className="flex flex-col space-y-1">
+                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Required Launch Timeline</label>
+                          <select
+                            value={launchTimeline}
+                            onChange={(e) => setLaunchTimeline(e.target.value)}
+                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
+                          >
+                            <option value="Under 1 Month">Under 1 Month (Fast Track)</option>
+                            <option value="1–3 Months">1–3 Months (Standard Production Cycle)</option>
+                            <option value="3–6 Months">3–6 Months (Extended Custom Tooling)</option>
+                            <option value="6 Months+">6 Months+ (Strategic Launch Planning)</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* SECTION 7: Strategic Goal and Custom specs */}
+                    <div className="space-y-5 border-l-2 border-[#8a684f]/20 pl-4">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 07</span>
+                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Strategic Alignment Goals</h3>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div className="flex flex-col space-y-1">
+                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold leading-normal">
+                            What is the single most important metric or qualitative outcome that will make this packaging project a success?
+                          </label>
+                          <textarea
+                            rows={3}
+                            value={strategicOutcome}
+                            onChange={(e) => setStrategicOutcome(e.target.value)}
+                            placeholder="e.g. Achieving 100% elimination of single-use plastics from our retail storefronts by Q4, with a premium rigid aesthetic..."
+                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all resize-none placeholder:text-garabel-mid/40"
+                          />
+                        </div>
+
+                        <div className="flex flex-col space-y-1">
+                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">
+                            Alternative Specification & Material Notes
+                          </label>
+                          <textarea
+                            id="quote_form_bottom_notes"
+                            rows={2}
+                            value={projectDescription}
+                            onChange={(e) => setProjectDescription(e.target.value)}
+                            placeholder="Outline any specific micro-dimensions, exact weights, secondary structural requests or materials here..."
+                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all resize-none placeholder:text-garabel-mid/40"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Submit Section */}
+                    <div className="pt-4">
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-[#376332] hover:bg-[#376332]/90 disabled:bg-[#376332]/60 text-[#fdfbf7] py-3 sm:py-3.5 px-6 rounded-xl font-mono text-[10px] tracking-[0.25em] font-bold uppercase transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer focus:outline-none"
+                        className="w-full bg-[#376332] hover:bg-[#2e522a] disabled:bg-[#376332]/60 text-[#fdfbf7] py-3.5 px-6 rounded-xl font-mono text-[11px] tracking-[0.25em] font-bold uppercase transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer focus:outline-none"
                       >
                         {isSubmitting ? (
                           <>
                             <span className="w-1.5 h-1.5 bg-[#fdfbf7] rounded-full animate-ping" />
-                            <span>SENDING QUOTE...</span>
+                            <span>SUBMITTING INQUIRY...</span>
                           </>
                         ) : (
                           <>
-                            <span>SEND QUOTE:</span>
+                            <span>SUBMIT ENVELOPE DESIGN SPEC</span>
                             <ArrowRight className="w-3.5 h-3.5 text-[#fdfbf7]" />
                           </>
                         )}
@@ -803,20 +1044,20 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ type: "spring", stiffness: 100, damping: 15 }}
-                  className="bg-garabel-cream/90 backdrop-blur-md rounded-2xl border border-garabel-ink/15 p-6 sm:p-10 text-center shadow-craft-2xl relative max-w-xl mx-auto"
+                  className="bg-garabel-cream/90 backdrop-blur-md rounded-2xl border border-garabel-ink/15 p-6 sm:p-10 text-center shadow-craft-2xl relative max-w-xl mx-auto animate-fadeIn"
                 >
                   <div className="absolute inset-0 paper-grain pointer-events-none opacity-10 rounded-2xl"></div>
 
                   <div className="w-16 h-16 bg-[#376332]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Check className="w-8 h-8 text-[#376332]" />
+                    <Check className="w-8 h-8 text-[#376332] stroke-[3]" />
                   </div>
 
                   {/* Brand Logo Display */}
                   <div className="flex justify-center mb-6">
-                    <div className="border border-[#376332]/10 bg-white/40 p-4 rounded-xl flex items-center justify-center shadow-inner max-w-xs animate-fadeIn duration-500">
+                    <div className="border border-[#376332]/10 bg-white/40 p-4 rounded-xl flex items-center justify-center shadow-inner max-w-xs select-none">
                       <img 
                         src="https://lh3.googleusercontent.com/d/1U3YfW75P9JyKKTCWA7yoM31HCTW9L0fN" 
-                        alt="ONE Biodegradable Brand Solutions" 
+                        alt="ONE Sustainable Packaging Solutions" 
                         referrerPolicy="no-referrer"
                         className="h-10 sm:h-12 w-auto object-contain select-none"
                       />
@@ -824,104 +1065,78 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                   </div>
 
                   <span className="font-mono text-[10px] tracking-[0.3em] text-[#376332] uppercase block mb-1">
-                    ✦ RECEIPT REGISTERED
+                    ✦ SPECIFICATION LODGED
                   </span>
 
                   <h3 className="font-sans font-black text-2xl uppercase text-garabel-ink tracking-tight mb-3">
-                    Specification Lodged
+                    Inquiry Transmitted
                   </h3>
 
-                  <p className="font-sans text-[13px] text-garabel-mid leading-relaxed max-w-md mx-auto mb-6">
+                  <p className="font-sans text-xs sm:text-[13px] text-garabel-mid leading-relaxed max-w-md mx-auto mb-6">
                     {language === "ja" ? (
-                      "ご要望がONE Biodegradable Brand Solutionsに登録されました。担当のパッケージングエンジニアが24時間以内にご連絡いたします。"
+                      "ご要望が調達システムに登録されました。弊社の担当マテリアルエンジニアが24時間以内にご連絡を差し上げ、詳細設計プロセスを開始します。"
                     ) : (
-                      "Your aesthetic and physical parameters are successfully queued into ONE Biodegradable Brand Solutions. A specialist design coordinator will contact your communications envelope shortly."
+                      "Your aesthetic, environmental, and physical parameters are successfully registered in our procurement framework. A managing material coordinator will contact you shortly."
                     )}
                   </p>
 
-                  <div className="border border-garabel-ink/10 rounded-xl bg-garabel-cream p-5 sm:p-6 text-left space-y-3 shadow-sm max-w-lg mx-auto">
-                    <div className="flex justify-between font-mono text-[10px] sm:text-[11px] md:text-sm text-garabel-mid border-b border-garabel-ink/5 pb-1.5 whitespace-nowrap">
-                      <span className="opacity-80">SPECIFICATION RECEIPT No:</span>
+                  <div className="border border-garabel-ink/10 rounded-xl bg-garabel-cream/40 p-5 text-left space-y-2.5 shadow-sm text-xs">
+                    <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
+                      <span>PROCUREMENT ID:</span>
                       <span className="font-bold text-garabel-ink select-all">#{receiptNo}</span>
                     </div>
-                    <div className="flex justify-between font-mono text-[10px] sm:text-[11px] md:text-sm text-garabel-mid border-b border-garabel-ink/5 pb-1.5 whitespace-nowrap">
-                      <span className="opacity-80">TIMESTAMP REGISTER:</span>
+
+                    <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
+                      <span>TIMESTAMP:</span>
                       <span className="font-bold text-garabel-ink">{timestamp}</span>
                     </div>
-                    <div className="flex justify-between font-mono text-[10px] sm:text-[11px] md:text-sm text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span className="opacity-80">COMPANY BRAND:</span>
+
+                    <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
+                      <span>ORGANIZATION:</span>
                       <span className="font-bold text-garabel-ink uppercase">{companyName}</span>
                     </div>
-                    {industry && (
-                      <div className="flex justify-between font-mono text-[10px] sm:text-[11px] md:text-sm text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                        <span className="opacity-80">INDUSTRY VERTICAL:</span>
-                        <span className="font-bold text-garabel-ink uppercase">{industry}</span>
-                      </div>
-                    )}
-                    <div className="flex justify-between font-mono text-[10px] sm:text-[11px] md:text-sm text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span className="opacity-80">REPRESENTATIVE:</span>
-                      <span className="font-bold text-[#376332] uppercase">{clientName} {clientDept && `(${clientDept})`}</span>
-                    </div>
-                    <div className="flex justify-between font-mono text-[10px] sm:text-[11px] md:text-sm text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span className="opacity-80">EMAIL ADDR:</span>
-                      <span className="font-bold text-garabel-ink select-all">{clientEmail}</span>
-                    </div>
-                    {clientPhone && (
-                      <div className="flex justify-between font-mono text-[10px] sm:text-[11px] md:text-sm text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                        <span className="opacity-80">PHONE CONNECTION:</span>
-                        <span className="font-bold text-garabel-ink select-all">{clientPhone}</span>
-                      </div>
-                    )}
-                    {location && (
-                      <div className="flex justify-between font-mono text-[10px] sm:text-[11px] md:text-sm text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                        <span className="opacity-80">GEOGRAPHY / PORT:</span>
-                        <span className="font-bold text-garabel-ink uppercase">{location}</span>
-                      </div>
-                    )}
-                    <div className="flex justify-between font-mono text-[10px] sm:text-[11px] md:text-sm text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span className="opacity-80">BUDGET GUIDING LINE:</span>
-                      <span className="font-bold text-[#376332] uppercase">
-                        {budget === "under_10k" ? "UNDER $10K USD" :
-                         budget === "10k_50k" ? "$10K - $50K USD" :
-                         budget === "50k_150k" ? "$50K - $150K USD" : "$150K+ USD"}
-                      </span>
-                    </div>
-                    <div className="flex justify-between font-mono text-[10px] sm:text-[11px] md:text-sm text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span className="opacity-80">SPECIMEN MODEL:</span>
-                      <span className="font-bold text-garabel-ink uppercase">{inquiryType === "existing" ? specimenModel : "BESPOKE CUSTOM DESIGN"}</span>
-                    </div>
-                    <div className="flex justify-between font-mono text-[10px] sm:text-[11px] md:text-sm text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span className="opacity-80">EST. QUANTITY:</span>
-                      <span className="font-bold text-garabel-ink uppercase">
-                        {estimatedQuantity === "100-500" ? "100 - 500 units" : 
-                         estimatedQuantity === "500" ? "500 - 2,500 units" :
-                         estimatedQuantity === "2500" ? "2,500 - 10,000 units" : "10,000+ units"}
-                      </span>
+
+                    <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
+                      <span>PRIMARY CONTACT:</span>
+                      <span className="font-bold text-garabel-ink uppercase">{clientName} ({clientDept})</span>
                     </div>
 
-                    {projectDescription && (
-                      <div className="font-mono text-[10px] sm:text-xs pt-1.5">
-                        <span className="text-garabel-mid opacity-80 block mb-1">MEMORANDUM NOTES:</span>
-                        <p className="font-sans text-xs sm:text-sm text-garabel-ink border-l-2 border-[#376332]/40 pl-3 py-1.5 bg-white/45 italic leading-relaxed whitespace-pre-wrap select-all">
-                          {projectDescription}
-                        </p>
+                    <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
+                      <span>ANNUAL SPEND TIERS:</span>
+                      <span className="font-bold text-red-800 uppercase">{annualSpend}</span>
+                    </div>
+
+                    <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
+                      <span>TARGET VOLUME:</span>
+                      <span className="font-bold text-garabel-ink uppercase">{orderVolume}</span>
+                    </div>
+
+                    <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
+                      <span>PREFERRED CATEGORIES:</span>
+                      <span className="font-bold text-[#376332] uppercase truncate max-w-[200px]">{packagingCategories.length > 0 ? packagingCategories.join(", ") : "Not Specified"}</span>
+                    </div>
+
+                    <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
+                      <span>LAUNCH TIMELINE:</span>
+                      <span className="font-bold text-garabel-ink uppercase">{launchTimeline}</span>
+                    </div>
+
+                    {strategicOutcome && (
+                      <div className="font-mono text-[9px] pt-1 leading-normal text-garabel-mid">
+                        <span className="block mb-0.5 font-bold">PROJECT SUCCESS CRITERION:</span>
+                        <p className="font-sans text-xs italic text-garabel-ink bg-white/50 p-2 border-l border-[#8a684f]/40 whitespace-pre-wrap">{strategicOutcome}</p>
                       </div>
                     )}
-
-                    <div className="flex justify-between font-mono text-[9px] sm:text-[11px] text-garabel-mid border-t border-garabel-ink/5 pt-2 mt-1.5">
-                      <span>DELIVERY ROUTED TO:</span>
-                      <span className="font-bold text-[#376332] select-all">oneunedigital@gmail.com</span>
-                    </div>
                   </div>
 
                   <div className="mt-8 flex flex-col gap-3 max-w-lg mx-auto">
-                    {/* Primary Export Action */}
+                    {/* Save custom system PDF with both pages */}
                     <button
                       onClick={handleDownloadPDF}
                       className="w-full bg-[#376332] hover:bg-[#2b4c27] text-[#fdfbf7] py-3.5 px-6 rounded-xl font-mono text-[11px] tracking-[0.2em] uppercase transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer focus:outline-none"
                     >
                       <Download className="w-4 h-4 shrink-0" />
-                      <span>SAVE DESIGN SPECIFICATION (PDF)</span>
+                      <span>SAVE PARTNERSHIP ENVELOPE (PDF)</span>
                     </button>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
@@ -933,7 +1148,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                       </button>
                       
                       <a
-                        href={`mailto:oneunedigital@gmail.com?subject=Custom Packaging Inquiry: ${encodeURIComponent(companyName)}&body=ONE Biodegradable Brand Solutions Design Specification%0D%0A%0D%0ABrand: ${encodeURIComponent(companyName)}%0D%0AIndustry: ${encodeURIComponent(industry)}%0D%0AContact: ${encodeURIComponent(clientName)} ${encodeURIComponent(clientDept ? `(${clientDept})` : "")}%0D%0APhone: ${encodeURIComponent(clientPhone)}%0D%0ALocation: ${encodeURIComponent(location)}%0D%0ABudget: ${encodeURIComponent(budget)}%0D%0AModel: ${encodeURIComponent(specimenModel)}%0D%0AEst. Qty: ${encodeURIComponent(estimatedQuantity)}%0D%0A%0D%0ADescription:%0D%0A${encodeURIComponent(projectDescription)}`}
+                        href={`mailto:oneunedigital@gmail.com?subject=Strategic Procurement Partnership Portfolio: ${encodeURIComponent(companyName)}&body=ONE Sustainable Packaging Systems Partnership Record ID #${receiptNo}%0D%0A%0D%0ALodged parameters & core details:%0D%0ABrand Name: ${encodeURIComponent(companyName)}%0D%0AWebsite: ${encodeURIComponent(companyWebsite)}%0D%0AIndustry: ${encodeURIComponent(industry)}%0D%0AOfficer: ${encodeURIComponent(clientName)} (${encodeURIComponent(clientDept)})%0D%0APhone: ${encodeURIComponent(clientPhone)}%0D%0AEmail: ${encodeURIComponent(clientEmail)}%0D%0A%0D%0AStrategic metrics for project success:%0D%0A${encodeURIComponent(strategicOutcome)}%0D%0A%0D%0AAnnual Spend: ${encodeURIComponent(annualSpend)}%0D%0AModel Specification: ${encodeURIComponent("Bespoke Custom")}`}
                         className="inline-flex items-center justify-center bg-transparent border border-garabel-ink/25 text-garabel-ink hover:bg-garabel-ink hover:text-[#fdfbf7] py-3 px-4 rounded-xl font-mono text-[10px] tracking-[0.15em] uppercase transition-all focus:outline-none cursor-pointer"
                       >
                         <FileText className="w-3.5 h-3.5 mr-1.5 shrink-0" />
