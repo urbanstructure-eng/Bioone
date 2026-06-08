@@ -5,78 +5,28 @@ import { JournalEntry } from "../types";
 
 const LOGO_PARTNERS = [
   {
-    name: "Kawahara Seishi", 
-    location: "TOKYO", 
-    icon: (
-      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18M3 12h18M12 3a9 9 0 019 9M3 12a9 9 0 009 9" />
-      </svg>
-    )
+    name: "Collaborative Brand I",
+    logoUrl: "https://lh3.googleusercontent.com/d/1jCDS-sL-foPnzuCz-KvVEQdJ7a7pp_YG"
   },
   {
-    name: "Kraft & Silt Guild", 
-    location: "MUNICH", 
-    icon: (
-      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-        <circle cx={12} cy={12} r={9} />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v8M8 12h8" />
-      </svg>
-    )
+    name: "Collaborative Brand II",
+    logoUrl: "https://lh3.googleusercontent.com/d/1BOJVMmVj36wXQbLEuZICNa7zCIygLy05"
   },
   {
-    name: "Moss & Soil Assoc.", 
-    location: "COPENHAGEN", 
-    icon: (
-      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    )
+    name: "Collaborative Brand III",
+    logoUrl: "https://lh3.googleusercontent.com/d/1ngEVh_QEZ1Tw-gDpO5ME3nMWPpULLCmG"
   },
   {
-    name: "Villa Erba Atelier", 
-    location: "MILAN", 
-    icon: (
-      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-        <rect x={4} y={4} width={16} height={16} rx={2} strokeLinecap="round" strokeLinejoin="round" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 9h6v6H9z" />
-      </svg>
-    )
+    name: "Collaborative Brand IV",
+    logoUrl: "https://lh3.googleusercontent.com/d/1gZ1u2-Ukj7p2b6jzQSDY7lhdav1zWSjH"
   },
   {
-    name: "L'Heure Sauvage", 
-    location: "PARIS", 
-    icon: (
-      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z" />
-      </svg>
-    )
+    name: "Collaborative Brand V",
+    logoUrl: "https://lh3.googleusercontent.com/d/1Mf-GMGpe7SSoDpgGAZ4XYKCAv5xOZgtq"
   },
   {
-    name: "Chateau De Lin", 
-    location: "LYON", 
-    icon: (
-      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-      </svg>
-    )
-  },
-  {
-    name: "Bamboo Arch Co.", 
-    location: "KYOTO", 
-    icon: (
-      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-      </svg>
-    )
-  },
-  {
-    name: "Raw Fibre Labs", 
-    location: "BOSTON", 
-    icon: (
-      <svg className="w-5 h-5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L2 22h20L12 2z" />
-      </svg>
-    )
+    name: "Collaborative Brand VI",
+    logoUrl: "https://lh3.googleusercontent.com/d/1DQtEZVL-uSp-Uzv3vd6QOs5W6-cYpkdt"
   }
 ];
 
@@ -162,19 +112,14 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
           {[...LOGO_PARTNERS, ...LOGO_PARTNERS].map((partner, idx) => (
             <div 
               key={idx} 
-              className="flex items-center gap-3.5 text-garabel-mid/45 hover:text-garabel-ink/85 transition-colors duration-300"
+              className="flex items-center justify-center shrink-0 px-6"
             >
-              <div className="text-garabel-mid/45 hover:text-garabel-accent/60 transition-colors duration-300">
-                {partner.icon}
-              </div>
-              <div className="flex flex-col items-start leading-none gap-0.5">
-                <span className="font-sans font-semibold text-[10px] md:text-[11px] uppercase tracking-[0.24em]">
-                  {partner.name}
-                </span>
-                <span className="font-mono text-[7px] tracking-[0.16em] text-garabel-mid/40 font-medium">
-                  {partner.location} // IN COLLABORATION
-                </span>
-              </div>
+              <img 
+                src={partner.logoUrl} 
+                referrerPolicy="no-referrer"
+                alt={partner.name}
+                className="h-9 sm:h-12 w-auto object-contain grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-all duration-300 mix-blend-multiply filter contrast-125 select-none"
+              />
             </div>
           ))}
         </motion.div>
