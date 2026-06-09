@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/submit-quote",
+      "destination": "/api/submit-quote.ts"
+    },
+    {
+      "source": "/api/generate-design",
+      "destination": "/api/generate-design.ts"
+    },
+    {
+      "source": "/api/logo-base64",
+      "destination": "/api/logo-base64.ts"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
