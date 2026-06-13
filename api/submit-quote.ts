@@ -61,11 +61,11 @@ Location: ${data.location || "N/A"}
 ✦ SPECIFICATION DETAILS
 Inquiry Type: ${data.inquiryType === "existing" ? "Existing Specimen Model" : "Bespoke Custom Design"}
 Selected Model: ${data.specimenModel || "N/A"}
-Guiding Budget Range: ${data.annualSpend || "N/A"}
-Est. Quantity Scope: ${data.orderVolume || "N/A"}
-Categories: ${(data.packagingCategories || []).join(", ") || "N/A"}
-Preferred Materials: ${(data.desiredMaterials || []).join(", ") || "N/A"}
-Launch Timeline: ${data.launchTimeline || "N/A"}
+Guiding Budget Range: ${data.budget || data.annualSpend || "N/A"}
+Est. Quantity Scope: ${data.estimatedQuantity || data.orderVolume || "N/A"}
+Packaging Type: ${data.packagingType || "N/A"}
+Custom Printing Needed: ${data.customPrinting || "N/A"}
+Launch Timeline: ${data.projectTimeline || data.launchTimeline || "N/A"}
 
 ✦ REQUEST NOTES & MEMORANDUM
 ${data.projectDescription || "No registration notes provided."}
