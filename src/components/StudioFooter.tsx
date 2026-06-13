@@ -183,13 +183,15 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
                 <p className="font-sans text-xs sm:text-sm text-garabel-mid leading-relaxed font-light">
                   Build a stronger brand and a cleaner future with packaging designed to make an impact long after the sale is complete.
                 </p>
+              </div>
 
-                {onOpenInquiry && (
+              {onOpenInquiry && (
+                <div className="col-span-1 md:col-span-2 mt-4">
                   <motion.button 
                     onClick={onOpenInquiry}
-                    className="mt-3 w-full inline-flex items-center justify-between gap-4 px-5 py-3.5 bg-[#376332] hover:bg-[#2b4c27] text-white rounded-xl transition-all duration-300 cursor-pointer group border border-[#376332]/10 shadow-lg select-none"
+                    className="w-full inline-flex items-center justify-between gap-4 px-6 md:px-8 py-4 bg-[#376332] hover:bg-[#2b4c27] text-white rounded-full transition-all duration-300 cursor-pointer group border border-[#376332]/10 shadow-lg select-none"
                     animate={{
-                      scale: [1, 1.02, 1],
+                      scale: [1, 1.015, 1],
                       boxShadow: [
                         "0 4px 6px -1px rgba(55, 99, 50, 0.15), 0 2px 4px -1px rgba(55, 99, 50, 0.1)",
                         "0 10px 15px -3px rgba(55, 99, 50, 0.3), 0 4px 6px -2px rgba(55, 99, 50, 0.15)",
@@ -201,10 +203,10 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
                       repeat: Infinity,
                       ease: "easeInOut"
                     }}
-                    whileHover={{ scale: 1.04 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: 1.025 }}
+                    whileTap={{ scale: 0.985 }}
                   >
-                    <div className="flex flex-col text-left">
+                    <div className="flex flex-col text-left pl-2.5">
                       <span className="font-mono text-[9px] tracking-widest text-[#a8d3a1] uppercase font-bold">
                         ✦ ONE BRAND SERVICE // DESIGN
                       </span>
@@ -212,12 +214,12 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
                         Get a Custom Quote Today
                       </span>
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-[#faf7f2]/10 group-hover:bg-[#faf7f2]/20 flex items-center justify-center transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-[#faf7f2]/10 group-hover:bg-[#faf7f2]/20 flex items-center justify-center transition-colors mr-1 shrink-0">
                       <span className="text-[#faf7f2] text-sm font-bold group-hover:translate-x-1 transition-transform duration-300">→</span>
                     </div>
                   </motion.button>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

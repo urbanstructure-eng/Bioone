@@ -119,45 +119,19 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
 
   // Form State
   const [companyName, setCompanyName] = useState("");
-  const [companyWebsite, setCompanyWebsite] = useState("");
-  const [industry, setIndustry] = useState("Luxury Retail");
   const [clientName, setClientName] = useState("");
-  const [clientDept, setClientDept] = useState("Founder");
   const [clientEmail, setClientEmail] = useState("");
   const [clientPhone, setClientPhone] = useState("");
 
-  // Project Scope
-  const [engagementType, setEngagementType] = useState("Custom Packaging Development");
-  const [annualSpend, setAnnualSpend] = useState("$10,000 – $50,000");
-  const [orderVolume, setOrderVolume] = useState("5,000 – 25,000");
-
-  // Sustainability Objectives
-  const [sustainabilityObjectives, setSustainabilityObjectives] = useState<string[]>([
-    "Plastic Reduction"
-  ]);
-
-  // Packaging Requirements
-  const [packagingCategories, setPackagingCategories] = useState<string[]>([]);
-  const [desiredMaterials, setDesiredMaterials] = useState<string[]>([]);
-
-  // Design Assets
-  const [brandAssetsStatus, setBrandAssetsStatus] = useState("Logo Only");
-
-  // Simulated File Upload states (store file names)
-  const [brandGuidelinesFileName, setBrandGuidelinesFileName] = useState<string | null>(null);
-  const [existingPackagingFileName, setExistingPackagingFileName] = useState<string | null>(null);
-  const [productPhotographyFileName, setProductPhotographyFileName] = useState<string | null>(null);
-  const [technicalSpecsFileName, setTechnicalSpecsFileName] = useState<string | null>(null);
-
-  // Procurement Information
-  const [geographicDistribution, setGeographicDistribution] = useState("Regional");
-  const [launchTimeline, setLaunchTimeline] = useState("1–3 Months");
-
-  // Final Strategic Question
-  const [strategicOutcome, setStrategicOutcome] = useState("");
+  // Project Details
+  const [industry, setIndustry] = useState("Food & Beverage");
+  const [packagingType, setPackagingType] = useState("Bags");
+  const [orderQuantity, setOrderQuantity] = useState("Under 1,000");
+  const [targetBudget, setTargetBudget] = useState("Under $2,500");
+  const [customPrinting, setCustomPrinting] = useState("Yes");
+  const [projectTimeline, setProjectTimeline] = useState("ASAP");
 
   const [specimenModel, setSpecimenModel] = useState("Specimen 01");
-  const [projectDescription, setProjectDescription] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -168,7 +142,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
     return `${d.getUTCFullYear()}.${String(d.getUTCMonth() + 1).padStart(2, "0")}.${String(d.getUTCDate()).padStart(2, "0")} ${String(d.getUTCHours()).padStart(2, "0")}:${String(d.getUTCMinutes()).padStart(2, "0")} UTC`;
   });
 
-  // Gorgeous Sustainable Luxury PDF generator (2 Pages, complete partnership profiling)
+  // Gorgeous Sustainable Luxury PDF generator (1 Page, minimalist, elegant representation)
   const handleDownloadPDF = () => {
     const doc = new jsPDF({
       orientation: "portrait",
@@ -176,7 +150,6 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
       format: "a4"
     });
 
-    // --- PAGE 1: Brand Profile & Relationship Scope ---
     // Fill beautiful warm off-white cream paper background
     doc.setFillColor(250, 247, 242);
     doc.rect(0, 0, 210, 297, "F");
@@ -231,7 +204,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
     doc.setFont("helvetica", "bold");
     doc.setFontSize(11);
     doc.setTextColor(30, 30, 30);
-    doc.text("OFFICIAL PARTNERSHIP procurement specification".toUpperCase(), 18, 54);
+    doc.text(inquiryType === "custom" ? "OFFICIAL CUSTOM QUOTE SPECIFICATION" : "OFFICIAL SPECIMEN MODEL ORDER SPECIFICATION", 18, 54);
 
     // Custom forest green rule accent
     doc.setDrawColor(55, 99, 50);
@@ -297,15 +270,12 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
     doc.setFont("helvetica", "bold");
     doc.setFontSize(9.5);
     doc.setTextColor(55, 99, 50);
-    doc.text("1. COMPANY PROFILE & COGNATES", 18, y - 5);
+    doc.text("1. COMPANY INFORMATION", 18, y - 5);
 
     drawSpecRow("REGISTERED COMPANY:", companyName.toUpperCase());
-    drawSpecRow("CORPORATE WEBSITE:", companyWebsite || "Not Specified");
-    drawSpecRow("INDUSTRY SECTOR:", industry.toUpperCase());
-    drawSpecRow("PRIMARY REPRESENTATIVE:", clientName.toUpperCase());
-    drawSpecRow("POSITION / DEPARTMENT:", clientDept.toUpperCase());
-    drawSpecRow("COMMUNICATIONS EMAIL:", clientEmail.toLowerCase());
-    drawSpecRow("PHONE CONNECTION:", clientPhone || "Not Specified");
+    drawSpecRow("CONTACT NAME:", clientName.toUpperCase());
+    drawSpecRow("BUSINESS EMAIL:", clientEmail.toLowerCase());
+    drawSpecRow("PHONE NUMBER:", clientPhone || "Not Provided");
 
     y += 4;
 
@@ -313,111 +283,38 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
     doc.setFont("helvetica", "bold");
     doc.setFontSize(9.5);
     doc.setTextColor(55, 99, 50);
-    doc.text("2. STRATEGIC RELATIONSHIP SCOPE", 18, y - 5);
+    doc.text("2. PROJECT DETAILS & METRICS", 18, y - 5);
 
-    drawSpecRow("ENGAGEMENT REQUIREMENT:", engagementType.toUpperCase());
-    drawSpecRow("EST. ANNUAL PACKAGING SPEND:", annualSpend.toUpperCase() + " (CRITICAL)");
-    drawSpecRow("EXPECTED ORDER VOLUME:", orderVolume.toUpperCase());
-    drawSpecRow("GEOGRAPHIC DISTRIBUTION:", geographicDistribution.toUpperCase());
-    drawSpecRow("REQUIRED LAUNCH TIMELINE:", launchTimeline.toUpperCase());
-
-
-    // --- PAGE 2: Specifications, Files & Strategic Alignment ---
-    doc.addPage();
-    // Fill beautiful warm off-white cream paper background
-    doc.setFillColor(250, 247, 242);
-    doc.rect(0, 0, 210, 297, "F");
-
-    // Header strip
-    doc.setFillColor(55, 99, 50);
-    doc.rect(15, 12, 180, 8, "F");
-    doc.setTextColor(255, 255, 255);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(7.5);
-    doc.text("ONE PREMIUM SUSTAINABLE PACKAGING SYSTEMS // COMPREHENSIVE SPECIFICATION RECORD", 20, 17);
-
-    y = 30;
-
-    const formatList = (arr: string[]) => arr.length > 0 ? arr.join(", ") : "None Specified";
-
-    // Subsection Header 3
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(9.5);
-    doc.setTextColor(55, 99, 50);
-    doc.text("3. ENVIRONMENTAL & MATERIAL DESIGN MATRIX", 18, y - 5);
-
-    drawSpecRow("SUSTAINABILITY OBJECTIVES:", formatList(sustainabilityObjectives));
-    drawSpecRow("PACKAGING CATEGORIES:", formatList(packagingCategories));
-    drawSpecRow("DESIRED PACKAGING MATERIALS:", formatList(desiredMaterials));
-    drawSpecRow("EXISTING BRAND GUIDELINES DISPOSITION:", brandAssetsStatus.toUpperCase());
-
-    y += 4;
-
-    // Subsection Header 4
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(9.5);
-    doc.setTextColor(55, 99, 50);
-    doc.text("4. DEPOSITED COLLATERAL & DESIGN DOCUMENTS", 18, y - 5);
-
-    drawSpecRow("UPLOADED BRAND GUIDELINES:", brandGuidelinesFileName || "NO FILE DEPOSITED");
-    drawSpecRow("UPLOADED EXISTING PACKAGING:", existingPackagingFileName || "NO FILE DEPOSITED");
-    drawSpecRow("UPLOADED PRODUCT PHOTOGRAPHY:", productPhotographyFileName || "NO FILE DEPOSITED");
-    drawSpecRow("UPLOADED TECHNICAL BLUEPRINTS:", technicalSpecsFileName || "NO FILE DEPOSITED");
-
-    y += 4;
-
-    // Section 5
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(9.5);
-    doc.setTextColor(55, 99, 50);
-    doc.text("5. PORTAL STRATEGIC OUTCOME ALIGNMENT", 18, y - 5);
-    y += 1;
-
-    doc.setFont("helvetica", "italic");
-    doc.setFontSize(8);
-    doc.setTextColor(100, 100, 100);
-    doc.text("Detailed definition of project strategic success & metrics requested by client:", 18, y);
-    y += 5;
-
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(8.5);
-    doc.setTextColor(40, 40, 40);
-    const outcomeText = strategicOutcome.trim() || "No customized strategic outcomes recorded. Handled via default materials consultation metrics.";
-    const splitOutcome = doc.splitTextToSize(outcomeText, 172);
-    doc.text(splitOutcome, 18, y);
-    y += Math.max(12, splitOutcome.length * 4);
-
-    if (projectDescription.trim()) {
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(9);
-      doc.setTextColor(55, 99, 50);
-      doc.text("6. SPECIAL EMBEDDED DESIGN COMPONENT NOTES", 18, y - 4);
-      
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(8);
-      doc.setTextColor(60, 60, 60);
-      const splitDesc = doc.splitTextToSize(projectDescription, 172);
-      doc.text(splitDesc, 18, y);
-      y += Math.max(12, splitDesc.length * 4);
+    if (inquiryType === "custom") {
+      drawSpecRow("INDUSTRY SECTOR:", industry.toUpperCase());
+      drawSpecRow("PACKAGING TYPE:", packagingType.toUpperCase());
+      drawSpecRow("ESTIMATED QUANTITY:", orderQuantity.toUpperCase());
+      drawSpecRow("TARGET BUDGET RANGE:", targetBudget.toUpperCase());
+      drawSpecRow("CUSTOM PRINTING:", customPrinting.toUpperCase());
+      drawSpecRow("PROJECT TIMELINE:", projectTimeline.toUpperCase());
+    } else {
+      drawSpecRow("ORDERED MODEL:", specimenModel.toUpperCase());
+      drawSpecRow("ESTIMATED QUANTITY:", orderQuantity.toUpperCase());
+      drawSpecRow("PROJECT TIMELINE:", projectTimeline.toUpperCase());
     }
 
     // Bottom signatures & Legal disclaimer
     doc.setDrawColor(55, 99, 50);
     doc.setLineWidth(0.4);
-    doc.line(135, 271, 185, 271);
+    doc.line(135, 255, 185, 255);
     
     doc.setFont("helvetica", "italic");
     doc.setFontSize(7.5);
     doc.setTextColor(115, 115, 115);
-    doc.text("Authorized Representative Sign-Off", 137, 275.5);
+    doc.text("Authorized Representative Sign-Off", 137, 259.5);
     
     doc.setFont("helvetica", "normal");
     doc.setFontSize(8);
     doc.setTextColor(80, 90, 75);
-    doc.text("ONE PREMIUM SUSTAINABLE PACKAGING SYSTEMS // STRATEGIC ADVISORY BOARD", 18, 275.5);
+    doc.text("ONE PREMIUM SUSTAINABLE PACKAGING SYSTEMS // STRATEGIC ADVISORY BOARD", 18, 259.5);
 
     // Save and download
-    doc.save(`ONE_Partnership_Specification_${receiptNo}.pdf`);
+    doc.save(`ONE_Custom_Quote_Specification_${receiptNo}.pdf`);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -436,29 +333,17 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
         },
         body: JSON.stringify({
           companyName,
-          companyWebsite,
-          industry,
           clientName,
-          clientDept,
           clientEmail,
           clientPhone,
-          engagementType,
-          annualSpend,
-          orderVolume,
-          sustainabilityObjectives,
-          packagingCategories,
-          desiredMaterials,
-          brandAssetsStatus,
-          brandGuidelinesFile: brandGuidelinesFileName,
-          existingPackagingFile: existingPackagingFileName,
-          productPhotographyFile: productPhotographyFileName,
-          technicalSpecsFile: technicalSpecsFileName,
-          geographicDistribution,
-          launchTimeline,
-          strategicOutcome,
-          projectDescription,
-          inquiryType: "custom",
-          specimenModel: "Bespoke Custom"
+          industry,
+          packagingType,
+          estimatedQuantity: orderQuantity,
+          budget: targetBudget,
+          customPrinting,
+          projectTimeline,
+          inquiryType,
+          specimenModel: inquiryType === "existing" ? specimenModel : "Bespoke Custom"
         }),
       });
 
@@ -579,137 +464,184 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-9">
-                    
+                    {/* Header Banner inside Form */}
+                    <div className="mb-6 border-b border-garabel-ink/10 pb-4">
+                      <h2 className="font-sans font-extrabold text-[#376332] text-lg uppercase tracking-tight">
+                        {inquiryType === "custom" ? "Request a Custom Quote" : `Customize & Order: ${specimenModel}`}
+                      </h2>
+                      <p className="text-[11px] text-garabel-mid leading-relaxed mt-1">
+                        {inquiryType === "custom" 
+                          ? "Specify your brand requirements for a bespoke materials and dimension calculation." 
+                          : "Configure and secure a physical prototype specification portfolio."}
+                      </p>
+                    </div>
+
                     {/* SECTION 1: Company Information */}
-                    <div className="space-y-5 border-l-2 border-[#8a684f]/20 pl-4">
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 01</span>
-                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Company & Contact Information</h3>
+                    <div className="space-y-5">
+                      <div className="flex items-center gap-2 border-l-2 border-[#376332] pl-3">
+                        <h3 className="font-sans font-black text-xs uppercase tracking-wider text-garabel-ink">Company Information</h3>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Brand or Company Name *</label>
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Company Name *</label>
                           <input
                             type="text"
                             required
                             value={companyName}
                             onChange={(e) => setCompanyName(e.target.value)}
-                            placeholder="e.g. Acme Corp"
-                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors"
+                            placeholder="e.g. Acme Corporation"
+                            className="bg-transparent border-b border-garabel-ink/20 py-2 font-sans text-xs text-garabel-ink placeholder-garabel-mid/40 focus:outline-none focus:border-[#376332] transition-colors"
                           />
                         </div>
 
                         <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Corporate Website *</label>
-                          <input
-                            type="url"
-                            required
-                            value={companyWebsite}
-                            onChange={(e) => setCompanyWebsite(e.target.value)}
-                            placeholder="e.g. https://www.acme.com"
-                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors"
-                          />
-                        </div>
-
-                        <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Industry Sector *</label>
-                          <select
-                            value={industry}
-                            onChange={(e) => setIndustry(e.target.value)}
-                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
-                          >
-                            <option value="Luxury Retail">Luxury Retail</option>
-                            <option value="Fashion & Apparel">Fashion & Apparel</option>
-                            <option value="Beauty & Cosmetics">Beauty & Cosmetics</option>
-                            <option value="Cannabis Retail">Cannabis Retail</option>
-                            <option value="Food & Beverage">Food & Beverage</option>
-                            <option value="Hospitality">Hospitality</option>
-                            <option value="Consumer Goods">Consumer Goods</option>
-                            <option value="Other">Other</option>
-                          </select>
-                        </div>
-
-                        <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Primary Contact Name *</label>
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Contact Name *</label>
                           <input
                             type="text"
                             required
                             value={clientName}
                             onChange={(e) => setClientName(e.target.value)}
                             placeholder="e.g. Jonathan Doe"
-                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors"
+                            className="bg-transparent border-b border-garabel-ink/20 py-2 font-sans text-xs text-garabel-ink placeholder-garabel-mid/40 focus:outline-none focus:border-[#376332] transition-colors"
                           />
                         </div>
 
                         <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Position / Department *</label>
-                          <select
-                            value={clientDept}
-                            onChange={(e) => setClientDept(e.target.value)}
-                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
-                          >
-                            <option value="Founder">Founder</option>
-                            <option value="CEO">CEO</option>
-                            <option value="Procurement">Procurement</option>
-                            <option value="Brand Management">Brand Management</option>
-                            <option value="Marketing">Marketing</option>
-                            <option value="Operations">Operations</option>
-                            <option value="Sustainability">Sustainability</option>
-                          </select>
-                        </div>
-
-                        <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Direct Phone Number</label>
-                          <input
-                            type="tel"
-                            value={clientPhone}
-                            onChange={(e) => setClientPhone(e.target.value)}
-                            placeholder="e.g. +1 (555) 019-2834"
-                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors"
-                          />
-                        </div>
-
-                        <div className="flex flex-col space-y-1 md:col-span-2">
-                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Communications Email *</label>
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Business Email *</label>
                           <input
                             type="email"
                             required
                             value={clientEmail}
                             onChange={(e) => setClientEmail(e.target.value)}
-                            placeholder="e.g. j.doe@acme.com"
-                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-colors"
+                            placeholder="e.g. j.doe@company.com"
+                            className="bg-transparent border-b border-garabel-ink/20 py-2 font-sans text-xs text-garabel-ink placeholder-garabel-mid/40 focus:outline-none focus:border-[#376332] transition-colors"
+                          />
+                        </div>
+
+                        <div className="flex flex-col space-y-1">
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Phone Number</label>
+                          <input
+                            type="tel"
+                            value={clientPhone}
+                            onChange={(e) => setClientPhone(e.target.value)}
+                            placeholder="e.g. +1 (555) 019-2834"
+                            className="bg-transparent border-b border-garabel-ink/20 py-2 font-sans text-xs text-garabel-ink placeholder-garabel-mid/40 focus:outline-none focus:border-[#376332] transition-colors"
                           />
                         </div>
                       </div>
                     </div>
 
-                    {/* SECTION 2: Project Scope & Credentials */}
-                    <div className="space-y-5 border-l-2 border-[#8a684f]/20 pl-4">
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 02</span>
-                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Strategic Project Scope</h3>
+                    {/* SECTION 2: Project Details */}
+                    <div className="space-y-6 pt-4">
+                      <div className="flex items-center gap-2 border-l-2 border-[#376332] pl-3">
+                        <h3 className="font-sans font-black text-xs uppercase tracking-wider text-garabel-ink">Project Details</h3>
                       </div>
 
-                      <div className="space-y-4">
-                        <div className="flex flex-col space-y-1.5">
-                          <span className="font-mono text-[8.5px] tracking-wider text-[#7c5d47] uppercase font-black">Engagement Sought</span>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            {[
-                              "Existing Specimen Order",
-                              "Custom Packaging Development",
-                              "Sustainable Packaging Consultation",
-                              "Long-Term Manufacturing Partnership",
-                              "Multi-Location Retail Program"
-                            ].map((opt) => (
+                      <div className="space-y-6">
+                        {inquiryType === "custom" && (
+                          <>
+                            {/* Industry */}
+                            <div className="flex flex-col space-y-2">
+                              <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Industry *</label>
+                              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                {["Food & Beverage", "Retail", "Cosmetics", "E-commerce", "Healthcare", "Cannabis", "Other"].map((opt) => (
+                                  <button
+                                    type="button"
+                                    key={opt}
+                                    onClick={() => setIndustry(opt)}
+                                    className={`px-3 py-2 text-[11px] text-center rounded-lg border transition-all duration-200 cursor-pointer ${
+                                      industry === opt
+                                        ? "bg-[#376332] text-[#fdfbf7] border-[#376332] font-semibold"
+                                        : "bg-white/40 border-garabel-ink/10 text-garabel-ink/80 hover:bg-neutral-100/60 hover:border-garabel-ink/30"
+                                    }`}
+                                  >
+                                    {opt}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Packaging Type Needed */}
+                            <div className="flex flex-col space-y-2">
+                              <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Packaging Type Needed *</label>
+                              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                                {["Bags", "Mailers", "Boxes", "Pouches", "Cups & Containers", "Other"].map((opt) => (
+                                  <button
+                                    type="button"
+                                    key={opt}
+                                    onClick={() => setPackagingType(opt)}
+                                    className={`px-3 py-2 text-[11px] text-center rounded-lg border transition-all duration-200 cursor-pointer ${
+                                      packagingType === opt
+                                        ? "bg-[#376332] text-[#fdfbf7] border-[#376332] font-semibold"
+                                        : "bg-white/40 border-garabel-ink/10 text-garabel-ink/80 hover:bg-neutral-100/60 hover:border-garabel-ink/30"
+                                    }`}
+                                  >
+                                    {opt}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                          </>
+                        )}
+
+                        {/* Estimated Order Quantity */}
+                        <div className="flex flex-col space-y-2">
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Estimated Order Quantity *</label>
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            {["Under 1,000", "1,000–5,000", "5,000–10,000", "10,000+"].map((opt) => (
                               <button
-                                key={opt}
                                 type="button"
-                                onClick={() => setEngagementType(opt)}
-                                className={`text-left text-[11px] px-3 py-2 rounded-lg border transition-all duration-200 cursor-pointer ${
-                                  engagementType === opt
-                                    ? "bg-[#376332] text-white border-[#376332] font-semibold"
-                                    : "bg-[#eaab7a]/5 border-[#8a684f]/20 text-[#5c4a3c] hover:bg-[#eaab7a]/15"
+                                key={opt}
+                                onClick={() => setOrderQuantity(opt)}
+                                className={`px-3 py-2 text-[11px] text-center rounded-lg border transition-all duration-200 cursor-pointer ${
+                                  orderQuantity === opt
+                                    ? "bg-[#376332] text-[#fdfbf7] border-[#376332] font-semibold"
+                                    : "bg-white/40 border-garabel-ink/10 text-garabel-ink/80 hover:bg-neutral-100/60 hover:border-garabel-ink/30"
+                                  }`}
+                              >
+                                {opt}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {inquiryType === "custom" && (
+                          /* Target Budget */
+                          <div className="flex flex-col space-y-2">
+                            <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Target Budget *</label>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                              {["Under $2,500", "$2,500–$5,000", "$5,000–$10,000", "$10,000+"].map((opt) => (
+                                <button
+                                  type="button"
+                                  key={opt}
+                                  onClick={() => setTargetBudget(opt)}
+                                  className={`px-3 py-2 text-[11px] text-center rounded-lg border transition-all duration-200 cursor-pointer ${
+                                    targetBudget === opt
+                                      ? "bg-[#376332] text-[#fdfbf7] border-[#376332] font-semibold"
+                                      : "bg-white/40 border-garabel-ink/10 text-garabel-ink/80 hover:bg-neutral-100/60 hover:border-garabel-ink/30"
+                                    }`}
+                                  >
+                                  {opt}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Need Custom Printing? */}
+                        <div className="flex flex-col space-y-2">
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Need Custom Printing? *</label>
+                          <div className="grid grid-cols-2 gap-2 max-w-xs">
+                            {["Yes", "No"].map((opt) => (
+                              <button
+                                type="button"
+                                key={opt}
+                                onClick={() => setCustomPrinting(opt)}
+                                className={`px-3 py-2 text-[11px] text-center rounded-lg border transition-all duration-200 cursor-pointer ${
+                                  customPrinting === opt
+                                    ? "bg-[#376332] text-[#fdfbf7] border-[#376332] font-semibold"
+                                    : "bg-white/40 border-garabel-ink/10 text-garabel-ink/80 hover:bg-neutral-100/60 hover:border-garabel-ink/30"
                                 }`}
                               >
                                 {opt}
@@ -718,300 +650,25 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                           </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <div className="flex flex-col space-y-1">
-                            <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold flex flex-wrap items-center gap-1.5">
-                              <span>Estimated Annual Spend *</span>
-                              <span className="font-sans text-[7.5px] font-black tracking-normal px-1.5 py-0.5 bg-red-800 text-[#fff] rounded-full uppercase leading-none select-none">Critical Validation</span>
-                            </label>
-                            <select
-                              value={annualSpend}
-                              onChange={(e) => setAnnualSpend(e.target.value)}
-                              className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
-                            >
-                              <option value="Under $10,000">Under $10,000</option>
-                              <option value="$10,000 – $50,000">$10,000 – $50,000</option>
-                              <option value="$50,000 – $250,000">$50,000 – $250,000</option>
-                              <option value="$250,000 – $1M">$250,000 – $1M</option>
-                              <option value="$1M+">$1M+</option>
-                            </select>
+                        {/* Project Timeline */}
+                        <div className="flex flex-col space-y-2">
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Project Timeline *</label>
+                          <div className="grid grid-cols-3 gap-2">
+                            {["ASAP", "Within 30 Days", "Within 60 Days"].map((opt) => (
+                              <button
+                                type="button"
+                                key={opt}
+                                onClick={() => setProjectTimeline(opt)}
+                                className={`px-3 py-2 text-[11px] text-center rounded-lg border transition-all duration-200 cursor-pointer ${
+                                  projectTimeline === opt
+                                    ? "bg-[#376332] text-[#fdfbf7] border-[#376332] font-semibold"
+                                    : "bg-white/40 border-garabel-ink/10 text-garabel-ink/80 hover:bg-neutral-100/60 hover:border-garabel-ink/30"
+                                }`}
+                              >
+                                {opt}
+                              </button>
+                            ))}
                           </div>
-
-                          <div className="flex flex-col space-y-1">
-                            <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Expected Order Volume</label>
-                            <select
-                              value={orderVolume}
-                              onChange={(e) => setOrderVolume(e.target.value)}
-                              className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
-                            >
-                              <option value="Under 5,000 Units">Under 5,000 Units</option>
-                              <option value="5,000 – 25,000">5,000 – 25,000</option>
-                              <option value="25,000 – 100,000">25,000 – 100,000</option>
-                              <option value="100,000 – 500,000">100,000 – 500,000</option>
-                              <option value="500,000+">500,000+</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* SECTION 3: Sustainability Objectives */}
-                    <div className="space-y-4 border-l-2 border-[#8a684f]/20 pl-4">
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 03</span>
-                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Sustainability Objectives</h3>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                        {[
-                          "Plastic Reduction",
-                          "Carbon Neutral Goals",
-                          "ESG Reporting",
-                          "Regulatory Compliance",
-                          "Sustainable Rebranding",
-                          "Customer Experience Enhancement",
-                          "Retail Packaging Upgrade"
-                        ].map((goal) => {
-                          const isChecked = sustainabilityObjectives.includes(goal);
-                          return (
-                            <button
-                              key={goal}
-                              type="button"
-                              onClick={() => {
-                                if (isChecked) {
-                                  setSustainabilityObjectives(sustainabilityObjectives.filter(x => x !== goal));
-                                } else {
-                                  setSustainabilityObjectives([...sustainabilityObjectives, goal]);
-                                }
-                              }}
-                              className={`flex items-center gap-2.5 text-left text-[11px] px-3 py-2 rounded-lg border transition-all duration-200 cursor-pointer ${
-                                isChecked
-                                  ? "bg-[#376332]/10 border-[#376332] text-garabel-ink font-semibold"
-                                  : "bg-[#faf8f5]/80 border-[#8a684f]/15 hover:bg-[#8a684f]/5 text-[#5c4a3c]/90"
-                              }`}
-                            >
-                              <div className={`w-4 h-4 rounded flex items-center justify-center transition-all ${isChecked ? "bg-[#376332] text-white" : "border border-[#8a684f]/40 bg-white"}`}>
-                                {isChecked && <Check className="w-3 h-3 text-white stroke-[3.5]" />}
-                              </div>
-                              <span className="truncate leading-none">{goal}</span>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* SECTION 4: Packaging and Materials Requirements */}
-                    <div className="space-y-5 border-l-2 border-[#8a684f]/20 pl-4">
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 04</span>
-                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Packaging Categories & Preferred Materials Matrix</h3>
-                      </div>
-
-                      <div className="space-y-4">
-                        <div className="flex flex-col space-y-1.5">
-                          <span className="font-mono text-[8.5px] tracking-wider text-[#7c5d47] uppercase font-black">Categories Required</span>
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                            {[
-                              "Luxury Shopping Bags",
-                              "Retail Carry Bags",
-                              "Product Packaging",
-                              "Gift Packaging",
-                              "Shipping Mailers",
-                              "Cannabis Packaging",
-                              "Sustainable Packaging System",
-                              "Bespoke Structural Packaging"
-                            ].map((cat) => {
-                              const isChecked = packagingCategories.includes(cat);
-                              return (
-                                <button
-                                  key={cat}
-                                  type="button"
-                                  onClick={() => {
-                                    if (isChecked) {
-                                      setPackagingCategories(packagingCategories.filter(x => x !== cat));
-                                    } else {
-                                      setPackagingCategories([...packagingCategories, cat]);
-                                    }
-                                  }}
-                                  className={`flex items-center gap-1.5 text-left text-[9.5px] font-mono tracking-wider uppercase px-2.5 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer ${
-                                    isChecked
-                                      ? "bg-[#376332]/15 border-[#376332] text-[#376332] font-semibold"
-                                      : "bg-[#faf8f5]/80 border-[#8a684f]/15 hover:bg-[#8a684f]/5 text-[#5c4a3c]/90"
-                                  }`}
-                                >
-                                  <div className={`w-3 h-3 rounded flex items-center justify-center transition-all ${isChecked ? "bg-[#376332]" : "border border-[#8a684f]/40 bg-white"}`}>
-                                    {isChecked && <Check className="w-2.5 h-2.5 text-white stroke-[3.5]" />}
-                                  </div>
-                                  <span className="truncate leading-none">{cat}</span>
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col space-y-1.5">
-                          <span className="font-mono text-[8.5px] tracking-wider text-[#7c5d47] uppercase font-black">Environmental Materials Profile</span>
-                          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                            {[
-                              "Compostable",
-                              "Biodegradable",
-                              "FSC Certified Paper",
-                              "Recycled Content",
-                              "Plant Fiber Composite",
-                              "Require Consultation"
-                            ].map((mat) => {
-                              const isChecked = desiredMaterials.includes(mat);
-                              return (
-                                <button
-                                  key={mat}
-                                  type="button"
-                                  onClick={() => {
-                                    if (isChecked) {
-                                      setDesiredMaterials(desiredMaterials.filter(x => x !== mat));
-                                    } else {
-                                      setDesiredMaterials([...desiredMaterials, mat]);
-                                    }
-                                  }}
-                                  className={`flex items-center gap-1.5 text-left text-[9.5px] font-mono tracking-wider uppercase px-2.5 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer ${
-                                    isChecked
-                                      ? "bg-[#376332]/15 border-[#376332] text-[#376332] font-semibold"
-                                      : "bg-[#faf8f5]/80 border-[#8a684f]/15 hover:bg-[#8a684f]/5 text-[#5c4a3c]/90"
-                                  }`}
-                                >
-                                  <div className={`w-3 h-3 rounded flex items-center justify-center transition-all ${isChecked ? "bg-[#376332]" : "border border-[#8a684f]/40 bg-white"}`}>
-                                    {isChecked && <Check className="w-2.5 h-2.5 text-white stroke-[3.5]" />}
-                                  </div>
-                                  <span className="truncate leading-none">{mat}</span>
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* SECTION 5: Collaborative Design Assets Upload */}
-                    <div className="space-y-5 border-l-2 border-[#8a684f]/20 pl-4">
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 05</span>
-                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Design Assets & Collaborative Attachment Chest</h3>
-                      </div>
-
-                      <div className="space-y-4">
-                        <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Current Layout Assets</label>
-                          <select
-                            value={brandAssetsStatus}
-                            onChange={(e) => setBrandAssetsStatus(e.target.value)}
-                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
-                          >
-                            <option value="Brand Guidelines Available">Brand Guidelines & Palette Available</option>
-                            <option value="Fully Completed CAD Files">Fully Completed CAD Files Available</option>
-                            <option value="Logo Only">Logo Only</option>
-                            <option value="No Digital Assets">No Digital Design Assets (Require Complete Design Partnership)</option>
-                          </select>
-                        </div>
-
-                        {/* 4 Multi-Upload grids */}
-                        <div className="grid grid-cols-2 gap-3 pt-1">
-                          <FileUploadSlot 
-                            label="Brand Guidelines (.pdf, .ai)"
-                            fileName={brandGuidelinesFileName}
-                            onFileSelect={(name) => setBrandGuidelinesFileName(name)}
-                            onClear={() => setBrandGuidelinesFileName(null)}
-                          />
-                          <FileUploadSlot 
-                            label="Existing Packaging Specs"
-                            fileName={existingPackagingFileName}
-                            onFileSelect={(name) => setExistingPackagingFileName(name)}
-                            onClear={() => setExistingPackagingFileName(null)}
-                          />
-                          <FileUploadSlot 
-                            label="Product Photo / Render"
-                            fileName={productPhotographyFileName}
-                            onFileSelect={(name) => setProductPhotographyFileName(name)}
-                            onClear={() => setProductPhotographyFileName(null)}
-                          />
-                          <FileUploadSlot 
-                            label="Core Technical Blueprints"
-                            fileName={technicalSpecsFileName}
-                            onFileSelect={(name) => setTechnicalSpecsFileName(name)}
-                            onClear={() => setTechnicalSpecsFileName(null)}
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* SECTION 6: Procurement Logistics */}
-                    <div className="space-y-5 border-l-2 border-[#8a684f]/20 pl-4">
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 06</span>
-                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Procurement Logistics & Distribution</h3>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Geographic Distribution</label>
-                          <select
-                            value={geographicDistribution}
-                            onChange={(e) => setGeographicDistribution(e.target.value)}
-                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
-                          >
-                            <option value="Regional">Regional Hub Only</option>
-                            <option value="National">National Coverage</option>
-                            <option value="Global Multi-Hub">Global Multi-Location Retail Network</option>
-                          </select>
-                        </div>
-
-                        <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">Required Launch Timeline</label>
-                          <select
-                            value={launchTimeline}
-                            onChange={(e) => setLaunchTimeline(e.target.value)}
-                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all cursor-pointer"
-                          >
-                            <option value="Under 1 Month">Under 1 Month (Fast Track)</option>
-                            <option value="1–3 Months">1–3 Months (Standard Production Cycle)</option>
-                            <option value="3–6 Months">3–6 Months (Extended Custom Tooling)</option>
-                            <option value="6 Months+">6 Months+ (Strategic Launch Planning)</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* SECTION 7: Strategic Goal and Custom specs */}
-                    <div className="space-y-5 border-l-2 border-[#8a684f]/20 pl-4">
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] bg-[#8a684f]/10 text-[#8a684f] px-2 py-0.5 rounded-md font-bold">SECTION 07</span>
-                        <h3 className="font-sans font-black text-sm uppercase text-garabel-ink tracking-tight">Strategic Alignment Goals</h3>
-                      </div>
-
-                      <div className="space-y-4">
-                        <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold leading-normal">
-                            What is the single most important metric or qualitative outcome that will make this packaging project a success?
-                          </label>
-                          <textarea
-                            rows={3}
-                            value={strategicOutcome}
-                            onChange={(e) => setStrategicOutcome(e.target.value)}
-                            placeholder="e.g. Achieving 100% elimination of single-use plastics from our retail storefronts by Q4, with a premium rigid aesthetic..."
-                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all resize-none placeholder:text-garabel-mid/40"
-                          />
-                        </div>
-
-                        <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[8.5px] tracking-wider text-garabel-mid uppercase font-bold">
-                            Alternative Specification & Material Notes
-                          </label>
-                          <textarea
-                            id="quote_form_bottom_notes"
-                            rows={2}
-                            value={projectDescription}
-                            onChange={(e) => setProjectDescription(e.target.value)}
-                            placeholder="Outline any specific micro-dimensions, exact weights, secondary structural requests or materials here..."
-                            className="bg-transparent border-b border-garabel-ink/20 py-1 font-sans text-xs text-garabel-ink focus:outline-none focus:border-[#376332] transition-all resize-none placeholder:text-garabel-mid/40"
-                          />
                         </div>
                       </div>
                     </div>
@@ -1098,35 +755,28 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
 
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
                       <span>PRIMARY CONTACT:</span>
-                      <span className="font-bold text-garabel-ink uppercase">{clientName} ({clientDept})</span>
+                      <span className="font-bold text-garabel-ink uppercase">{clientName}</span>
                     </div>
 
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span>ANNUAL SPEND TIERS:</span>
-                      <span className="font-bold text-red-800 uppercase">{annualSpend}</span>
+                      <span>{inquiryType === "custom" ? "TARGET BUDGET:" : "MODEL BASE:"}</span>
+                      <span className="font-bold text-red-800 uppercase">{inquiryType === "custom" ? targetBudget : specimenModel}</span>
                     </div>
 
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span>TARGET VOLUME:</span>
-                      <span className="font-bold text-garabel-ink uppercase">{orderVolume}</span>
+                      <span>ESTIMATED QUANTITY:</span>
+                      <span className="font-bold text-garabel-ink uppercase">{orderQuantity}</span>
                     </div>
 
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span>PREFERRED CATEGORIES:</span>
-                      <span className="font-bold text-[#376332] uppercase truncate max-w-[200px]">{packagingCategories.length > 0 ? packagingCategories.join(", ") : "Not Specified"}</span>
+                      <span>{inquiryType === "custom" ? "PACKAGING NEEDED:" : "ENGAGEMENT TYPE:"}</span>
+                      <span className="font-bold text-[#376332] uppercase truncate max-w-[200px]">{inquiryType === "custom" ? packagingType : "Model Prototype"}</span>
                     </div>
 
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span>LAUNCH TIMELINE:</span>
-                      <span className="font-bold text-garabel-ink uppercase">{launchTimeline}</span>
+                      <span>PROJECT TIMELINE:</span>
+                      <span className="font-bold text-garabel-ink uppercase">{projectTimeline}</span>
                     </div>
-
-                    {strategicOutcome && (
-                      <div className="font-mono text-[9px] pt-1 leading-normal text-garabel-mid">
-                        <span className="block mb-0.5 font-bold">PROJECT SUCCESS CRITERION:</span>
-                        <p className="font-sans text-xs italic text-garabel-ink bg-white/50 p-2 border-l border-[#8a684f]/40 whitespace-pre-wrap">{strategicOutcome}</p>
-                      </div>
-                    )}
                   </div>
 
                   <div className="mt-8 flex flex-col gap-3 max-w-lg mx-auto">
@@ -1148,7 +798,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                       </button>
                       
                       <a
-                        href={`mailto:oneunedigital@gmail.com?subject=Strategic Procurement Partnership Portfolio: ${encodeURIComponent(companyName)}&body=ONE Sustainable Packaging Systems Partnership Record ID #${receiptNo}%0D%0A%0D%0ALodged parameters & core details:%0D%0ABrand Name: ${encodeURIComponent(companyName)}%0D%0AWebsite: ${encodeURIComponent(companyWebsite)}%0D%0AIndustry: ${encodeURIComponent(industry)}%0D%0AOfficer: ${encodeURIComponent(clientName)} (${encodeURIComponent(clientDept)})%0D%0APhone: ${encodeURIComponent(clientPhone)}%0D%0AEmail: ${encodeURIComponent(clientEmail)}%0D%0A%0D%0AStrategic metrics for project success:%0D%0A${encodeURIComponent(strategicOutcome)}%0D%0A%0D%0AAnnual Spend: ${encodeURIComponent(annualSpend)}%0D%0AModel Specification: ${encodeURIComponent("Bespoke Custom")}`}
+                        href={`mailto:oneunedigital@gmail.com?subject=Strategic Procurement Partnership Portfolio: ${encodeURIComponent(companyName)}&body=ONE Sustainable Packaging Systems Partnership Record ID #${receiptNo}%0D%0A%0D%0ALodged parameters & core details:%0D%0ACompany Name: ${encodeURIComponent(companyName)}%0D%0AContact Name: ${encodeURIComponent(clientName)}%0D%0APhone: ${encodeURIComponent(clientPhone)}%0D%0AEmail: ${encodeURIComponent(clientEmail)}%0D%0A%0D%0AQuantity Needed: ${encodeURIComponent(orderQuantity)}%0D%0APackaging Type: ${encodeURIComponent(inquiryType === "custom" ? packagingType : "Model Base Blueprint")}%0D%0ALaunch Timeline: ${encodeURIComponent(projectTimeline)}`}
                         className="inline-flex items-center justify-center bg-transparent border border-garabel-ink/25 text-garabel-ink hover:bg-garabel-ink hover:text-[#fdfbf7] py-3 px-4 rounded-xl font-mono text-[10px] tracking-[0.15em] uppercase transition-all focus:outline-none cursor-pointer"
                       >
                         <FileText className="w-3.5 h-3.5 mr-1.5 shrink-0" />
