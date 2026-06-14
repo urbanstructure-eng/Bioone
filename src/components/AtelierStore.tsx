@@ -16,14 +16,14 @@ export default function AtelierStore({ cart, setCart }: AtelierStoreProps) {
       {/* Visual Header Block layout */}
       <div className="space-y-6 mb-16 md:mb-24">
         <span className="block font-mono text-[11px] tracking-widest text-[#376332] uppercase font-bold">
-          ✦ Sustainable Brand Engineering ✦
+          ✦ Premium Bio Packaging & Marketing Design Solutions ✦
         </span>
         <h2 className="text-4xl xs:text-5xl sm:text-6xl md:text-[68px] lg:text-[88px] xl:text-[96px] font-sans font-black tracking-tighter text-[#376332] leading-[0.85] uppercase">
-          Packaging That Builds Brands.<br />
-          Sustainability That Drives Growth.
+          Top Design Ideas.<br />
+          Elite Marketing Packaging.
         </h2>
         <p className="text-sm md:text-lg font-sans font-light text-garabel-mid max-w-3xl leading-relaxed pt-2">
-          Your packaging is often the first physical interaction customers have with your brand. Make it unforgettable.
+          Your product container is your brand's ultimate physical ambassador. We engineer premium custom bio-packaging and luxurious structural designs, turning sustainable materials into highly effective marketing tools.
         </p>
       </div>
 

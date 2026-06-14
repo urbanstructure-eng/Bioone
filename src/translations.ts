@@ -17,10 +17,10 @@ export const TRANSLATIONS: Record<LanguageCode, Record<string, string>> = {
     order_details: "Order Details",
     return_to_top: "Return to top",
     // Hero Banner
-    hero_title_1: "A luxury sustainable",
-    hero_title_2: "packaging partner for",
-    hero_title_3: "modern premium brands.",
-    hero_certified: "We help premium brands transition away from plastic while enhancing customer experience and supporting ESG goals.",
+    hero_title_1: "PREMIUM BIO PACKAGING",
+    hero_title_2: "ELITE DESIGN IDEAS FOR",
+    hero_title_3: "SUCCESSFUL BRAND MARKETING",
+    hero_certified: "Bespoke, sustainable, and biodegradable packaging systems engineered to turn every unboxing into a powerful brand marketing asset. Exceptional structural design meets zero emissions without compromise.",
     hero_scroll: "Scroll down to explore",
     // Sustainability section
     sustain_goals_1: "helping brands",
