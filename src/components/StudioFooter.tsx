@@ -95,6 +95,30 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
   return (
     <footer className="relative w-full max-w-7xl mx-auto px-6 pt-16 pb-12 z-10 border-t border-garabel-ink/10 select-none animate-fadeIn">
       
+      {/* Website Design & Developed Badge at Top Right */}
+      <div className="flex md:absolute md:top-6 md:right-6 justify-end items-center mb-6 md:mb-0 z-20">
+        <a 
+          href="https://oneupdesign.co/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-1 py-0.5 rounded-lg select-none opacity-80 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+        >
+          <span className="font-mono text-[9px] tracking-[0.16em] text-garabel-mid uppercase font-bold text-right">
+            website design & develope byoneup
+          </span>
+          <img 
+            src="https://lh3.googleusercontent.com/d/1PFT_g5jStNb6Y8yQk5zyvj9HtxESI_gT" 
+            alt="Oneup Logo" 
+            referrerPolicy="no-referrer"
+            onError={(e) => {
+              // Fallback to absolute direct download/stream link if lh3 fails
+              e.currentTarget.src = "https://drive.google.com/uc?export=view&id=1PFT_g5jStNb6Y8yQk5zyvj9HtxESI_gT";
+            }}
+            className="h-7 w-auto object-contain select-none"
+          />
+        </a>
+      </div>
+
       {/* Luxurious Editorial Logo Ticker (Brown organic subtle placeholders) */}
       <div className="w-full overflow-hidden py-8 border-b border-garabel-ink/10 mb-14 relative">
         {/* Elegant edge fading using CSS custom properties for theme-cohesive background matching */}
@@ -230,6 +254,27 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
       <div className="mt-16 -mx-6 -mb-12 px-6 py-12 bg-garabel-ink text-garabel-cream flex flex-col items-center justify-center gap-10 rounded-b-lg relative overflow-hidden">
         {/* Subtle decorative grain to enhance luxury paper feel */}
         <div className="absolute inset-0 paper-grain pointer-events-none opacity-20"></div>
+
+        {/* Top Right Logo in Dark Brown Footer Block */}
+        <a 
+          href="https://oneupdesign.co/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute top-6 right-6 z-30 select-none opacity-70 hover:opacity-100 transition-opacity duration-300 flex items-center gap-2 cursor-pointer"
+        >
+          <span className="font-mono text-[9px] tracking-[0.16em] text-garabel-cream/80 uppercase font-bold text-right">
+            website design & developed by
+          </span>
+          <img 
+            src="https://drive.google.com/thumbnail?id=1PFT_g5jStNb6Y8yQk5zyvj9HtxESI_gT&sz=w120" 
+            alt="Oneup Logo" 
+            referrerPolicy="no-referrer"
+            onError={(e) => {
+              e.currentTarget.src = "https://drive.google.com/uc?export=view&id=1PFT_g5jStNb6Y8yQk5zyvj9HtxESI_gT";
+            }}
+            className="h-7 w-auto object-contain select-none invert opacity-90"
+          />
+        </a>
         
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -250,9 +295,6 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
             <span>© 2026 ATELIER GARABEL. COPH / MUNICH / TOKYO. ALL SPEC RIGHTS PERSIST.</span>
             <span className="hidden sm:inline text-garabel-cream/35">•</span>
             <span>COMPOSTABLE CERTIFICATION NO. 299-A</span>
-          </div>
-          <div className="text-white font-bold uppercase tracking-[0.2em] opacity-95">
-            DESIGN BY NATURAL RATIO SYSTEMS
           </div>
         </div>
       </div>
