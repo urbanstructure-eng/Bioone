@@ -17,6 +17,7 @@ interface FileUploadSlotProps {
 
 function FileUploadSlot({ label, fileName, onFileSelect, onClear }: FileUploadSlotProps) {
   const [isDragOver, setIsDragOver] = React.useState(false);
+  const { t } = useLanguage();
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -65,7 +66,7 @@ function FileUploadSlot({ label, fileName, onFileSelect, onClear }: FileUploadSl
           <div className="w-6 h-6 rounded-full bg-[#376332]/10 flex items-center justify-center text-[#376332]">
             <Check className="w-3.5 h-3.5" />
           </div>
-          <span className="font-mono text-[8px] tracking-wider text-garabel-mid uppercase block">✦ FILE ATTACHED</span>
+          <span className="font-mono text-[8px] tracking-wider text-garabel-mid uppercase block">{t("file_attached")}</span>
           <p className="font-sans text-[10px] font-bold text-garabel-ink truncate w-full select-all">
             {fileName}
           </p>
@@ -78,7 +79,7 @@ function FileUploadSlot({ label, fileName, onFileSelect, onClear }: FileUploadSl
             }}
             className="text-[8px] font-mono text-red-600 hover:underline mt-1 font-black cursor-pointer px-1 relative z-30"
           >
-            [ REMOVE ]
+            [ {t("remove")} ]
           </button>
         </div>
       ) : (
@@ -87,7 +88,7 @@ function FileUploadSlot({ label, fileName, onFileSelect, onClear }: FileUploadSl
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
           </svg>
           <span className="font-mono text-[8px] sm:text-[9px] tracking-wider text-[#5c4a3c] uppercase font-bold">{label}</span>
-          <p className="font-sans text-[9px] text-[#5c4a3c]/60">Drag/Drop or click</p>
+          <p className="font-sans text-[9px] text-[#5c4a3c]/60">{t("drag_drop_click")}</p>
         </div>
       )}
     </div>
@@ -95,8 +96,256 @@ function FileUploadSlot({ label, fileName, onFileSelect, onClear }: FileUploadSl
 }
 
 export default function InquiryPage({ onClose }: InquiryPageProps) {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [inquiryType, setInquiryType] = useState<"existing" | "custom">("existing");
+  
+  // Localized option maps
+  const getIndustryLabel = (opt: string) => {
+    switch (language) {
+      case "ja":
+        return {
+          "Food & Beverage": "飲食・フード",
+          "Retail": "小売業",
+          "Cosmetics": "化粧品",
+          "E-commerce": "Eコマース",
+          "Healthcare": "ヘルスケア",
+          "Cannabis": "医療大麻・グリーン",
+          "Other": "その他"
+        }[opt] || opt;
+      case "fr":
+        return {
+          "Food & Beverage": "Alimentation & Boisson",
+          "Retail": "Vente de détail",
+          "Cosmetics": "Cosmétiques",
+          "E-commerce": "E-commerce",
+          "Healthcare": "Santé / Pharma",
+          "Cannabis": "Cannabis",
+          "Other": "Autre"
+        }[opt] || opt;
+      case "it":
+        return {
+          "Food & Beverage": "Alimentari e bevande",
+          "Retail": "Vendita al dettaglio",
+          "Cosmetics": "Cosmetici",
+          "E-commerce": "E-commerce",
+          "Healthcare": "Sanitario",
+          "Cannabis": "Cannabis",
+          "Other": "Altro"
+        }[opt] || opt;
+      case "es":
+        return {
+          "Food & Beverage": "Alimentos y bebidas",
+          "Retail": "Comercio minorista",
+          "Cosmetics": "Cosméticos",
+          "E-commerce": "E-commerce",
+          "Healthcare": "Salud",
+          "Cannabis": "Cannabis",
+          "Other": "Otro"
+        }[opt] || opt;
+      case "de":
+        return {
+          "Food & Beverage": "Lebensmittel & Getränke",
+          "Retail": "Einzelhandel",
+          "Cosmetics": "Kosmetik",
+          "E-commerce": "E-commerce",
+          "Healthcare": "Gesundheitswesen",
+          "Cannabis": "Cannabis",
+          "Other": "Sonstiges"
+        }[opt] || opt;
+      default:
+        return opt;
+    }
+  };
+
+  const getPackagingLabel = (opt: string) => {
+    switch (language) {
+      case "ja":
+        return {
+          "Bags": "バッグ・袋類",
+          "Mailers": "配送用メーラー・封筒",
+          "Boxes": "化粧箱・ボックス",
+          "Pouches": "スタンドパウチ・フィルム",
+          "Cups & Containers": "カップ・ボトル容器",
+          "Other": "その他"
+        }[opt] || opt;
+      case "fr":
+        return {
+          "Bags": "Sacs",
+          "Mailers": "Enveloppes d'expédition",
+          "Boxes": "Boîtes de luxe",
+          "Pouches": "Sachets",
+          "Cups & Containers": "Gobelets & Récipients",
+          "Other": "Autre"
+        }[opt] || opt;
+      case "it":
+        return {
+          "Bags": "Sacchetti",
+          "Mailers": "Buste spedizione",
+          "Boxes": "Scatole",
+          "Pouches": "Bustine richiudibili",
+          "Cups & Containers": "Bicchieri e Contenitori",
+          "Other": "Altro"
+        }[opt] || opt;
+      case "es":
+        return {
+          "Bags": "Bolsas",
+          "Mailers": "Sobres de envío",
+          "Boxes": "Cajas de lujo",
+          "Pouches": "Bolsas herméticas",
+          "Cups & Containers": "Vasos y Envases",
+          "Other": "Otro"
+        }[opt] || opt;
+      case "de":
+        return {
+          "Bags": "Tragetaschen",
+          "Mailers": "Versandtaschen",
+          "Boxes": "Luxusschachteln",
+          "Pouches": "Standbodenbeutel",
+          "Cups & Containers": "Becher & Behälter",
+          "Other": "Sonstiges"
+        }[opt] || opt;
+      default:
+        return opt;
+    }
+  };
+
+  const getQuantityLabel = (opt: string) => {
+    switch (language) {
+      case "ja":
+        return {
+          "Under 1,000": "1,000個未満",
+          "1,000–5,000": "1,000〜5,000個",
+          "5,000–10,000": "5,000〜10,000個",
+          "10,000+": "10,000個以上"
+        }[opt] || opt;
+      case "fr":
+        return {
+          "Under 1,000": "Moins de 1 000",
+          "1,000–5,000": "1 000 – 5 000",
+          "5,000–10,000": "5 000 – 10 000",
+          "10,000+": "10 000 ou plus"
+        }[opt] || opt;
+      case "it":
+        return {
+          "Under 1,000": "Meno di 1.000",
+          "1,000–5,000": "1.000 – 5.000",
+          "5,000–10,000": "5.000 – 10.000",
+          "10,000+": "Oltre 10.000"
+        }[opt] || opt;
+      case "es":
+        return {
+          "Under 1,000": "Menos de 1.000",
+          "1,000–5,000": "1.000 – 5.000",
+          "5,000–10,000": "5.000 – 10.000",
+          "10,000+": "Más de 10.000"
+        }[opt] || opt;
+      case "de":
+        return {
+          "Under 1,000": "Unter 1.000",
+          "1,000–5,000": "1.000 – 5.000",
+          "5,000–10,000": "5.000 – 10.000",
+          "10,000+": "Über 10.000"
+        }[opt] || opt;
+      default:
+        return opt;
+    }
+  };
+
+  const getBudgetLabel = (opt: string) => {
+    switch (language) {
+      case "ja":
+        return {
+          "Under $2,500": "2,500ドル未満",
+          "$2,500–$5,000": "2,500〜5,000ドル",
+          "$5,000–$10,000": "5,000〜10,000ドル",
+          "$10,000+": "10,000ドル以上"
+        }[opt] || opt;
+      case "fr":
+        return {
+          "Under $2,500": "Moins de 2 500 $",
+          "$2,500–$5,000": "2 500 $ – 5 000 $",
+          "$5,000–$10,000": "5 000 $ – 10 000 $",
+          "$10,000+": "10 000 $ ou plus"
+        }[opt] || opt;
+      case "it":
+        return {
+          "Under $2,500": "Meno di 2.500 $",
+          "$2,500–$5,000": "2.500 $ – 5.000 $",
+          "$5,000–$10,000": "5.000 $ – 10.000 $",
+          "$10,000+": "Oltre 10.000 $"
+        }[opt] || opt;
+      case "es":
+        return {
+          "Under $2,500": "Menos de 2.500 $",
+          "$2,500–$5,000": "2.500 $ – 5.000 $",
+          "$5,000–$10,000": "5.000 $ – 10.000 $",
+          "$10,000+": "Más de 2.500 $"
+        }[opt] || opt;
+      case "de":
+        return {
+          "Under $2,500": "Unter 2.500 $",
+          "$2,500–$5,000": "2.500 $ – 5.000 $",
+          "$5,000–$10,000": "5.000 $ – 10.000 $",
+          "$10,000+": "Über 10.000 $"
+        }[opt] || opt;
+      default:
+        return opt;
+    }
+  };
+
+  const getCustomPrintingLabel = (opt: string) => {
+    switch (language) {
+      case "ja":
+        return opt === "Yes" ? "はい（希望する）" : "いいえ（不要）";
+      case "fr":
+        return opt === "Yes" ? "Oui" : "Non";
+      case "it":
+        return opt === "Yes" ? "Sì" : "No";
+      case "es":
+        return opt === "Yes" ? "Sí" : "No";
+      case "de":
+        return opt === "Yes" ? "Ja" : "Nein";
+      default:
+        return opt;
+    }
+  };
+
+  const getTimelineLabel = (opt: string) => {
+    switch (language) {
+      case "ja":
+        return {
+          "ASAP": "至急（できるだけ早く）",
+          "Within 30 Days": "30日以内",
+          "Within 60 Days": "60日以内"
+        }[opt] || opt;
+      case "fr":
+        return {
+          "ASAP": "Dès que possible",
+          "Within 30 Days": "Sous 30 jours",
+          "Within 60 Days": "Sous 60 jours"
+        }[opt] || opt;
+      case "it":
+        return {
+          "ASAP": "Il prima possibile",
+          "Within 30 Days": "Entro 30 giorni",
+          "Within 60 Days": "Entro 60 giorni"
+        }[opt] || opt;
+      case "es":
+        return {
+          "ASAP": "Lo antes posible",
+          "Within 30 Days": "En menos de 30 días",
+          "Within 60 Days": "En menos de 60 días"
+        }[opt] || opt;
+      case "de":
+        return {
+          "ASAP": "Schnellstmöglich",
+          "Within 30 Days": "Innerhalb von 30 Tagen",
+          "Within 60 Days": "Innerhalb von 60 Tagen"
+        }[opt] || opt;
+      default:
+        return opt;
+    }
+  };
   
   // Base64 Logo state retrieved securely from full-stack api
   const [logoBase64, setLogoBase64] = useState<string | null>(null);
@@ -401,23 +650,15 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
             className="space-y-4"
           >
             <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.3em] text-[#376332] uppercase block">
-              ✦ PORTAL FOR MATERIAL CONSULTANCY & PROCUREMENT
+              {t("portal_sub")}
             </span>
             <h1 className="font-sans font-black text-2xl sm:text-3xl md:text-4xl uppercase text-garabel-ink tracking-tight leading-[0.95] max-w-xl">
-              {language === "ja" ? (
-                <>持続可能パッケージ<br />調達・提携ポータル</>
-              ) : (
-                <>Sustainable Packaging<br />Procurement Portal</>
-              )}
+              {t("portal_title")}
             </h1>
             <div className="w-12 h-0.5 bg-[#376332] mt-4"></div>
             
             <p className="font-sans text-xs sm:text-[13px] text-garabel-mid leading-relaxed max-w-2xl pt-2">
-              {language === "ja" ? (
-                "私たちの材料・製造チームとのパッケージングコンサルテーションを開始します。持続可能な小売用パッケージの調達、特注の構造コンセプトの開発、または長期的な調達パートナーシップの評価など、お客様のブランド目標、サステナビリティ目標、および製造要件に沿った仕立ての提案書をご用意いたします。進取の気性に富む小売業者、ラグジュアリーブランド、医療用大麻事業者、および妥協のない高品質を求める一般消費財企業に信頼されています。"
-              ) : (
-                "Initiate a packaging consultation with our materials and manufacturing team. Whether you are sourcing sustainable retail packaging, developing a bespoke structural concept, or evaluating long-term procurement partnerships, our team will prepare a tailored proposal aligned with your brand objectives, sustainability goals, and production requirements. Trusted by forward-thinking retailers, luxury brands, cannabis operators, and consumer product companies seeking premium packaging solutions without compromise."
-              )}
+              {t("portal_desc")}
             </p>
           </motion.div>
 
@@ -447,7 +688,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                       {inquiryType === "existing" && (
                         <motion.div layoutId="typeIndicator" className="absolute bottom-0 inset-x-0 h-[2px] bg-[#376332]" />
                       )}
-                      {language === "ja" ? "01 / モデル注文" : "01 / ORDER MODEL"}
+                      {t("tab_existing")}
                     </button>
                     <button
                       type="button"
@@ -459,7 +700,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                       {inquiryType === "custom" && (
                         <motion.div layoutId="typeIndicator" className="absolute bottom-0 inset-x-0 h-[2px] bg-[#376332]" />
                       )}
-                      {language === "ja" ? "02 / カスタム設計" : "02 / Bespoke CUSTOM"}
+                      {t("tab_custom")}
                     </button>
                   </div>
 
@@ -467,24 +708,24 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                     {/* Header Banner inside Form */}
                     <div className="mb-6 border-b border-garabel-ink/10 pb-4">
                       <h2 className="font-sans font-extrabold text-[#376332] text-lg uppercase tracking-tight">
-                        {inquiryType === "custom" ? "Request a Custom Quote" : `Customize & Order: ${specimenModel}`}
+                        {inquiryType === "custom" ? t("form_custom_title") : `${t("form_existing_title")}: ${specimenModel}`}
                       </h2>
                       <p className="text-[11px] text-garabel-mid leading-relaxed mt-1">
                         {inquiryType === "custom" 
-                          ? "Specify your brand requirements for a bespoke materials and dimension calculation." 
-                          : "Configure and secure a physical prototype specification portfolio."}
+                          ? t("form_custom_desc") 
+                          : t("form_existing_desc")}
                       </p>
                     </div>
 
                     {/* SECTION 1: Company Information */}
                     <div className="space-y-5">
                       <div className="flex items-center gap-2 border-l-2 border-[#376332] pl-3">
-                        <h3 className="font-sans font-black text-xs uppercase tracking-wider text-garabel-ink">Company Information</h3>
+                        <h3 className="font-sans font-black text-xs uppercase tracking-wider text-garabel-ink">{t("sec_company")}</h3>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Company Name *</label>
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">{t("field_company_name")}</label>
                           <input
                             type="text"
                             required
@@ -496,7 +737,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                         </div>
 
                         <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Contact Name *</label>
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">{t("field_contact_name")}</label>
                           <input
                             type="text"
                             required
@@ -508,7 +749,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                         </div>
 
                         <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Business Email *</label>
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">{t("field_email")}</label>
                           <input
                             type="email"
                             required
@@ -520,7 +761,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                         </div>
 
                         <div className="flex flex-col space-y-1">
-                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Phone Number</label>
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">{t("field_phone")}</label>
                           <input
                             type="tel"
                             value={clientPhone}
@@ -535,7 +776,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                     {/* SECTION 2: Project Details */}
                     <div className="space-y-6 pt-4">
                       <div className="flex items-center gap-2 border-l-2 border-[#376332] pl-3">
-                        <h3 className="font-sans font-black text-xs uppercase tracking-wider text-garabel-ink">Project Details</h3>
+                        <h3 className="font-sans font-black text-xs uppercase tracking-wider text-garabel-ink">{t("sec_project")}</h3>
                       </div>
 
                       <div className="space-y-6">
@@ -543,7 +784,9 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                           <>
                             {/* Industry */}
                             <div className="flex flex-col space-y-2">
-                              <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Industry *</label>
+                              <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                                {language === "ja" ? "業界 *" : "Industry *"}
+                              </label>
                               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                                 {["Food & Beverage", "Retail", "Cosmetics", "E-commerce", "Healthcare", "Cannabis", "Other"].map((opt) => (
                                   <button
@@ -556,7 +799,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                                         : "bg-white/40 border-garabel-ink/10 text-garabel-ink/80 hover:bg-neutral-100/60 hover:border-garabel-ink/30"
                                     }`}
                                   >
-                                    {opt}
+                                    {getIndustryLabel(opt)}
                                   </button>
                                 ))}
                               </div>
@@ -564,7 +807,9 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
 
                             {/* Packaging Type Needed */}
                             <div className="flex flex-col space-y-2">
-                              <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Packaging Type Needed *</label>
+                              <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                                {language === "ja" ? "必要パッケージ種類 *" : "Packaging Type Needed *"}
+                              </label>
                               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                                 {["Bags", "Mailers", "Boxes", "Pouches", "Cups & Containers", "Other"].map((opt) => (
                                   <button
@@ -577,7 +822,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                                         : "bg-white/40 border-garabel-ink/10 text-garabel-ink/80 hover:bg-neutral-100/60 hover:border-garabel-ink/30"
                                     }`}
                                   >
-                                    {opt}
+                                    {getPackagingLabel(opt)}
                                   </button>
                                 ))}
                               </div>
@@ -587,7 +832,9 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
 
                         {/* Estimated Order Quantity */}
                         <div className="flex flex-col space-y-2">
-                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Estimated Order Quantity *</label>
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                            {language === "ja" ? "推定数量 *" : "Estimated Order Quantity *"}
+                          </label>
                           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                             {["Under 1,000", "1,000–5,000", "5,000–10,000", "10,000+"].map((opt) => (
                               <button
@@ -600,7 +847,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                                     : "bg-white/40 border-garabel-ink/10 text-garabel-ink/80 hover:bg-neutral-100/60 hover:border-garabel-ink/30"
                                   }`}
                               >
-                                {opt}
+                                {getQuantityLabel(opt)}
                               </button>
                             ))}
                           </div>
@@ -609,7 +856,9 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                         {inquiryType === "custom" && (
                           /* Target Budget */
                           <div className="flex flex-col space-y-2">
-                            <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Target Budget *</label>
+                            <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                              {language === "ja" ? "目標予算 *" : "Target Budget *"}
+                            </label>
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                               {["Under $2,500", "$2,500–$5,000", "$5,000–$10,000", "$10,000+"].map((opt) => (
                                 <button
@@ -622,7 +871,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                                       : "bg-white/40 border-garabel-ink/10 text-garabel-ink/80 hover:bg-neutral-100/60 hover:border-garabel-ink/30"
                                     }`}
                                   >
-                                  {opt}
+                                  {getBudgetLabel(opt)}
                                 </button>
                               ))}
                             </div>
@@ -631,7 +880,9 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
 
                         {/* Need Custom Printing? */}
                         <div className="flex flex-col space-y-2">
-                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Need Custom Printing? *</label>
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                            {language === "ja" ? "ロゴ・カスタム印刷加工 *" : "Need Custom Printing? *"}
+                          </label>
                           <div className="grid grid-cols-2 gap-2 max-w-xs">
                             {["Yes", "No"].map((opt) => (
                               <button
@@ -644,7 +895,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                                     : "bg-white/40 border-garabel-ink/10 text-garabel-ink/80 hover:bg-neutral-100/60 hover:border-garabel-ink/30"
                                 }`}
                               >
-                                {opt}
+                                {getCustomPrintingLabel(opt)}
                               </button>
                             ))}
                           </div>
@@ -652,7 +903,9 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
 
                         {/* Project Timeline */}
                         <div className="flex flex-col space-y-2">
-                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">Project Timeline *</label>
+                          <label className="font-mono text-[9px] tracking-wider text-garabel-mid uppercase font-bold">
+                            {language === "ja" ? "プロジェクト期間 *" : "Project Timeline *"}
+                          </label>
                           <div className="grid grid-cols-3 gap-2">
                             {["ASAP", "Within 30 Days", "Within 60 Days"].map((opt) => (
                               <button
@@ -665,7 +918,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                                     : "bg-white/40 border-garabel-ink/10 text-garabel-ink/80 hover:bg-neutral-100/60 hover:border-garabel-ink/30"
                                 }`}
                               >
-                                {opt}
+                                {getTimelineLabel(opt)}
                               </button>
                             ))}
                           </div>
@@ -683,11 +936,11 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                         {isSubmitting ? (
                           <>
                             <span className="w-1.5 h-1.5 bg-[#fdfbf7] rounded-full animate-ping" />
-                            <span>SUBMITTING INQUIRY...</span>
+                            <span>{t("btn_submitting")}</span>
                           </>
                         ) : (
                           <>
-                            <span>SUBMIT ENVELOPE DESIGN SPEC</span>
+                            <span>{t("btn_submit")}</span>
                             <ArrowRight className="w-3.5 h-3.5 text-[#fdfbf7]" />
                           </>
                         )}
@@ -722,60 +975,56 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                   </div>
 
                   <span className="font-mono text-[10px] tracking-[0.3em] text-[#376332] uppercase block mb-1">
-                    ✦ SPECIFICATION LODGED
+                    {t("confirm_badge")}
                   </span>
 
                   <h3 className="font-sans font-black text-2xl uppercase text-garabel-ink tracking-tight mb-3">
-                    Inquiry Transmitted
+                    {t("confirm_title")}
                   </h3>
 
                   <p className="font-sans text-xs sm:text-[13px] text-garabel-mid leading-relaxed max-w-md mx-auto mb-6">
-                    {language === "ja" ? (
-                      "ご要望が調達システムに登録されました。弊社の担当マテリアルエンジニアが24時間以内にご連絡を差し上げ、詳細設計プロセスを開始します。"
-                    ) : (
-                      "Your aesthetic, environmental, and physical parameters are successfully registered in our procurement framework. A managing material coordinator will contact you shortly."
-                    )}
+                    {t("confirm_desc")}
                   </p>
 
                   <div className="border border-garabel-ink/10 rounded-xl bg-garabel-cream/40 p-5 text-left space-y-2.5 shadow-sm text-xs">
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span>PROCUREMENT ID:</span>
+                      <span>{t("card_proc_id")}</span>
                       <span className="font-bold text-garabel-ink select-all">#{receiptNo}</span>
                     </div>
 
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span>TIMESTAMP:</span>
+                      <span>{t("card_time")}</span>
                       <span className="font-bold text-garabel-ink">{timestamp}</span>
                     </div>
 
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span>ORGANIZATION:</span>
+                      <span>{t("card_org")}</span>
                       <span className="font-bold text-garabel-ink uppercase">{companyName}</span>
                     </div>
 
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span>PRIMARY CONTACT:</span>
+                      <span>{t("card_contact")}</span>
                       <span className="font-bold text-garabel-ink uppercase">{clientName}</span>
                     </div>
 
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span>{inquiryType === "custom" ? "TARGET BUDGET:" : "MODEL BASE:"}</span>
-                      <span className="font-bold text-red-800 uppercase">{inquiryType === "custom" ? targetBudget : specimenModel}</span>
+                      <span>{inquiryType === "custom" ? t("card_budget") : t("card_model")}</span>
+                      <span className="font-bold text-red-800 uppercase">{inquiryType === "custom" ? getBudgetLabel(targetBudget) : specimenModel}</span>
                     </div>
 
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span>ESTIMATED QUANTITY:</span>
-                      <span className="font-bold text-garabel-ink uppercase">{orderQuantity}</span>
+                      <span>{t("card_quantity")}</span>
+                      <span className="font-bold text-garabel-ink uppercase">{getQuantityLabel(orderQuantity)}</span>
                     </div>
 
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span>{inquiryType === "custom" ? "PACKAGING NEEDED:" : "ENGAGEMENT TYPE:"}</span>
-                      <span className="font-bold text-[#376332] uppercase truncate max-w-[200px]">{inquiryType === "custom" ? packagingType : "Model Prototype"}</span>
+                      <span>{inquiryType === "custom" ? t("card_pack_needed") : t("card_engagement")}</span>
+                      <span className="font-bold text-[#376332] uppercase truncate max-w-[200px]">{inquiryType === "custom" ? getPackagingLabel(packagingType) : "Model Prototype"}</span>
                     </div>
 
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">
-                      <span>PROJECT TIMELINE:</span>
-                      <span className="font-bold text-garabel-ink uppercase">{projectTimeline}</span>
+                      <span>{t("card_timeline")}</span>
+                      <span className="font-bold text-garabel-ink uppercase">{getTimelineLabel(projectTimeline)}</span>
                     </div>
                   </div>
 
@@ -786,7 +1035,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                       className="w-full bg-[#376332] hover:bg-[#2b4c27] text-[#fdfbf7] py-3.5 px-6 rounded-xl font-mono text-[11px] tracking-[0.2em] uppercase transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer focus:outline-none"
                     >
                       <Download className="w-4 h-4 shrink-0" />
-                      <span>SAVE PARTNERSHIP ENVELOPE (PDF)</span>
+                      <span>{t("btn_pdf")}</span>
                     </button>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
@@ -794,7 +1043,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                         onClick={onClose}
                         className="bg-transparent border border-garabel-ink hover:bg-neutral-100 text-garabel-ink py-3 px-4 rounded-xl font-mono text-[10px] tracking-[0.15em] uppercase transition-all focus:outline-none cursor-pointer"
                       >
-                        CLOSE RECEIPT
+                        {t("btn_close_receipt")}
                       </button>
                       
                       <a
@@ -802,7 +1051,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                         className="inline-flex items-center justify-center bg-transparent border border-garabel-ink/25 text-garabel-ink hover:bg-garabel-ink hover:text-[#fdfbf7] py-3 px-4 rounded-xl font-mono text-[10px] tracking-[0.15em] uppercase transition-all focus:outline-none cursor-pointer"
                       >
                         <FileText className="w-3.5 h-3.5 mr-1.5 shrink-0" />
-                        DIRECT MAIL BACKUP
+                        {t("btn_mail_backup")}
                       </a>
                     </div>
                   </div>
@@ -817,7 +1066,7 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
               className="group flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] font-bold text-garabel-ink uppercase hover:text-[#376332] transition-colors focus:outline-none cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
-              <span>BACK TO WORKSHOP</span>
+              <span>{t("btn_back")}</span>
             </button>
           </div>
 
