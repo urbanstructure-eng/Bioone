@@ -1024,14 +1024,9 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                       </div>
                     ) : emailSent ? (
                       <div className="bg-emerald-50/95 text-emerald-800 border border-emerald-250/60 rounded-xl p-3.5 text-[11px] font-sans mb-1 shadow-xs animate-fadeIn">
-                        <div className="flex gap-2 items-start">
-                          <span className="w-2 h-2 rounded-full bg-emerald-600 mt-1 shrink-0" />
-                          <div>
-                            <p className="font-bold uppercase tracking-wider text-[9px] font-mono mb-0.5 text-emerald-950">✦ DIRECT EMAIL DISPATCHED SUCCESSFULLY</p>
-                            <p className="text-emerald-700 leading-relaxed">
-                              Real-time brand quote parameters have been compiled and sent via SMTP to <strong className="font-black text-emerald-950">oneunedigital@gmail.com</strong>.
-                            </p>
-                          </div>
+                        <div className="flex gap-2 items-center">
+                          <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" />
+                          <p className="font-bold uppercase tracking-wider text-[10px] font-mono text-emerald-950">✦ DIRECT EMAIL DISPATCHED SUCCESSFULLY. THANK YOU FOR CONTACTING ONEBIO.SHOP</p>
                         </div>
                       </div>
                     ) : (
