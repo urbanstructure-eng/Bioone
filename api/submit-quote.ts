@@ -25,25 +25,54 @@ export default async function handler(req: any, res: any) {
     console.log(`Email: ${data.clientEmail}`);
     console.log("-----------------------------------------");
 
-    // Dynamic fallback checking of GMail/SMTP environment variables
+    // Dynamic fallback checking of SMTP environment variables
     const smtpUser = process.env.SMTP_USER;
     const smtpPass = process.env.SMTP_PASS;
-    const smtpService = process.env.SMTP_SERVICE || "gmail";
+    const smtpService = process.env.SMTP_SERVICE;
+    const smtpHost = process.env.SMTP_HOST || "smtp.gmail.com";
+    const smtpPort = parseInt(process.env.SMTP_PORT || "587");
+    // Secure is true for 465, false for other ports
+    const smtpSecure = process.env.SMTP_SECURE === "true" || smtpPort === 465;
+
+    let smtpConfigured = false;
+    let emailSent = false;
+    let dispatchError = null;
 
     if (smtpUser && smtpPass) {
-      const transporter = nodemailer.createTransport({
-        service: smtpService,
-        auth: {
-          user: smtpUser,
-          pass: smtpPass,
-        },
-      });
+      smtpConfigured = true;
+      try {
+        // Build robust transporter config
+        const transportConfig: any = smtpService 
+          ? {
+              service: smtpService,
+              auth: {
+                user: smtpUser,
+                pass: smtpPass,
+              },
+            }
+          : {
+              host: smtpHost,
+              port: smtpPort,
+              secure: smtpSecure,
+              auth: {
+                user: smtpUser,
+                pass: smtpPass,
+              },
+              // TLS options to handle unauthorized cert issues common on serverless
+              tls: {
+                rejectUnauthorized: false
+              }
+            };
 
-      const mailOptions = {
-        from: `"ONE Biodegradable Brand Solutions" <${smtpUser}>`,
-        to: "oneunedigital@gmail.com",
-        subject: `New Spec & Custom Inquiry: ${data.companyName || "N/A"}`,
-        text: `
+        console.log(`✦ Initializing node-mailer with: ${smtpService ? `Service: ${smtpService}` : `Host: ${smtpHost}:${smtpPort} (Secure: ${smtpSecure})`}`);
+        const transporter = nodemailer.createTransport(transportConfig);
+
+        const mailOptions = {
+          from: `"ONE Biodegradable Brand Solutions" <${smtpUser}>`,
+          to: "oneunedigital@gmail.com",
+          replyTo: data.clientEmail,
+          subject: `New Spec & Custom Inquiry: ${data.companyName || "N/A"}`,
+          text: `
 ONE Biodegradable Brand Solutions - New Quote Inquiry Received
 
 A brand has lodged a new design specification.
@@ -74,19 +103,26 @@ ${data.projectDescription || "No registration notes provided."}
 ${data.strategicOutcome || "No specific metric provided."}
 
 Timestamp: ${new Date().toUTCString()}
-        `,
-      };
+          `,
+        };
 
-      await transporter.sendMail(mailOptions);
-      console.log("✦ SMTP transmission to oneunedigital@gmail.com successful via Vercel Serverless.");
+        await transporter.sendMail(mailOptions);
+        emailSent = true;
+        console.log("✦ SMTP transmission to oneunedigital@gmail.com successful via Vercel Serverless.");
+      } catch (sendErr: any) {
+        dispatchError = sendErr.message || String(sendErr);
+        console.error("✦ SMTP email transmission failed:", sendErr);
+      }
     } else {
-      console.log("✦ Note: SMTP_USER and SMTP_PASS are not configured in Vercel environment variables. Sending will complete but only simulation mode will run.");
+      console.log("✦ Note: SMTP_USER and SMTP_PASS are not configured in Vercel environment variables. Running in simulated fallback mode.");
     }
 
     return res.status(200).json({ 
       success: true, 
       destination: "oneunedigital@gmail.com",
-      smtpConfigured: !!(smtpUser && smtpPass)
+      smtpConfigured,
+      emailSent,
+      dispatchError
     });
   } catch (err: any) {
     console.error("Vercel submit quote serverless function error:", err);

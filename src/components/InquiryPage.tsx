@@ -383,6 +383,9 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
   const [specimenModel, setSpecimenModel] = useState("Specimen 01");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [smtpConfigured, setSmtpConfigured] = useState<boolean | null>(null);
+  const [emailSent, setEmailSent] = useState<boolean | null>(null);
+  const [dispatchError, setDispatchError] = useState<string | null>(null);
 
   // Stable luxury receipt details generated once per session/form load
   const [receiptNo] = useState(() => Math.floor(100000 + Math.random() * 900000));
@@ -574,6 +577,10 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
     }
 
     setIsSubmitting(true);
+    setSmtpConfigured(null);
+    setEmailSent(null);
+    setDispatchError(null);
+
     try {
       const response = await fetch("/api/submit-quote", {
         method: "POST",
@@ -597,10 +604,18 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
       });
 
       if (!response.ok) {
-        throw new Error("Server transmission failed");
+        throw new Error(`Server returned status code: ${response.status}`);
       }
-    } catch (err) {
+
+      const resData = await response.json();
+      if (resData) {
+        setSmtpConfigured(resData.smtpConfigured);
+        setEmailSent(resData.emailSent);
+        setDispatchError(resData.dispatchError);
+      }
+    } catch (err: any) {
       console.error("Quote submit backend error, using graceful client-side fallback simulation:", err);
+      setDispatchError(err.message || String(err));
     } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -985,6 +1000,62 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
                   <p className="font-sans text-xs sm:text-[13px] text-garabel-mid leading-relaxed max-w-md mx-auto mb-6">
                     {t("confirm_desc")}
                   </p>
+
+                  {/* SMTP Status Feedback for Vercel/Express deployment debugging */}
+                  <div className="mb-6 max-w-md mx-auto text-left">
+                    {smtpConfigured === null ? (
+                      <div className="bg-neutral-100/85 text-neutral-600 border border-neutral-200/50 rounded-xl p-3.5 text-[11px] font-sans flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-ping shrink-0" />
+                        <div>
+                          <strong className="font-bold">Transmission Status:</strong> Checking SMTP connection parameters...
+                        </div>
+                      </div>
+                    ) : smtpConfigured === false ? (
+                      <div className="bg-yellow-50/80 text-yellow-800 border border-yellow-200/55 rounded-xl p-3.5 text-[11px] font-sans">
+                        <div className="flex gap-2 items-start">
+                          <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-1 shrink-0" />
+                          <div>
+                            <p className="font-bold uppercase tracking-wider text-[9px] font-mono mb-0.5 text-yellow-900">Simulation Mode Active (Local Spec saved)</p>
+                            <p className="text-[#634a15] leading-relaxed">
+                              Your specification was successfully compiled. To deliver real automated emails directly to <strong className="font-black text-yellow-950">oneunedigital@gmail.com</strong>, define the environment variables <strong className="font-semibold">SMTP_USER</strong> and <strong className="font-semibold">SMTP_PASS</strong> in your Vercel Dashboard settings.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ) : emailSent ? (
+                      <div className="bg-emerald-50/95 text-emerald-800 border border-emerald-250/60 rounded-xl p-3.5 text-[11px] font-sans mb-1 shadow-xs animate-fadeIn">
+                        <div className="flex gap-2 items-start">
+                          <span className="w-2 h-2 rounded-full bg-emerald-600 mt-1 shrink-0" />
+                          <div>
+                            <p className="font-bold uppercase tracking-wider text-[9px] font-mono mb-0.5 text-emerald-950">✦ DIRECT EMAIL DISPATCHED SUCCESSFULLY</p>
+                            <p className="text-emerald-700 leading-relaxed">
+                              Real-time brand quote parameters have been compiled and sent via SMTP to <strong className="font-black text-emerald-950">oneunedigital@gmail.com</strong>.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="bg-[#fcf5f5] text-red-800 border border-red-200/60 rounded-xl p-3.5 text-[11px] font-sans mb-1 shadow-xs">
+                        <div className="flex gap-2 items-start">
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-1.5 shrink-0" />
+                          <div>
+                            <p className="font-bold uppercase tracking-wider text-[9px] font-mono mb-0.5 text-red-900">Email SMTP Transmit Error</p>
+                            <p className="text-[#7c3030] leading-relaxed mb-1.5">
+                              Nodemailer failed to establish secure link to your SMTP server.
+                            </p>
+                            {dispatchError && (
+                              <p className="text-red-950 font-mono text-[10px] bg-red-100/50 p-1.5 rounded break-all leading-normal">
+                                Error: {dispatchError}
+                              </p>
+                            )}
+                            <p className="text-red-650 mt-1.5 leading-normal">
+                              Verify that you have set valid SMTP credentials (or SMTP host options specified in `.env.example`) in your Vercel Environment configurations.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
                   <div className="border border-garabel-ink/10 rounded-xl bg-garabel-cream/40 p-5 text-left space-y-2.5 shadow-sm text-xs">
                     <div className="flex justify-between font-mono text-[10px] text-garabel-mid border-b border-garabel-ink/5 pb-1.5">

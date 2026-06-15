@@ -139,21 +139,49 @@ app.post("/api/submit-quote", async (req, res) => {
     console.log(`Description: ${data.projectDescription || "N/A"}`);
     console.log("-----------------------------------------");
 
-    // Dynamic optional import of nodemailer for robust SMTP deliveries
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
+    const smtpUser = process.env.SMTP_USER;
+    const smtpPass = process.env.SMTP_PASS;
+    const smtpService = process.env.SMTP_SERVICE;
+    const smtpHost = process.env.SMTP_HOST || "smtp.gmail.com";
+    const smtpPort = parseInt(process.env.SMTP_PORT || "587");
+    const smtpSecure = process.env.SMTP_SECURE === "true" || smtpPort === 465;
+
+    let smtpConfigured = false;
+    let emailSent = false;
+    let dispatchError = null;
+
+    if (smtpUser && smtpPass) {
+      smtpConfigured = true;
       try {
         const nodemailer = await import("nodemailer");
-        const transporter = nodemailer.createTransport({
-          service: process.env.SMTP_SERVICE || "gmail",
-          auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS,
-          },
-        });
+        const transportConfig: any = smtpService 
+          ? {
+              service: smtpService,
+              auth: {
+                user: smtpUser,
+                pass: smtpPass,
+              },
+            }
+          : {
+              host: smtpHost,
+              port: smtpPort,
+              secure: smtpSecure,
+              auth: {
+                user: smtpUser,
+                pass: smtpPass,
+              },
+              tls: {
+                rejectUnauthorized: false
+              }
+            };
+
+        console.log(`✦ Initializing node-mailer on Express with: ${smtpService ? `Service: ${smtpService}` : `Host: ${smtpHost}:${smtpPort} (Secure: ${smtpSecure})`}`);
+        const transporter = nodemailer.createTransport(transportConfig);
 
         const mailOptions = {
-          from: `"ONE Biodegradable Brand Solutions" <${process.env.SMTP_USER}>`,
+          from: `"ONE Biodegradable Brand Solutions" <${smtpUser}>`,
           to: "oneunedigital@gmail.com",
+          replyTo: data.clientEmail,
           subject: `New Spec & Custom Inquiry: ${data.companyName}`,
           text: `
 ONE Biodegradable Brand Solutions - New Quote Inquiry Received
@@ -186,13 +214,23 @@ Timestamp: ${new Date().toUTCString()}
         };
 
         await transporter.sendMail(mailOptions);
+        emailSent = true;
         console.log("✦ SMTP transmission to oneunedigital@gmail.com successful.");
-      } catch (smtpErr) {
+      } catch (smtpErr: any) {
+        dispatchError = smtpErr.message || String(smtpErr);
         console.error("✦ SMTP email sending failed: ", smtpErr);
       }
+    } else {
+      console.log("✦ Note: SMTP_USER and SMTP_PASS are not configured. Running in simulated fallback mode.");
     }
 
-    res.json({ success: true, destination: "oneunedigital@gmail.com" });
+    res.json({ 
+      success: true, 
+      destination: "oneunedigital@gmail.com",
+      smtpConfigured,
+      emailSent,
+      dispatchError
+    });
   } catch (err: any) {
     console.error("Quote submission error:", err);
     res.status(500).json({ error: "Failed to log & route inquiry." });
