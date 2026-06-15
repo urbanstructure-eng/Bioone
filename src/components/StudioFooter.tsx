@@ -103,7 +103,7 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-1 py-0.5 rounded-lg select-none opacity-80 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
         >
-          <span className="font-mono text-[9px] tracking-[0.16em] text-garabel-mid uppercase font-bold text-right">
+          <span className="font-mono text-[10px] tracking-[0.16em] text-garabel-mid uppercase font-bold text-right">
             website design & develope byoneup
           </span>
           <img 
@@ -114,7 +114,7 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
               // Fallback to absolute direct download/stream link if lh3 fails
               e.currentTarget.src = "https://drive.google.com/uc?export=view&id=1PFT_g5jStNb6Y8yQk5zyvj9HtxESI_gT";
             }}
-            className="h-7 w-auto object-contain select-none"
+            className="h-[31px] w-auto object-contain select-none"
           />
         </a>
       </div>
@@ -262,7 +262,7 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
           rel="noopener noreferrer"
           className="absolute top-6 right-6 z-30 select-none opacity-70 hover:opacity-100 transition-opacity duration-300 flex items-center gap-2 cursor-pointer"
         >
-          <span className="font-mono text-[9px] tracking-[0.16em] text-garabel-cream/80 uppercase font-bold text-right">
+          <span className="font-mono text-[10px] tracking-[0.16em] text-garabel-cream/80 uppercase font-bold text-right">
             website design & developed by
           </span>
           <img 
@@ -272,7 +272,8 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
             onError={(e) => {
               e.currentTarget.src = "https://drive.google.com/uc?export=view&id=1PFT_g5jStNb6Y8yQk5zyvj9HtxESI_gT";
             }}
-            className="h-7 w-auto object-contain select-none invert opacity-90"
+            style={{ filter: "brightness(0) invert(1)", WebkitFilter: "brightness(0) invert(1)" }}
+            className="h-[31px] w-auto object-contain select-none opacity-90"
           />
         </a>
         
