@@ -95,30 +95,6 @@ export default function StudioFooter({ onOpenInquiry }: StudioFooterProps) {
   return (
     <footer className="relative w-full max-w-7xl mx-auto px-6 pt-16 pb-12 z-10 border-t border-garabel-ink/10 select-none animate-fadeIn">
       
-      {/* Website Design & Developed Badge at Top Right */}
-      <div className="flex md:absolute md:top-6 md:right-6 justify-end items-center mb-6 md:mb-0 z-20">
-        <a 
-          href="https://oneupdesign.co/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 px-1 py-0.5 rounded-lg select-none opacity-80 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-        >
-          <span className="font-mono text-[10px] tracking-[0.16em] text-garabel-mid uppercase font-bold text-right">
-            website design & develope byoneup
-          </span>
-          <img 
-            src="https://lh3.googleusercontent.com/d/1PFT_g5jStNb6Y8yQk5zyvj9HtxESI_gT" 
-            alt="Oneup Logo" 
-            referrerPolicy="no-referrer"
-            onError={(e) => {
-              // Fallback to absolute direct download/stream link if lh3 fails
-              e.currentTarget.src = "https://drive.google.com/uc?export=view&id=1PFT_g5jStNb6Y8yQk5zyvj9HtxESI_gT";
-            }}
-            className="h-[31px] w-auto object-contain select-none"
-          />
-        </a>
-      </div>
-
       {/* Luxurious Editorial Logo Ticker (Brown organic subtle placeholders) */}
       <div className="w-full overflow-hidden py-8 border-b border-garabel-ink/10 mb-14 relative">
         {/* Elegant edge fading using CSS custom properties for theme-cohesive background matching */}
