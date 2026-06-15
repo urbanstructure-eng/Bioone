@@ -683,9 +683,15 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
               {!isSubmitted ? (
                 <motion.div
                   key="form"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: 10, filter: "blur(4px)", scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+                  exit={{ 
+                    opacity: 0, 
+                    y: -15, 
+                    filter: "blur(25px)", 
+                    scale: 1.05,
+                    transition: { duration: 1.2, ease: [0.25, 1, 0.5, 1] }
+                  }}
                   transition={{ duration: 0.5 }}
                   className="bg-garabel-cream/85 backdrop-blur-md rounded-2xl border border-garabel-ink/10 p-5 sm:p-8 shadow-craft-lg relative"
                 >
@@ -966,9 +972,9 @@ export default function InquiryPage({ onClose }: InquiryPageProps) {
               ) : (
                 <motion.div
                   key="confirmation"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ type: "spring", stiffness: 100, damping: 15 }}
+                  initial={{ opacity: 0, scale: 0.96, y: 12, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ type: "spring", stiffness: 100, damping: 18, delay: 0.1 }}
                   className="bg-garabel-cream/90 backdrop-blur-md rounded-2xl border border-garabel-ink/15 p-6 sm:p-10 text-center shadow-craft-2xl relative max-w-xl mx-auto animate-fadeIn"
                 >
                   <div className="absolute inset-0 paper-grain pointer-events-none opacity-10 rounded-2xl"></div>
