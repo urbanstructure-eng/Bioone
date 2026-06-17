@@ -12,6 +12,7 @@ import CartDrawer from "./components/CartDrawer";
 import { FlowArt, FlowSection } from "./components/FlowArt";
 import { useLanguage, LANGUAGES } from "./translations";
 import InquiryPage from "./components/InquiryPage";
+import NaturePopup from "./components/NaturePopup";
 import { smoothScrollTo } from "./lib/scrollUtils";
 
 export interface OrganicTheme {
@@ -368,6 +369,9 @@ export default function App() {
           <InquiryPage onClose={() => setIsInquiryOpen(false)} />
         )}
       </AnimatePresence>
+
+      {/* Sustainable Visual Nature Showcase Popup Badge */}
+      <NaturePopup />
 
       {/* Main Interactive Layers - slides completely right to reveal the full page drawer */}
       <motion.div 
