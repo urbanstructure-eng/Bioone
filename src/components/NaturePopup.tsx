@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Recycle } from "lucide-react";
+import { X } from "lucide-react";
 
 export default function NaturePopup() {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,51 +34,56 @@ export default function NaturePopup() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15, filter: "blur(8px)" }}
               transition={{ type: "spring", stiffness: 100, damping: 18 }}
-              className="pointer-events-auto w-full max-w-lg aspect-square sm:aspect-auto sm:min-h-[380px] bg-neutral-900 rounded-3xl overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] border border-white/10 relative flex flex-col justify-center items-center p-8 sm:p-12 text-center select-none group"
+              className="pointer-events-auto w-full max-w-lg aspect-square sm:aspect-auto sm:min-h-[380px] bg-neutral-900 rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] border border-white/10 relative flex flex-col justify-center items-center p-8 sm:p-12 text-center select-none group"
               id="nature-popup-modal"
             >
-              {/* Fallback Leaf Nature Background Macro Photo */}
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{
-                  backgroundImage: `url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1200&q=85')`,
-                }}
-              />
-
-              {/* Cinematic Looping Video Background of Leaves Under Sun */}
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover opacity-90 z-0 transition-transform duration-[10000ms] ease-out scale-102 group-hover:scale-108 pointer-events-none"
-              >
-                <source
-                  src="https://assets.mixkit.co/videos/preview/mixkit-slow-motion-of-leaves-under-the-sun-33519-large.mp4"
-                  type="video/mp4"
+              {/* Premium Top Center Seam Edge Logo */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[60] flex items-center justify-center pointer-events-none">
+                <img
+                  src="https://drive.google.com/thumbnail?id=1qS2_qmlMWUQcajrumU5MJMdREokFaDLS&sz=w400"
+                  alt="Green Brand Logo"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://drive.google.com/uc?export=view&id=1qS2_qmlMWUQcajrumU5MJMdREokFaDLS";
+                  }}
+                  className="h-[99px] sm:h-[123px] w-auto object-contain select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.5)]"
                 />
-              </video>
+              </div>
 
-              {/* Premium cinematic vignette and depth gradient overlay to ensure immaculate white text legibility */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/70 mix-blend-multiply z-0" />
-              <div className="absolute inset-0 bg-black/30 mix-blend-overlay z-0" />
+              {/* Dedicated Overflow-Hidden Mask for Background Elements */}
+              <div className="absolute inset-0 rounded-3xl overflow-hidden z-0 pointer-events-none">
+                {/* Cinematic Floating Green Leaf Background Video-like Experience */}
+                <motion.div
+                  animate={{
+                    scale: [1.05, 1.18, 1.05],
+                    x: [-8, 8, -8],
+                    y: [-6, 6, -6],
+                    rotate: [0.5, -0.5, 0.5]
+                  }}
+                  transition={{
+                    duration: 22,
+                    ease: "easeInOut",
+                    repeat: Infinity,
+                  }}
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1200&q=90')`,
+                  }}
+                />
 
-              {/* Organic Luxe Paper Grain Texture */}
-              <div className="absolute inset-0 paper-grain pointer-events-none opacity-[0.14]" />
+                {/* Premium cinematic vignette and depth gradient overlay configured to enhance green visibility while retaining legibility */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/60 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-black/20 mix-blend-overlay" />
+
+                {/* Organic Luxe Paper Grain Texture */}
+                <div className="absolute inset-0 paper-grain opacity-[0.14]" />
+              </div>
 
               {/* Luxury Accent Corner Borders */}
               <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-white/25 pointer-events-none" />
               <div className="absolute top-4 right-4 w-4 h-4 border-t border-r border-white/25 pointer-events-none" />
               <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-white/25 pointer-events-none" />
               <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-white/25 pointer-events-none" />
-
-              {/* Small Recycle Bio Icon Badge */}
-              <div
-                className="absolute top-4 right-14 z-50 w-8 h-8 flex items-center justify-center rounded-full bg-white/15 text-white/95 shadow-md backdrop-blur-sm border border-white/10 select-none"
-                title="Sustainable Biodegradable Packaging"
-              >
-                <Recycle className="w-4 h-4 animate-[spin_10s_linear_infinite]" />
-              </div>
 
               {/* Minimal Elegant Close Button */}
               <button
@@ -94,9 +99,9 @@ export default function NaturePopup() {
               </button>
 
               {/* Modal Typography & Message Core */}
-              <div className="relative z-10 flex flex-col justify-center items-center h-full max-w-[420px]">
+              <div className="relative z-10 flex flex-col justify-center items-center h-full max-w-[420px] pt-10 sm:pt-14">
                 {/* Heading */}
-                <h3 className="font-sans text-xl sm:text-2xl lg:text-3xl font-medium tracking-tight text-white mb-5 sm:mb-6 mt-2 leading-[1.25] drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+                <h3 className="font-sans text-xl sm:text-2xl lg:text-3xl font-medium tracking-tight text-white mb-5 sm:mb-6 mt-6 sm:mt-8 leading-[1.25] drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
                   The future of packaging is sustainable.
                 </h3>
 
